@@ -4,14 +4,15 @@ author: "David Granjon"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{bs4Dash Showcase}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ## Dashboard Demo
 
-The demo is hosted [here](http://130.60.24.205/bs4Dash/showcase).
+The demo is hosted [here](http://130.60.24.205/bs4Dash/showcase/classic) or 
+[here](http://130.60.24.205/bs4Dash/showcase/old_school).
 From RStudio, you can also launch the gallery as follows:
 ```r
 library(shiny)
@@ -22,11 +23,10 @@ library(plotly)
 bs4DashGallery()
 ```
 
-<iframe src="http://130.60.24.205/bs4Dash/showcase" width="100%" height="720px" frameBorder="0">
-
 ## Demo code
 
-Below is the code of the showcase:
+Below is the code of the showcase. You can pass the argument `old_school = TRUE`
+to set up the old school dashboard theme.
 
 ```r
 library(shiny)
@@ -45,7 +45,6 @@ y <- rnorm(200)
 
 shiny::shinyApp(
   ui = bs4DashPage(
-    old_school = TRUE,
     navbar = bs4DashNavbar(
       status = "white",
       "I can write text in the navbar!",
