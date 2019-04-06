@@ -4,24 +4,53 @@
 \alias{bs4TabCard}
 \title{Create a Boostrap 4 tabCard}
 \usage{
-bs4TabCard(..., title = NULL, width = 6, height = NULL,
-  elevation = NULL)
+bs4TabCard(..., id, title = NULL, status = NULL, elevation = NULL,
+  solidHeader = FALSE, headerBorder = TRUE, gradientColor = NULL,
+  tabStatus = NULL, width = 6, height = NULL, collapsible = TRUE,
+  collapsed = FALSE, closable = TRUE, side = c("left", "right"))
 }
 \arguments{
-\item{...}{Contents of the box: should be bs4TabPanel.}
+\item{...}{Contents of the box: should be \link{bs4TabPanel}.}
+
+\item{id}{Unique \link{bs4TabSetPanel} id.}
 
 \item{title}{TabCard title.}
 
+\item{status}{The status of the card header. "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent". NULL by default.}
+
+\item{elevation}{tabCard elevation.}
+
+\item{solidHeader}{Should the header be shown with a solid color background?}
+
+\item{headerBorder}{Whether to display a border between the header and body.
+TRUE by default}
+
+\item{gradientColor}{If NULL (the default), the background of the box will be
+white. Otherwise, a color string. "primary", "success", "warning" or "danger".}
+
+\item{tabStatus}{The status of the tabs buttons over header. "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent".
+NULL by default, "light" if status is set.   
+A vector is possible with a colour for each tab button}
+
 \item{width}{The width of the box, using the Bootstrap grid system. This is
 used for row-based layouts. The overall width of a region is 12, so the
-default valueBox width of 4 occupies 1/3 of that width. For column-based
+default width of 4 occupies 1/3 of that width. For column-based
 layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
 
 \item{height}{The height of a box, in pixels or other CSS unit. By default
 the height scales automatically with the content.}
 
-\item{elevation}{tabCard elevation.}
+\item{collapsible}{If TRUE, display a button in the upper right that allows
+the user to collapse the box.}
+
+\item{collapsed}{If TRUE, start collapsed. This must be used with
+\code{collapsible=TRUE}.}
+
+\item{closable}{If TRUE, display a button in the upper right that allows the user to close the box.}
+
+\item{side}{Side of the box the tabs should be on (\code{"left"} or
+\code{"right"}).}
 }
 \description{
 Build an adminLTE3 card with tabs
@@ -40,19 +69,20 @@ if(interactive()){
     title = "test",
     body = bs4DashBody(
      bs4TabCard(
+      id = "tabcard",
       title = "A card with tabs",
       bs4TabPanel(
-       tabName = "Tab1", 
+       tabName = "Tab 1", 
        active = FALSE,
        "Content 1"
       ),
       bs4TabPanel(
-       tabName = "Tab2", 
+       tabName = "Tab 2", 
        active = TRUE,
        "Content 2"
       ),
       bs4TabPanel(
-       tabName = "Tab3", 
+       tabName = "Tab 3", 
        active = FALSE,
        "Content 3"
       )

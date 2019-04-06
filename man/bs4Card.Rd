@@ -9,7 +9,7 @@ bs4Card(..., title = NULL, footer = NULL, status = NULL,
   gradientColor = NULL, width = 6, height = NULL,
   collapsible = TRUE, collapsed = FALSE, closable = TRUE,
   labelStatus = NULL, labelText = NULL, labelTooltip = NULL,
-  dropdownMenu = NULL, dropdownIcon = "wrench")
+  dropdownMenu = NULL, dropdownIcon = "wrench", overflow = FALSE)
 }
 \arguments{
 \item{...}{Contents of the box.}
@@ -18,8 +18,7 @@ bs4Card(..., title = NULL, footer = NULL, status = NULL,
 
 \item{footer}{Optional footer text.}
 
-\item{status}{The status of the item This determines the item's background
-color. "primary", "success", "warning", "danger". NULL by default.}
+\item{status}{The status of the card header. "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent". NULL by default.}
 
 \item{elevation}{Card elevation.}
 
@@ -33,7 +32,7 @@ white. Otherwise, a color string. "primary", "success", "warning" or "danger".}
 
 \item{width}{The width of the box, using the Bootstrap grid system. This is
 used for row-based layouts. The overall width of a region is 12, so the
-default valueBox width of 4 occupies 1/3 of that width. For column-based
+default width of 4 occupies 1/3 of that width. For column-based
 layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
 
@@ -48,15 +47,17 @@ the user to collapse the box.}
 
 \item{closable}{If TRUE, display a button in the upper right that allows the user to close the box.}
 
-\item{labelStatus}{status of the box label: "danger", "success", "primary", "warning".}
+\item{labelStatus}{status of the box label: "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent".}
 
 \item{labelText}{Label text.}
 
 \item{labelTooltip}{Label tooltip displayed on hover.}
 
-\item{dropdownMenu}{List of items in the the boxtool dropdown menu. Use dropdownItemList().}
+\item{dropdownMenu}{List of items in the the boxtool dropdown menu. Use \link{dropdownItemList}.}
 
 \item{dropdownIcon}{Dropdown icon. "wrench" by default.}
+
+\item{overflow}{Whether to enable overflow in the card body and footer. FALSE by default.}
 }
 \description{
 Build an adminLTE3 card

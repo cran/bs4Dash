@@ -14,8 +14,10 @@ addDeps <- function(x, theme) {
   
   # put all necessary ressources here
   adminLTE3_js <- "adminlte.min.js"
-  bs4Dash_js <- "bs4Dash.js"
   adminLTE3_css <- "adminlte.min.css"
+  bs4Dash_js <- "bs4Dash.js"
+  bs4Dash_css <- "bs4Dash.css"
+  jquery_ui_js <- "jquery-ui.min.js"
   bootstrap_js <- "bootstrap.bundle.min.js"
   old_school_css <- "https://bootswatch.com/4/sketchy/"
   fontawesome_css <- "https://use.fontawesome.com/releases/v5.0.13/css/"
@@ -23,11 +25,18 @@ addDeps <- function(x, theme) {
   google_fonts <- "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
   
   dashboardDeps <- list(
+    # jquery UI deps for sortable elements
+    htmltools::htmlDependency(
+      name = "jquery-ui", 
+      version = "1.12.1",
+      src = c(file = system.file("jquery-ui-1.12.1", package = "bs4Dash")),
+      script = jquery_ui_js
+    ),
     # bootstrap deps
     htmltools::htmlDependency(
       name = "bootstrap", 
-      version = "4.1.0",
-      src = c(file = system.file("bootstrap-4.1.0", package = "bs4Dash")),
+      version = "4.3.1",
+      src = c(file = system.file("bootstrap-4.3.1", package = "bs4Dash")),
       script = bootstrap_js
     ),
     # adminLTE3 deps
@@ -43,7 +52,8 @@ addDeps <- function(x, theme) {
       name = "bs4Dash",
       version = as.character(utils::packageVersion("bs4Dash")),
       src = c(file = system.file("bs4Dash-0.2.0", package = "bs4Dash")),
-      script = bs4Dash_js
+      script = bs4Dash_js,
+      stylesheet = bs4Dash_css
     ),
     # fontawesome
     htmltools::htmlDependency(

@@ -6,25 +6,36 @@
 \usage{
 bs4DashPage(navbar = NULL, sidebar = NULL, body = NULL,
   controlbar = NULL, footer = NULL, title = NULL,
-  old_school = FALSE, sidebar_collapsed = FALSE)
+  old_school = FALSE, sidebar_collapsed = FALSE,
+  controlbar_collapsed = TRUE, enable_preloader = FALSE,
+  loading_duration = 2, loading_background = "#1E90FF")
 }
 \arguments{
-\item{navbar}{Bootstrap 4 dashboard navbar.}
+\item{navbar}{Slot for \link{bs4DashNavbar}.}
 
-\item{sidebar}{Bootstrap 4 dashboard main sidebar.}
+\item{sidebar}{Slot for \link{bs4DashSidebar}.}
 
-\item{body}{Bootstrap 4 dashboard body wrapper.}
+\item{body}{Slot for \link{bs4DashBody}.}
 
-\item{controlbar}{Bootstrap 4 dashboard control sidebar (right side).}
+\item{controlbar}{Slot for \link{bs4DashControlbar} (right side).}
 
-\item{footer}{Bootstrap 4 dashboard footer.}
+\item{footer}{Slot for \link{bs4DashFooter}.}
 
 \item{title}{App title.}
 
-\item{old_school}{Whether to use the wonderful sketchy design for BS4. FALSE
+\item{old_school}{Whether to use the wonderful sketchy design for Bootstrap 4. FALSE
 by default.}
 
 \item{sidebar_collapsed}{Whether the sidebar is collapsed of not at start. FALSE by default.}
+
+\item{controlbar_collapsed}{Whether the sidebar is collapsed of not at start. TRUE by default.}
+
+\item{enable_preloader}{Whether to enable a page loader. FALSE by default.}
+
+\item{loading_duration}{Loader duration in seconds. 2s by default.}
+
+\item{loading_background}{Background color during page startup. Blue by default: 
+\url{https://www.w3schools.com/cssref/css_colors.asp}.}
 }
 \description{
 Build an adminLTE3 dashboard page
@@ -36,6 +47,7 @@ if(interactive()){
 
  shiny::shinyApp(
    ui = bs4DashPage(
+    enable_preloader = TRUE,
     navbar = bs4DashNavbar(),
     sidebar = bs4DashSidebar(),
     controlbar = bs4DashControlbar(),

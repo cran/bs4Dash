@@ -2,7 +2,7 @@
 #'
 #' Build an adminLTE3 dashboard main sidebar
 #'
-#' @param ... Slot for bs4SidebarMenu.
+#' @param ... Slot for \link{bs4SidebarMenu}.
 #' @param title Sidebar title.
 #' @param skin Sidebar skin. "dark" or "light"
 #' @param status Sidebar status. "primary", "danger", "warning", "success", "info".
@@ -10,8 +10,9 @@
 #' "success", "info", "white" or "gray-light".
 #' @param url Sidebar brand link.
 #' @param src Sidebar brand image.
-#' @param elevation Sidebar elevation. 4 by default.
+#' @param elevation Sidebar elevation. 4 by default (until 5).
 #' @param opacity Sidebar opacity. From 0 to 1. 0.8 by default.
+# #' @param width Sidebar width. 250 px by default.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
@@ -44,12 +45,51 @@ bs4DashSidebar <- function(..., title = NULL, skin = "dark", status = "primary",
   )
 
   sidebarTag <- shiny::tags$aside(
-    class = paste0("main-sidebar sidebar-", skin,
-                   "-", status, " elevation-", elevation))
+    class = paste0(
+      "main-sidebar sidebar-", skin, "-", 
+      status, " elevation-", elevation
+    )
+   )
 
   sidebarTag <- shiny::tagAppendChildren(sidebarTag, brandTag, contentTag)
   sidebarTag
-
+  
+  
+  ## change sidebar width
+  #shiny::tagList(
+  #  shiny::singleton(
+  #    shiny::tags$head(
+  #      shiny::tags$style(
+  #        shiny::HTML(
+  #          paste0(
+  #            ".main-sidebar, .main-sidebar:before {
+  #              transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+  #              width: ", width, "px;
+  #            }
+  #            .sidebar-mini.sidebar-collapse .main-sidebar:hover {
+  #                width: ", width, "px;
+  #            }
+  #            @media (min-width: 768px) {
+  #              .content-wrapper,
+  #              .main-footer,
+  #              .main-header {
+  #                transition: margin-left 0.3s ease-in-out;
+  #                margin-left: ", width, "px;
+  #                z-index: 3000;
+  #              }
+  #            }
+  #            .nav-sidebar:hover {
+  #              overflow: hidden;
+  #            }
+  #            "
+  #          )
+  #        )
+  #      )
+  #    )
+  #  ),
+  #  sidebarTag
+  #)
+  
 }
 
 
@@ -58,7 +98,7 @@ bs4DashSidebar <- function(..., title = NULL, skin = "dark", status = "primary",
 #'
 #' Build an adminLTE3 dashboard main sidebar menu
 #'
-#' @param ... Slot for bs4SidebarMenuItemList or bs4SidebarMenuItem or bs4SidebarHeader
+#' @param ... Slot for \link{bs4SidebarMenuItem} or \link{bs4SidebarHeader}.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
@@ -194,7 +234,7 @@ bs4SidebarMenuItem <- function(..., tabName = NULL, icon = NULL) {
       href = paste0("#shiny-tab-", tabName),
       `data-toggle` = "tab",
       `data-value` = tabName,
-      shiny::tags$i(class = paste0("nav-icon fas fa-", icon)),
+      shiny::tags$i(class = paste0("nav-icon fa fa-", icon)),
       shiny::tags$p(
         ...
       )
@@ -218,5 +258,31 @@ bs4SidebarHeader <- function(title) {
   shiny::tags$li(
     class = "nav-header",
     title
+  )
+}
+
+
+
+#' Create a Boostrap 4 dashboard main sidebar user panel
+#'
+#' Build an adminLTE3 dashboard main sidebar user panel
+#'
+#' @param img User panel image path or url.
+#' @param text User panel text.
+#'
+#' @author David Granjon, \email{dgranjon@@ymail.com}
+#'
+#' @export
+bs4SidebarUserPanel <- function(img = NULL, text = NULL) {
+  shiny::tags$div(
+    class = "user-panel mt-3 pb-3 mb-3 d-flex",
+    shiny::tags$div(
+      class = "image",
+      shiny::img(src = img, class = "img-circle elevation-2")
+    ),
+    shiny::tags$div(
+      class = "info",
+      shiny::a(class = "d-block", href = "#", text)
+    )
   )
 }
