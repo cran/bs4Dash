@@ -1,3 +1,43 @@
+# bs4Dash 0.4.0
+
+## Major changes
+- add `bs4DashControlbarMenu()`, `bs4DashControlbarItem()` and `updatebs4ControlbarMenu()`
+- add `updatebs4TabItems()` and `updateTabItems()` to programatically update the selected
+sidebar tab and the corresponding body tab
+- add `updatebs4TabSetPanel()` and `updateTabsetPanel()` (aliases) to dynamically update `bs4TabSetPanel()` from
+the server side
+- add maximizable option for `bs4Card()` and `bs4TabCard()`. In other words, allow full screen option
+- Fix #8: add input binding to the `bs4SidebarMenu()`. Now by adding an id to the menu,
+the user can recover the currently selected tab. Thanks @rpodcast
+- add aliases to make bs4Dash closer to shinydashboard (the conversion is easier). 
+For instance `bs4DashPage()` can also be `dashboardPage()`
+- update adminLTE dependencies
+- add vertical mode to `bs4TabSetPanel()`
+- add `bs4SidebarMenuSubItem()`
+- add `bs4Table()`, `bs4TableItems()` and `bs4TableItem()`
+
+## Breaking changes
+- add text arg to `bs4SidebarMenuItem()`
+- Now the ... arg is for `bs4SidebarMenuSubItem()`
+
+## Minor Changes
+- Fix #41: add disable argument to `bs4DashSidebar()` and `bs4DashControlbar()`. Thanks @jamiebono 
+- images are centered in `userPost()`
+- add startExpanded arg to `bs4SidebarMenuItem()`
+- add `bs4TabSetPanel()` to the gallery
+
+## Bug Fix
+- fix overflow-y issue in `bs4TabCard()`
+- fix #44: update `bs4InfoBox()` class. Thanks @henry090.
+- update adminLTE dependencies (fix sidebar horizontal overflow, ...)
+- hide the `bs4DashControlbar()` toggle if no `bs4DashControlbar()` is given in `bs4DashPage()`
+- fix wrong url in `attachmentBlock()` image (and replace http by https)
+- fix #24: No right border on collapsed sidebar menu items. Thanks @aldomann
+- Tooltips z-index is lower than sidebar's z-index, this cause tooltips are not showing up 
+(see https://github.com/ColorlibHQ/AdminLTE/pull/2105)
+- after Bootstrap 4.3.1 update the table color in the green calendar widget changed to black, caused by bootstrap (see https://github.com/ColorlibHQ/AdminLTE/pull/2105)
+
+
 # bs4Dash 0.3.0
 
 ## Breaking change

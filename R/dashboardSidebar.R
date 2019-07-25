@@ -3,6 +3,7 @@
 #' Build an adminLTE3 dashboard main sidebar
 #'
 #' @param ... Slot for \link{bs4SidebarMenu}.
+#' @param disable If \code{TRUE}, the sidebar will be disabled.
 #' @param title Sidebar title.
 #' @param skin Sidebar skin. "dark" or "light"
 #' @param status Sidebar status. "primary", "danger", "warning", "success", "info".
@@ -17,7 +18,7 @@
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
-bs4DashSidebar <- function(..., title = NULL, skin = "dark", status = "primary",
+bs4DashSidebar <- function(..., disable = FALSE, title = NULL, skin = "dark", status = "primary",
                                 brandColor = NULL, url = NULL, src = NULL,
                                 elevation = 4, opacity = .8) {
 
@@ -48,11 +49,23 @@ bs4DashSidebar <- function(..., title = NULL, skin = "dark", status = "primary",
     class = paste0(
       "main-sidebar sidebar-", skin, "-", 
       status, " elevation-", elevation
-    )
+    ),
+    style = if (disable) "display: none;"
    )
 
   sidebarTag <- shiny::tagAppendChildren(sidebarTag, brandTag, contentTag)
   sidebarTag
+  
+  customCSS <- shiny::singleton(
+    shiny::tags$style(
+      ".content-wrapper, .main-footer, .main-header {
+          margin-left: 0px;
+       }
+      "
+    )
+  )
+  
+  if (disable) shiny::tagList(customCSS, sidebarTag) else sidebarTag
   
   
   ## change sidebar width
@@ -99,64 +112,75 @@ bs4DashSidebar <- function(..., title = NULL, skin = "dark", status = "primary",
 #' Build an adminLTE3 dashboard main sidebar menu
 #'
 #' @param ... Slot for \link{bs4SidebarMenuItem} or \link{bs4SidebarHeader}.
+#' @param id For \link{bs4SidebarMenu}, if \code{id} is present, this id will be
+#'   used for a Shiny input value, and it will report which tab is selected. For
+#'   example, if \code{id="tabs"}, then \code{input$tabs} will be the
+#'   \code{tabName} of the currently-selected \link{bs4SidebarMenuItem}.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
+#' 
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(bs4Dash)
+#'  
+#'  shinyApp(
+#'    ui = bs4DashPage(
+#'      sidebar_collapsed = TRUE,
+#'      controlbar_collapsed = TRUE,
+#'      enable_preloader = FALSE,
+#'      loading_duration =  2,
+#'      navbar = bs4DashNavbar(skin = "light"),
+#'      body = bs4DashBody(
+#'        
+#'      ),
+#'      sidebar = bs4DashSidebar(
+#'        skin = "light",
+#'        bs4SidebarMenu(
+#'          id = "test",
+#'          bs4SidebarMenuItem(
+#'            tabName = "tab1",
+#'            text = "Tab 1"
+#'          ),
+#'          bs4SidebarMenuItem(
+#'            tabName = "tab2",
+#'            text = "Tab 2"
+#'          ),
+#'          bs4SidebarMenuItem(
+#'            text = "Click me pleaaaaase",
+#'            bs4SidebarMenuSubItem(
+#'              tabName = "subtab1",
+#'              text = "Tab 3"
+#'            ),bs4SidebarMenuSubItem(
+#'              tabName = "subtab2",
+#'              text = "Tab 4"
+#'            )
+#'          )
+#'        )
+#'      ),
+#'      controlbar = bs4DashControlbar(skin = "light"),
+#'      footer = bs4DashFooter()
+#'    ),
+#'    server = function(input, output, session) {
+#'      observeEvent(input$test, {
+#'        if (input$test == "subtab1") {
+#'          showModal(modalDialog(
+#'            title = "Thank you so much",
+#'            "You clicked me! This event is the result of
+#'            an input bound to the menu. By adding an id to the
+#'            bs4SidebarMenu, input$id will give the currently selected
+#'            tab. This is useful to trigger some events.",
+#'            easyClose = TRUE,
+#'            footer = NULL
+#'          ))
+#'        }
+#'      })
+#'    }
+#'  )
+#' }
 #'
 #' @export
-bs4SidebarMenu <- function(...) {
-  
-  # menuItems <- list(...)
-  # navItems <- lapply(X = 1:length(menuItems), FUN = function(i) {
-  #   # select only items with class nav-item
-  #   menuItem <- menuItems[[i]]
-  #   itemClass <- menuItem$attribs[["class"]]
-  #   if (sum(grep(x = itemClass, pattern = "nav-item")) == 1) {
-  #     menuItem
-  #   } else {
-  #     NULL
-  #   }
-  # })
-  # # remove NULL elements
-  # navItems <- navItems[!sapply(navItems, is.null)]
-  # 
-  # #handle the case we have a list of items in navItems and store it
-  # #in another object
-  # for (i in 1:length(navItems)) {
-  #   subnavItem <- navItems[[i]]
-  #   subnavItemClass <- subnavItem$attribs[["class"]]
-  #   if (sum(grep(x = subnavItemClass, pattern = "has-treeview")) == 1) {
-  #     navItems <- append(navItems, subnavItem$children[[2]]$children, i)
-  #     navItems[[i]] <- NULL
-  #     break
-  #   }
-  # }
-  # navItems <- navItems[!sapply(navItems, is.null)]
-  # 
-  # selectedTabIndex <- lapply(X = 1:length(navItems), FUN = function(i) {
-  #   children <- navItems[[i]]$children
-  #   childrenClass <- children[[1]]$attribs[["class"]]
-  #   if (sum(grep(x = childrenClass, pattern = "active show")) == 1) i
-  # })
-  # selectedTabIndex <- unlist(selectedTabIndex[!sapply(selectedTabIndex, is.null)])
-  # 
-  # # select the first tab by default if nothing is specified
-  # if (is.null(selectedTabIndex)) {
-  #   link <- navItems[[1]]$children[[1]]$attribs[["href"]]
-  # } else {
-  #   if (length(selectedTabIndex) == 1) {
-  #     link <- navItems[[selectedTabIndex]]$children[[1]]$attribs[["href"]]
-  #     # if more than two tabs have the active class
-  #   } else {
-  #     link <- NULL
-  #   }
-  # }
-  # 
-  # if (is.null(link)) stop("Only one item should be active in the sidebar")
-  # 
-  # # sidebar items hav an id like tab-cards (and body elements #shiny-tab-cards)
-  # # useful to simulated a click
-  # target <- gsub(x = link , pattern = "#shiny-", replacement = "")
-  
+bs4SidebarMenu <- function(..., id = NULL) {
   # menu Tag
   shiny::tags$ul(
     class = "nav nav-pills nav-sidebar flex-column",
@@ -164,51 +188,19 @@ bs4SidebarMenu <- function(...) {
     id = "mymenu",
     role = "menu",
     `data-accordion` = "false",
-    ...
+    ...,
+    # This is a 0 height div, whose only purpose is to hold the tabName of the currently
+    # selected menuItem in its `data-value` attribute. This is the DOM element that is
+    # bound to tabItemInputBinding in the JS side.
+    shiny::tags$div(
+      id = id, class = "sidebarMenuSelectedTabItem", 
+      `data-value` = "null"
+    )
   )
   
 }
 
 
-
-
-# #' Create a Boostrap 4 dashboard main sidebar menu item list
-# #'
-# #' Build an adminLTE3 dashboard main sidebar menu item list
-# #'
-# #' @param ... Slot for bs4SidebarMenuItem.
-# #' @param name Item list name.
-# #' @param icon Item list icon.
-# #' @param open Whether to display the item list in an open state. FALSE by default.
-# #' @param active Whether the section is active. FALSE by default.
-# #'
-# #' @author David Granjon, \email{dgranjon@@ymail.com}
-# #'
-# #' @export
-# bs4SidebarMenuItemList <- function(..., name = NULL, icon = NULL,
-#                                    open = FALSE, active = FALSE) {
-# 
-#   menuItemCl <- "nav-item has-treeview"
-#   if (isTRUE(open)) menuItemCl <- paste0(menuItemCl, " menu-open")
-# 
-#   shiny::tags$li(
-#     class = menuItemCl,
-#     shiny::tags$a(
-#       href = "#",
-#       `data-toggle` = "tab",
-#       class = if (isTRUE(active)) "nav-link active" else "nav-link",
-#       shiny::tags$i(class = paste0("nav-icon fas fa-", icon)),
-#       shiny::tags$p(
-#         name,
-#         shiny::tags$i(class = "right fas fa-angle-left")
-#       )
-#     ),
-#     shiny::tags$ul(
-#       class = "nav nav-treeview",
-#       ...
-#     )
-#   )
-# }
 
 
 
@@ -217,15 +209,196 @@ bs4SidebarMenu <- function(...) {
 #'
 #' Build an adminLTE3 dashboard main sidebar menu item
 #'
-#' @param ... Item name.
+#' @param text Item name.
+#' @param ... \link{bs4SidebarMenuSubItem}.
+#' @param tabName Should correspond exactly to the tabName given in \code{\link{bs4TabItem}}.
+#' @param icon Item icon.
+#' @param startExpanded Whether to expand the \link{bs4SidebarMenuItem} at start.
+#'
+#' @author David Granjon, \email{dgranjon@@ymail.com}
+#'
+#' @export
+bs4SidebarMenuItem <- function(text, ..., tabName = NULL, icon = NULL, startExpanded = FALSE) {
+  
+  subitems <- list(...)
+  
+  # classic menuItem with 1 element
+  if (length(subitems) == 0) {
+    return(
+      shiny::tags$li(
+        class = "nav-item",
+        shiny::tags$a(
+          class = "nav-link",
+          id = paste0("tab-", tabName),
+          href = paste0("#shiny-tab-", tabName),
+          `data-toggle` = "tab",
+          `data-value` = tabName,
+          shiny::tags$i(class = paste0("nav-icon fa fa-", icon)),
+          shiny::tags$p(text)
+        )
+      )
+    )
+    # in case we have multiple subitems
+  } else {
+    menuItemCl <- "nav-item has-treeview"
+    if (startExpanded) menuItemCl <- paste0(menuItemCl, " menu-open")
+    shiny::tags$li(
+      class = menuItemCl,
+      shiny::tags$a(
+        href = "#",
+        class = "nav-link",
+        shiny::tags$i(class = paste0("nav-icon fas fa-", icon)),
+        shiny::tags$p(
+          text,
+          shiny::tags$i(class = "right fas fa-angle-left")
+        )
+      ),
+      shiny::tags$ul(
+        class = "nav nav-treeview",
+        ...
+      )
+    )
+  }
+  
+}
+
+
+
+
+
+#' Create a Boostrap 4 dashboard main sidebar menu sub-item
+#'
+#' Build an adminLTE3 dashboard main sidebar menu sub-item
+#'
+#' @param text Item name.
 #' @param tabName Should correspond exactly to the tabName given in \code{\link{bs4TabItem}}.
 #' @param icon Item icon.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
-bs4SidebarMenuItem <- function(..., tabName = NULL, icon = NULL) {
-
+#' @examples 
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(bs4Dash)
+#'  
+#'  shiny::shinyApp(
+#'    ui = bs4DashPage(
+#'      navbar = bs4DashNavbar(),
+#'      sidebar = bs4DashSidebar(
+#'        bs4SidebarMenu(
+#'          bs4SidebarHeader("List of items 1"),
+#'          bs4SidebarMenuItem(
+#'            text = "Item List",
+#'            icon = "bars",
+#'            startExpanded = TRUE,
+#'            bs4SidebarMenuSubItem(
+#'              text = "Item 1",
+#'              tabName = "item1",
+#'              icon = "circle-thin"
+#'            ),
+#'            bs4SidebarMenuSubItem(
+#'              text = "Item 2",
+#'              tabName = "item2",
+#'              icon = "circle-thin"
+#'            )
+#'          ),
+#'          bs4SidebarHeader("Classic Items"),
+#'          bs4SidebarMenuItem(
+#'            text = "Item 3",
+#'            tabName = "item3"
+#'          ),
+#'          bs4SidebarHeader("List of items 2"),
+#'          bs4SidebarMenuItem(
+#'            text = "Item List 2",
+#'            icon = "bars",
+#'            startExpanded = FALSE,
+#'            #active = FALSE,
+#'            bs4SidebarMenuSubItem(
+#'              text = "Item 4",
+#'              tabName = "item4",
+#'              icon = "circle-thin"
+#'            ),
+#'            bs4SidebarMenuSubItem(
+#'              text = "Item 5",
+#'              tabName = "item5",
+#'              icon = "circle-thin"
+#'            )
+#'          )
+#'        )
+#'      ),
+#'      controlbar = bs4DashControlbar(),
+#'      footer = bs4DashFooter(),
+#'      title = "test",
+#'      body = bs4DashBody(
+#'        bs4TabItems(
+#'          bs4TabItem(
+#'            tabName = "item1",
+#'            bs4Card(
+#'              title = "Card 1", 
+#'              closable = TRUE, 
+#'              width = 6,
+#'              solidHeader = TRUE, 
+#'              status = "primary",
+#'              collapsible = TRUE,
+#'              p("Box Content")
+#'            )
+#'          ),
+#'          bs4TabItem(
+#'            tabName = "item2",
+#'            bs4Card(
+#'              title = "Card 2", 
+#'              closable = TRUE, 
+#'              width = 6,
+#'              solidHeader = TRUE, 
+#'              status = "warning",
+#'              collapsible = TRUE,
+#'              p("Box Content")
+#'            )
+#'          ),
+#'          bs4TabItem(
+#'            tabName = "item3",
+#'            bs4Card(
+#'              title = "Card 3", 
+#'              closable = TRUE, 
+#'              width = 6,
+#'              solidHeader = TRUE, 
+#'              status = "danger",
+#'              collapsible = TRUE,
+#'              p("Box Content")
+#'            )
+#'          ),
+#'          bs4TabItem(
+#'            tabName = "item4",
+#'            bs4Card(
+#'              title = "Card 4", 
+#'              closable = TRUE, 
+#'              width = 6,
+#'              solidHeader = TRUE, 
+#'              status = "info",
+#'              collapsible = TRUE,
+#'              p("Box Content")
+#'            )
+#'          ),
+#'          bs4TabItem(
+#'            tabName = "item5",
+#'            bs4Card(
+#'              title = "Card 5", 
+#'              closable = TRUE, 
+#'              width = 6,
+#'              solidHeader = TRUE, 
+#'              status = "success",
+#'              collapsible = TRUE,
+#'              p("Box Content")
+#'            )
+#'          )
+#'        )
+#'      )
+#'    ),
+#'    server = function(input, output) {}
+#'  )
+#' }
+bs4SidebarMenuSubItem <- function(text, tabName = NULL, icon = NULL) {
   shiny::tags$li(
     class = "nav-item",
     shiny::tags$a(
@@ -235,14 +408,10 @@ bs4SidebarMenuItem <- function(..., tabName = NULL, icon = NULL) {
       `data-toggle` = "tab",
       `data-value` = tabName,
       shiny::tags$i(class = paste0("nav-icon fa fa-", icon)),
-      shiny::tags$p(
-        ...
-      )
+      shiny::tags$p(text)
     )
   )
 }
-
-
 
 
 #' Create a Boostrap 4 dashboard main sidebar header

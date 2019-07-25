@@ -3,6 +3,8 @@ source("global.R")
 shiny::shinyApp(
   ui = bs4DashPage(
     sidebar_collapsed = TRUE,
+    enable_preloader = TRUE,
+    loading_duration = 3,
     navbar = bs4DashNavbar(
       status = "white",
       "I can write text in the navbar!",
@@ -31,6 +33,7 @@ shiny::shinyApp(
       elevation = 3,
       opacity = 0.8,
       bs4SidebarMenu(
+        id = "current_tab",
         bs4SidebarHeader("Cards"),
         bs4SidebarMenuItem(
           "Basic cards",
@@ -70,32 +73,37 @@ shiny::shinyApp(
         ),
         bs4SidebarHeader("BS4 gallery"),
         bs4SidebarMenuItem(
-          HTML(
-            paste(
-              "Gallery 1", 
-              bs4Badge(
-                "new", 
-                position = "right", 
-                status = "danger"
+          text = "Galleries",
+          icon = "cubes",
+          startExpanded = FALSE,
+          bs4SidebarMenuSubItem(
+            text = HTML(
+              paste(
+                "Gallery 1", 
+                bs4Badge(
+                  "new", 
+                  position = "right", 
+                  status = "danger"
+                )
               )
-            )
+            ),
+            tabName = "gallery1",
+            icon = "circle-thin"
           ),
-          tabName = "gallery1",
-          icon = "paint-brush"
-        ),
-        bs4SidebarMenuItem(
-          HTML(
-            paste(
-              "Gallery 2", 
-              bs4Badge(
-                "!", 
-                position = "right", 
-                status = "success"
+          bs4SidebarMenuSubItem(
+            text = HTML(
+              paste(
+                "Gallery 2", 
+                bs4Badge(
+                  "!", 
+                  position = "right", 
+                  status = "success"
+                )
               )
-            )
-          ),
-          tabName = "gallery2",
-          icon = "map"
+            ),
+            tabName = "gallery2",
+            icon = "circle-thin"
+          )
         )
       )
     ),
@@ -147,19 +155,24 @@ shiny::shinyApp(
   ),
   server = function(input, output) {
     
+    output$bigPlot <- renderPlot({
+      hist(rnorm(input$bigObs))
+    })
+    
     output$plot <- renderPlot({
       hist(rnorm(input$obs))
     })
     
-    output$distPlot <- renderPlot({
-      dist <- switch(input$dist,
-                     norm = rnorm,
-                     unif = runif,
-                     lnorm = rlnorm,
-                     exp = rexp,
-                     rnorm)
-      
-      hist(dist(500))
+    # this is not reactive but just for fixing the plot size on the client side.
+    output$riverPlot <- renderEcharts4r({
+      river %>% 
+        e_charts(dates) %>% 
+        e_river(apples) %>% 
+        e_river(bananas) %>% 
+        e_river(pears) %>% 
+        e_tooltip(trigger = "axis") %>% 
+        e_title("River charts", "(Streamgraphs)") %>%
+        e_theme("shine")
     })
     
     output$plot2 <- renderPlotly({
@@ -206,6 +219,21 @@ shiny::shinyApp(
         shareX = TRUE, shareY = TRUE, titleX = FALSE, titleY = FALSE
       )
       p <- layout(s, showlegend = FALSE)
+    })
+    
+    
+    observeEvent(input$current_tab, {
+      if (input$current_tab == "cards") {
+        showModal(modalDialog(
+          title = "This event only triggers for the first tab!",
+          "You clicked me! This event is the result of
+          an input bound to the menu. By adding an id to the
+          bs4SidebarMenu, input$id will give the currently selected
+          tab. This is useful to trigger some events.",
+          easyClose = TRUE,
+          footer = NULL
+        ))
+      }
     })
     
   }

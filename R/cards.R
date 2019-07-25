@@ -24,6 +24,7 @@
 #' @param collapsed If TRUE, start collapsed. This must be used with
 #'   \code{collapsible=TRUE}.
 #' @param closable If TRUE, display a button in the upper right that allows the user to close the box.
+#' @param maximizable If TRUE, the card can be displayed in full screen mode.
 #' @param labelStatus status of the box label: "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent".
 #' @param labelText Label text.
 #' @param labelTooltip Label tooltip displayed on hover.
@@ -83,7 +84,8 @@
 #'       )
 #'      )
 #'      ),
-#'      bs4Card(
+#'      fluidRow(
+#'       bs4Card(
 #'        title = "Closable Box with solidHeader", 
 #'        closable = TRUE, 
 #'        width = 6,
@@ -91,10 +93,27 @@
 #'        status = "primary",
 #'        collapsible = TRUE,
 #'        p("Box Content")
+#'       ),
+#'       bs4Card(
+#'        title = "Maximizable Card", 
+#'        width = 6,
+#'        status = "warning", 
+#'        closable = FALSE,
+#'        maximizable = TRUE, 
+#'        collapsible = FALSE,
+#'        sliderInput("obs", "Number of observations:",
+#'                    min = 0, max = 1000, value = 500
+#'        ),
+#'        plotOutput("distPlot")
 #'       )
+#'      )
 #'     )
 #'    ),
-#'    server = function(input, output) {}
+#'    server = function(input, output) {
+#'     output$distPlot <- renderPlot({
+#'      hist(rnorm(input$obs))
+#'     })
+#'    }
 #'  )
 #' }
 #'
@@ -104,12 +123,12 @@
 bs4Card <- function(..., title = NULL, footer = NULL, status = NULL, elevation = NULL,
                     solidHeader = FALSE, headerBorder = TRUE, gradientColor = NULL, 
                     width = 6, height = NULL, collapsible = TRUE, collapsed = FALSE, 
-                    closable = TRUE, labelStatus = NULL, labelText = NULL, 
+                    closable = TRUE, maximizable = FALSE, labelStatus = NULL, labelText = NULL, 
                     labelTooltip = NULL, dropdownMenu = NULL, dropdownIcon = "wrench",
                     overflow = FALSE) {
   
   cardCl <- if (!is.null(gradientColor)) {
-    paste0("card bg-", gradientColor, "-gradient")
+    paste0("card bg-gradient-", gradientColor)
   } else {
     if (is.null(status)) {
       "card card-default"
@@ -172,11 +191,21 @@ bs4Card <- function(..., title = NULL, footer = NULL, status = NULL, elevation =
         `data-widget` = "remove",
         shiny::tags$i(class = "fa fa-times")
       )
+    },
+    
+    # maximize
+    if (maximizable) {
+      shiny::tags$button(
+        type = "button",
+        class = "btn btn-tool",
+        `data-widget` = "maximize",
+        shiny::tags$i(class = "fa fa-expand")
+      )
     }
   )
   
   # header
-  if (is.null(title) & (isTRUE(closable) | isTRUE(collapsible))) title <- "\u200C"
+  if (is.null(title) & (isTRUE(maximizable) | isTRUE(closable) | isTRUE(collapsible))) title <- "\u200C"
   
   headerTag <- shiny::tags$div(
     class = if (isTRUE(headerBorder)) "card-header" else "card-header no-border",
@@ -440,7 +469,7 @@ bs4InfoBox <- function(..., title, value = NULL, icon = NULL,
   
   
   infoBoxCl <- if (!is.null(gradientColor)) {
-    paste0("info-box bg-", gradientColor, "-gradient")
+    paste0("info-box bg-gradient-", gradientColor)
   } else {
     if (is.null(status)) {
       "info-box"
@@ -600,13 +629,13 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
                        solidHeader = FALSE, headerBorder = TRUE, gradientColor = NULL,
                        tabStatus = NULL, width = 6, height = NULL,  
                        collapsible = TRUE, collapsed = FALSE, closable = TRUE,
-                       side = c("left", "right")) {
+                       maximizable = FALSE, overflow = FALSE, side = c("left", "right")) {
   
   found_active <- FALSE
   side <- match.arg(side)
   
   tabCardCl <- if (!is.null(gradientColor)) {
-    paste0("card bg-", gradientColor, "-gradient")
+    paste0("card bg-gradient-", gradientColor)
   } else {
     if (is.null(status)) {
       "card card-default"
@@ -622,7 +651,7 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
   if (!is.null(elevation)) tabCardCl <- paste0(tabCardCl, " elevation-", elevation)
   
   # tools collapse/closable
-  if (isTRUE(closable) | isTRUE(collapsible)) {
+  if (isTRUE(closable) | isTRUE(collapsible) | isTRUE(maximizable)) {
   cardToolTag <- shiny::tags$div(
     class = "tools pt-3 pb-3 pr-2 mr-2",
 
@@ -647,6 +676,16 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
         `data-widget` = "remove",
         shiny::tags$i(class = "fa fa-times")
       )
+    },
+    
+    # maximize
+    if (maximizable) {
+      shiny::tags$button(
+        type = "button",
+        class = "btn btn-tool",
+        `data-widget` = "maximize",
+        shiny::tags$i(class = "fa fa-expand")
+      )
     }
   )
   } else {
@@ -655,7 +694,7 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
   
   # header
   tabMenu <- bs4TabSetPanel(..., id = id, side = side, tabStatus = tabStatus)[[2]]
-  if (is.null(title) & (isTRUE(closable) | isTRUE(collapsible))) title <- "\u200C"
+  if (is.null(title) & (isTRUE(maximizable) | isTRUE(closable) | isTRUE(collapsible))) title <- "\u200C"
   
   headerTag <- shiny::tags$div(
     class = if (isTRUE(headerBorder)) "card-header d-flex p-0" else "card-header d-flex p-0 no-border",
@@ -680,7 +719,7 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
   panelContent <- bs4TabSetPanel(..., id = id, side = side, tabStatus = tabStatus)[c(1, 3)]
   bodyTag <- shiny::tags$div(
     class = "card-body",
-    style = "overflow-y: auto;",
+    style = if (overflow) "overflow-y: auto; max-height: 500px;" else NULL,
     panelContent
   )
   
@@ -716,6 +755,7 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
 #'  NULL by default, "light" if status is set.   
 #'  A vector is possible with a colour for each tab button
 #' @param .list When elements are programmatically added, pass them here instead of in ...
+#' @param vertical Whether to display tabs in a vertical mode. FALSE by default.
 #' 
 #' @inheritParams bs4Card
 #' 
@@ -754,10 +794,26 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
 #'       )
 #'      ),
 #'      
+#'      br(), br(),
 #'      # programmatically inserted panels
 #'      bs4TabSetPanel(
 #'        id = "tabset",
 #'        side = "left",
+#'        .list = lapply(1:3, function(i) {
+#'          bs4TabPanel(
+#'            tabName = paste0("Tab", i), 
+#'            active = FALSE,
+#'            paste("Content", i)
+#'          )
+#'        })
+#'       ),
+#'       
+#'       br(), br(),
+#'       # vertical tabset
+#'       bs4TabSetPanel(
+#'        id = "verttabset",
+#'        side = "left",
+#'        vertical = TRUE,
 #'        .list = lapply(1:3, function(i) {
 #'          bs4TabPanel(
 #'            tabName = paste0("Tab", i), 
@@ -775,7 +831,8 @@ bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL,
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
-bs4TabSetPanel <- function(..., id, side, status = NULL, tabStatus = NULL, .list = NULL) {
+bs4TabSetPanel <- function(..., id, side, status = NULL, tabStatus = NULL, 
+                           .list = NULL, vertical = FALSE) {
   
   # to make tab ids in the namespace of the tabSetPanel
   ns <- shiny::NS(id)
@@ -829,13 +886,18 @@ bs4TabSetPanel <- function(..., id, side, status = NULL, tabStatus = NULL, .list
     )
   })
   
+  # support vertical tabs
+  tabSetCl <- if (side == "right") {
+    "nav nav-pills ml-auto p-2"
+  } else {
+    "nav nav-pills p-2"
+  }
+  if (vertical) tabSetCl <- paste0(tabSetCl, " flex-column")
+  
   tabSetMenu <- shiny::tags$ul(
     id = id,
-    class = if (side == "right") {
-      "nav nav-pills ml-auto p-2"
-    } else {
-      "nav nav-pills p-2"
-    }
+    class = tabSetCl,
+    `aria-orientation` = if (vertical) "vertical" else NULL
   )
   tabSetMenu <- shiny::tagAppendChildren(tabSetMenu, tabSetPanelItem)
   
@@ -850,22 +912,38 @@ bs4TabSetPanel <- function(..., id, side, status = NULL, tabStatus = NULL, .list
     })
   )
   
-  shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$script(
-          paste0(
-            "$(function () {
+  # tabSet JS wrapper to handle vertical 
+  tabSetJS <- shiny::singleton(
+    shiny::tags$head(
+      shiny::tags$script(
+        paste0(
+          "$(function () {
               $('#", id," li:eq(", selected,") a').tab('show');
             })
             "
-          )
         )
       )
-    ),
-    tabSetMenu, tabSetContent
+    )
   )
   
+  # Wrapper
+  if (vertical) {
+    if (side == "left") {
+      shiny::fluidRow(
+        tabSetJS,
+        shiny::column(width = 3, tabSetMenu),
+        shiny::column(width = 9, tabSetContent)
+      )
+    } else {
+      shiny::fluidRow(
+        tabSetJS,
+        shiny::column(width = 9, tabSetContent),
+        shiny::column(width = 3, tabSetMenu)
+      )
+    }
+  } else {
+    shiny::tagList(tabSetJS, tabSetMenu, tabSetContent)
+  }
 }
 
 

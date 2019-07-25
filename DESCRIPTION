@@ -1,7 +1,7 @@
 Package: bs4Dash
 Type: Package
 Title: A 'Bootstrap 4' Version of 'shinydashboard'
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: c(
   person("David", "Granjon", email = "dgranjon@ymail.com", role = c("aut", "cre")),
   person(family = "RinteRface", role = "cph"),
@@ -22,12 +22,17 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+Collate: 'update-functions.R' 'render-functions.R' 'cards.R'
+        'dashboardSidebar.R' 'dashboardBody.R' 'dashboardFooter.R'
+        'dashboardControlbar.R' 'dashboardNavbar.R' 'dashboardPage.R'
+        'aliases.R' 'bs4DashGallery.R' 'deps.R' 'useful-items.R'
+        'utils.R'
 NeedsCompilation: no
-Packaged: 2019-04-06 14:05:34 UTC; macdavidgranjon
+Packaged: 2019-07-25 12:20:54 UTC; granjda1
 Author: David Granjon [aut, cre],
   RinteRface [cph],
   Almasaeed Studio [ctb, cph] (AdminLTE3 theme for Bootstrap 4),
   Winston Chang [ctb, cph] (Utils functions from shinydashboard),
   Thomas Park [ctb, cph] (Bootswatch Sketchy theme CSS)
 Repository: CRAN
-Date/Publication: 2019-04-06 14:22:40 UTC
+Date/Publication: 2019-07-25 12:40:04 UTC

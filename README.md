@@ -11,21 +11,16 @@
 <br>
 
 <div class="row">
-<div class="col-sm-4" align="center">
+<div class="col-sm-6" align="center">
 <div class="card">
-<a href="https://rinterface.com/shiny/showcase/lorenz/" target="_blank"><img src="man/figures/bs4Dash_Lorenz.png"></a>
-</div>
-</div>
-<div class="col-sm-4" align="center">
-<div class="card">
-<a href="https://rinterface.com/shiny/showcase/ratp/" target="_blank"><img src="man/figures/bs4Dash_ratp.png"></a>
+<a href="https://dgranjon.shinyapps.io/virtual_patient_v2/" target="_blank"><img src="https://community.rstudio.com/uploads/default/original/2X/e/eb1013fd09ccf10cbe13da3f0168eebfcb0eba75.gif"></a>
 </div>
 </div>
 </div>
 
 <br>
 
-See a working example on shinyapps.io [here](https://dgranjon.shinyapps.io/bs4DashDemo/) and on RStudio connect [here](http://130.60.24.205:3939/bs4DashDemo/).
+See a working example on shinyapps.io [here](https://dgranjon.shinyapps.io/bs4DashDemo/).
 
 ## Useful Informations (if any)
 

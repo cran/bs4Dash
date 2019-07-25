@@ -293,6 +293,48 @@ tab_cards_tab <- bs4TabItem(
         )
       )
     )
+  ),
+  fluidRow(
+    # manually inserted panels
+    column(
+      width = 6,
+      bs4TabSetPanel(
+        id = "tabcard",
+        side = "left",
+        bs4TabPanel(
+          tabName = "Tab 1", 
+          active = FALSE,
+          "Content 1"
+        ),
+        bs4TabPanel(
+          tabName = "Tab 2", 
+          active = TRUE,
+          "Content 2"
+        ),
+        bs4TabPanel(
+          tabName = "Tab 3", 
+          active = FALSE,
+          "Content 3"
+        )
+      )
+    ),
+    
+    # programmatically inserted panels
+    column(
+      width = 6,
+      bs4TabSetPanel(
+        id = "tabset",
+        side = "left",
+        tabStatus = "warning",
+        .list = lapply(1:3, function(i) {
+          bs4TabPanel(
+            tabName = paste0("Tab", i), 
+            active = FALSE,
+            paste("Content", i)
+          )
+        })
+      )
+    )
   )
 )
 
@@ -668,7 +710,7 @@ gallery_1_tab <- bs4TabItem(
     bs4Card(
       title = "Attachment example",
       attachmentBlock(
-        src = "http://kiev.carpediem.cd/data/afisha/o/2d/c7/2dc7670333.jpg",
+        src = "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo1.png",
         title = "Test",
         title_url = "http://google.com",
         "This is the content"

@@ -3,6 +3,18 @@ library(shiny)
 library(shinyWidgets)
 library(bs4Dash)
 library(plotly)
+library(echarts4r)
+
+# river charts 
+dates <- seq.Date(Sys.Date() - 30, Sys.Date(), by = "day")
+
+river <- data.frame(
+  dates = dates,
+  apples = runif(length(dates)),
+  bananas = runif(length(dates)),
+  pears = runif(length(dates))
+)
+
 
 # plot 2
 x <- seq(-2 * pi, 2 * pi, length.out = 1000)
@@ -43,8 +55,10 @@ basic_cards_tab <- bs4TabItem(
       solidHeader = FALSE, 
       gradientColor = "success",
       collapsible = TRUE,
-      plotOutput("distPlot")
-    ),
+      echarts4rOutput("riverPlot")
+    )
+  ),
+  fluidRow(
     bs4Card(
       title = "Card with solidHeader and elevation", 
       elevation = 4,
@@ -54,6 +68,18 @@ basic_cards_tab <- bs4TabItem(
       status = "primary",
       collapsible = TRUE,
       plot_ly(z = ~volcano) %>% add_surface()
+    ),
+    bs4Card(
+      title = "Maximizable Card", 
+      width = 6,
+      status = "danger", 
+      closable = FALSE,
+      maximizable = TRUE, 
+      collapsible = FALSE,
+      sliderInput("bigObs", "Number of observations:",
+                  min = 0, max = 1000, value = 500
+      ),
+      plotOutput("bigPlot")
     )
   )
 )
@@ -203,7 +229,8 @@ tab_cards_tab <- bs4TabItem(
         elevation = 2,
         id = "tabcard1",
         width = 12,
-        collapsible = FALSE, closable = TRUE,
+        collapsible = FALSE, 
+        closable = FALSE,
         bs4TabPanel(
           tabName = "Tab 1",
           active = FALSE,
@@ -256,6 +283,9 @@ tab_cards_tab <- bs4TabItem(
         width = 12,
         status = "warning",
         tabStatus = c("dark", "danger", "primary"),
+        maximizable = TRUE,
+        collapsible = TRUE, 
+        closable = TRUE,
         bs4TabPanel(
           tabName = "Tab 4",
           active = FALSE,
@@ -296,6 +326,85 @@ tab_cards_tab <- bs4TabItem(
           and more recently with desktop publishing software like Aldus
           PageMaker including versions of Lorem Ipsum."
         )
+      )
+    )
+  ),
+  br(), br(),
+  fluidRow(
+    # manually inserted panels
+    column(
+      width = 6,
+      bs4TabSetPanel(
+        id = "tabcard",
+        side = "left",
+        bs4TabPanel(
+          tabName = "Tab 1", 
+          active = FALSE,
+          "Content 1"
+        ),
+        bs4TabPanel(
+          tabName = "Tab 2", 
+          active = TRUE,
+          "Content 2"
+        ),
+        bs4TabPanel(
+          tabName = "Tab 3", 
+          active = FALSE,
+          "Content 3"
+        )
+      )
+    ),
+    
+    # programmatically inserted panels
+    column(
+      width = 6,
+      bs4TabSetPanel(
+        id = "tabset",
+        side = "left",
+        tabStatus = "warning",
+        .list = lapply(1:3, function(i) {
+          bs4TabPanel(
+            tabName = paste0("Tab", i), 
+            active = FALSE,
+            paste("Content", i)
+          )
+        })
+      )
+    )
+  ),
+  br(), br(),
+  # Vertical panels
+  fluidRow(
+    column(
+      width = 6,
+      # vertical tabset
+      bs4TabSetPanel(
+        id = "verttabset",
+        side = "left",
+        vertical = TRUE,
+        .list = lapply(1:3, function(i) {
+          bs4TabPanel(
+            tabName = paste0("Tab", i), 
+            active = FALSE,
+            paste("Content", i)
+          )
+        })
+      )
+    ),
+    column(
+      width = 6,
+      # vertical tabset
+      bs4TabSetPanel(
+        id = "verttabset2",
+        side = "right",
+        vertical = TRUE,
+        .list = lapply(1:3, function(i) {
+          bs4TabPanel(
+            tabName = paste0("Tab", i), 
+            active = FALSE,
+            paste("Content", i)
+          )
+        })
       )
     )
   )
@@ -673,10 +782,52 @@ gallery_1_tab <- bs4TabItem(
     bs4Card(
       title = "Attachment example",
       attachmentBlock(
-        src = "http://kiev.carpediem.cd/data/afisha/o/2d/c7/2dc7670333.jpg",
+        src = "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo1.png",
         title = "Test",
         title_url = "http://google.com",
         "This is the content"
+      )
+    )
+  ),
+  h4("bs4Table"),
+  fluidRow(
+    bs4Table(
+      cardWrap = TRUE,
+      bordered = TRUE,
+      striped = TRUE,
+      headTitles = c(
+        "PROJECT",
+        "BUDGET",
+        "STATUS",
+        "USERS",
+        "COMPLETION",
+        ""
+      ),
+      bs4TableItems(
+        bs4TableItem("bs4 Design System"),
+        bs4TableItem(dataCell = TRUE, "$2,500 USD"),
+        bs4TableItem(
+          dataCell = TRUE, 
+          bs4Badge(
+            "Pending",
+            position = "right",
+            status = "danger",
+            rounded = TRUE
+          )
+        ),
+        bs4TableItem(
+          progressBar(id = "pb1", value = 50, size = "xxs")
+        ),
+        bs4TableItem(
+          dataCell = TRUE, 
+          "test"
+        ),
+        bs4TableItem(
+          actionButton(
+            "go",
+            "Go"
+          )
+        )
       )
     )
   )
