@@ -5,6 +5,29 @@ library(bs4Dash)
 library(plotly)
 library(echarts4r)
 
+# color statuses
+statusColors <- c(
+  "navy",
+  "gray-dark",
+  "gray",
+  "secondary",
+  "indigo",
+  "purple",
+  "primary",
+  "info",
+  "success",
+  "olive",
+  "teal",
+  "lime",
+  "warning",
+  "orange",
+  "danger",
+  "fuchsia",
+  "maroon",
+  "pink",
+  "light"
+)
+
 # river charts 
 dates <- seq.Date(Sys.Date() - 30, Sys.Date(), by = "day")
 
@@ -84,6 +107,38 @@ basic_cards_tab <- bs4TabItem(
   )
 )
 
+#' card API
+cards_api_tab <- bs4TabItem(
+  tabName = "cardsAPI",
+  actionButton(inputId = "triggerCard", label = "Trigger Card Action"),
+  selectInput(
+    inputId = "cardAction", 
+    label = "Card action", 
+    choices = c(
+      "remove",
+      "toggle",
+      "toggleMaximize",
+      "restore"
+    )
+  ),
+  
+  bs4Card(
+    inputId = "mycard",
+    title = "The plot is visible when you maximize the card", 
+    closable = TRUE, 
+    maximizable = TRUE,
+    width = 12,
+    status = "warning", 
+    solidHeader = FALSE, 
+    collapsible = TRUE,
+    sliderInput("obsAPI", "Number of observations:",
+                min = 0, max = 1000, value = 500
+    ),
+    plotOutput("cardAPIPlot")
+  )
+)
+
+
 #' social_cards_tab ----
 social_cards_tab <- bs4TabItem(
   tabName = "socialcards",
@@ -109,10 +164,9 @@ social_cards_tab <- bs4TabItem(
         status = "info"
       ),
       bs4ProgressBar(
-        value = 5,
+        value = 20,
         striped = TRUE,
-        status = "warning",
-        width = "20%"
+        status = "warning"
       )
     )
   ),
@@ -511,11 +565,20 @@ boxes_tab <- bs4TabItem(
     bs4Box(
       height = "600px",
       title = "Box 1",
+      bs4Ribbon(
+        text = "Plot 1",
+        status = "success"
+      ),
       plotlyOutput("plot2")
     ),
     bs4Box(
       height = "600px",
       title = "Box 2",
+      bs4Ribbon(
+        text = "Plot 2",
+        status = "danger",
+        size = "xl"
+      ),
       plotlyOutput("plot3")
     )
   )
@@ -558,15 +621,17 @@ value_boxes_tab <- bs4TabItem(
   h4("Info Boxes"),
   fluidRow(
     bs4InfoBox(
-      title = "Messages",
+      tabName = "cardsAPI",
+      title = "Navigate to Cards API section",
       value = 1410,
-      icon = "envelope"
+      icon = "laptop-code"
     ),
     bs4InfoBox(
-      title = "Bookmarks",
+      tabName = "colors",
+      title = "Navigate to colors section",
       status = "info",
       value = 240,
-      icon = "bookmark"
+      icon = "tint"
     ),
     bs4InfoBox(
       title = "Comments",
@@ -647,6 +712,19 @@ gallery_1_tab <- bs4TabItem(
   ),
   fluidRow(
     bs4Card(
+      title = "bs4Quote",
+      fluidRow(
+        bs4Quote("Blablabla", status = "indigo"),
+        bs4Quote("Blablabla", status = "danger"),
+        bs4Quote("Blablabla", status = "teal"),
+        bs4Quote("Blablabla", status = "orange"),
+        bs4Quote("Blablabla", status = "warning"),
+        bs4Quote("Blablabla", status = "fuchsia")
+      )
+    )
+  ),
+  fluidRow(
+    bs4Card(
       title = "Progress bars",
       footer = tagList(
         bs4ProgressBar(
@@ -657,8 +735,7 @@ gallery_1_tab <- bs4TabItem(
         bs4ProgressBar(
           value = 5,
           striped = TRUE,
-          status = "warning",
-          width = "20%"
+          status = "warning"
         )
       ),
       bs4ProgressBar(
@@ -670,8 +747,7 @@ gallery_1_tab <- bs4TabItem(
         value = 100,
         vertical = TRUE,
         striped = TRUE,
-        status = "danger",
-        height = "80%"
+        status = "danger"
       )
     ),
     bs4Card(
@@ -922,4 +998,20 @@ gallery_2_tab <- bs4TabItem(
       )
     )
   )
+)
+
+# color_tab ----
+colors_tab <- bs4TabItem(
+  tabName = "colors",
+  lapply(seq_along(statusColors), function(i) {
+    fluidRow(
+      bs4Card(
+        status = statusColors[i], 
+        title = paste(statusColors[i], "card"),
+        width = 12,
+        closable = FALSE,
+        collapsible = FALSE
+      )
+    )
+  })
 )

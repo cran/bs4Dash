@@ -341,8 +341,7 @@ bs4CarouselItem <- function(active = FALSE, src = NULL) {
 #' @param striped Whether the progress bar is striped or not. FALSE by default.
 #' @param vertical Whether to display the progress bar in vertical mode. FALSE by default.
 #' @param status Progress bar status. "primary", "success", "warning", "danger" or "info".
-#' @param width Progress bar width (only if vertical is FALSE).
-#' @param height Progress bar height (only if vertical is TRUE).
+#' @param size Progress bar size. NULL, "sm", "xs" or "xxs".
 #' 
 #' @examples
 #' if(interactive()){
@@ -363,14 +362,14 @@ bs4CarouselItem <- function(active = FALSE, src = NULL) {
 #'         footer = tagList(
 #'           bs4ProgressBar(
 #'           value = 5,
+#'           size = "xxs",
 #'           striped = FALSE,
 #'           status = "info"
 #'          ),
 #'          bs4ProgressBar(
-#'           value = 5,
+#'           value = 25,
 #'           striped = TRUE,
-#'           status = "warning",
-#'           width = "20%"
+#'           status = "warning"
 #'          )
 #'         ),
 #'         bs4ProgressBar(
@@ -382,8 +381,8 @@ bs4CarouselItem <- function(active = FALSE, src = NULL) {
 #'          value = 100,
 #'          vertical = TRUE,
 #'          striped = TRUE,
-#'          status = "danger",
-#'          height = "80%"
+#'          size = "sm",
+#'          status = "danger"
 #'         )
 #'        )
 #'      )
@@ -396,37 +395,39 @@ bs4CarouselItem <- function(active = FALSE, src = NULL) {
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
-bs4ProgressBar <- function(value, min = 0, max = 100, vertical = FALSE, striped = FALSE,
-                           status = c("primary", "warning", "danger", "info", "success"),
-                           width = "80%", height = "40%") {
-  
+bs4ProgressBar <- function (value, min = 0, max = 100, vertical = FALSE, striped = FALSE, 
+                            status = c("primary", "warning", "danger", "info", "success"), 
+                            size = NULL) {
   status <- match.arg(status)
   stopifnot(value >= min)
   stopifnot(value <= max)
-  
-  progressCl <- if (isTRUE(vertical)) "progress vertical" else "progress mb-3"
+  progressCl <- if (isTRUE(vertical)) 
+    "progress vertical"
+  else "progress mb-3"
+  if (!is.null(size)) 
+    progressCl <- paste0(progressCl, " progress-", size)
   barCl <- "progress-bar"
-  if (!is.null(status)) barCl <- paste0(barCl, " bg-", status)
-  if (isTRUE(striped)) barCl <- paste0(barCl, " progress-bar-striped")
-  
+  if (!is.null(status)) 
+    barCl <- paste0(barCl, " bg-", status)
+  if (isTRUE(striped)) 
+    barCl <- paste0(barCl, " progress-bar-striped")
   barTag <- shiny::tags$div(
-    class = barCl,
-    role = "progressbar",
-    `aria-valuenow` = value,
-    `aria-valuemin` = min,
-    `aria-valuemax` = max,
+    class = barCl, 
+    role = "progressbar", 
+    `aria-valuenow` = value, 
+    `aria-valuemin` = min, 
+    `aria-valuemax` = max, 
     style = if (vertical) {
-      paste0("height: ", height)
-    } else {
-      paste0("width: ", height)
-    },
+      paste0("height: ", paste0(value, "%"))
+    }
+    else {
+      paste0("width: ", paste0(value, "%"))
+    }, 
     shiny::tags$span(class = "sr-only", paste0(value, "%"))
   )
-  
   progressTag <- shiny::tags$div(class = progressCl)
   progressTag <- shiny::tagAppendChild(progressTag, barTag)
   progressTag
-  
 }
 
 
@@ -714,7 +715,7 @@ bs4Timeline <- function(..., reversed = TRUE, width = 6) {
   cl <- "timeline"
   if (isTRUE(reversed)) cl <- paste0(cl, " timeline-inverse")
   
-  timelineTag <- shiny::tags$ul(
+  timelineTag <- shiny::tags$div(
     class = cl,
     ...
   )
@@ -742,7 +743,7 @@ bs4TimelineLabel <- function(..., status = NULL) {
   cl <- "bg-"
   if (!is.null(status)) cl <- paste0(cl, status)
   
-  shiny::tags$li(
+  shiny::tags$div(
     class = "time-label",
     shiny::tags$span(
       class = cl,
@@ -779,7 +780,7 @@ bs4TimelineItem <- function(..., elevation = NULL, icon = NULL,
   itemCl <- "timeline-header no-border"
   if (isTRUE(border)) itemCl <- "timeline-header"
   
-  shiny::tags$li(
+  shiny::tags$div(
     
     # timelineItem icon and status
     shiny::tags$i(
@@ -866,7 +867,7 @@ bs4TimelineStart <- function(icon = "clock-o", status = NULL) {
   if (!is.null(icon)) cl <- paste0(cl, icon)
   if (!is.null(status)) cl <- paste0(cl, " bg-", status)
   
-  shiny::tags$li(
+  shiny::tags$div(
     shiny::tags$i(class = cl)
   )
 }
@@ -889,7 +890,7 @@ bs4TimelineEnd <- function(icon = "hourglass-end", status = NULL) {
   if (!is.null(status)) cl <- paste0(cl, " bg-", status)
   
   shiny::tagList(
-    shiny::tags$li(
+    shiny::tags$div(
       shiny::tags$i(class = cl)
     ),
     shiny::br(), 
@@ -1028,13 +1029,15 @@ bs4Jumbotron <- function(..., title = NULL, lead = NULL, href = NULL, btn_name =
     shiny::tags$p(class = "lead", lead),
     shiny::tags$hr(class = "my-4"),
     shiny::tags$p(...),
-    shiny::tags$a(
-      class = paste0("btn btn-", btnStatus, " btn-lg"),
-      href = href,
-      target = "_blank",
-      role = "button",
-      btn_name
-    )
+    if (!is.null(btn_name)) {
+      shiny::tags$a(
+        class = paste0("btn btn-", btnStatus, " btn-lg"),
+        href = href,
+        target = "_blank",
+        role = "button",
+        btn_name
+      )
+    }
   )
 }
 
@@ -2001,4 +2004,284 @@ bs4TableItem <- function(..., dataCell = FALSE) {
   } else {
     shiny::tags$th(...)
   }
+}
+
+
+
+
+# #' @title AdminLTE3 todo list container
+# #'
+# #' @description Create a todo list container
+# #'
+# #' @param ... slot for todoListItem.
+# #' @param sortable Whether the list elements are sortable or not.
+# #'
+# #' @author David Granjon, \email{dgranjon@@ymail.com}
+# #'
+# #' @examples
+# #' if (interactive()) {
+# #'  library(shiny)
+# #'  library(bs4Dash)
+# #'  shinyApp(
+# #'   ui = dashboardPage(
+# #'     dashboardHeader(),
+# #'     dashboardSidebar(),
+# #'     dashboardBody(
+# #'      box(
+# #'       "Sortable todo list demo",
+# #'       status = "warning",
+# #'       todoList(
+# #'         todoListItem(
+# #'           label = "Design a nice theme",
+# #'           "Some text here"
+# #'         ),
+# #'         todoListItem(
+# #'           label = "Make the theme responsive",
+# #'           "Some text here"
+# #'         ),
+# #'         todoListItem(
+# #'           checked = TRUE,
+# #'           label = "Let theme shine like a star"
+# #'         )
+# #'        )
+# #'       ),
+# #'       box(
+# #'       "Simple todo list demo",
+# #'       status = "warning",
+# #'       todoList(
+# #'       sortable = FALSE,
+# #'         todoListItem(
+# #'           label = "Design a nice theme",
+# #'           "Some text here"
+# #'         ),
+# #'         todoListItem(
+# #'           label = "Make the theme responsive",
+# #'           "Some text here"
+# #'         ),
+# #'         todoListItem(
+# #'           checked = TRUE,
+# #'           label = "Let theme shine like a star"
+# #'         )
+# #'        )
+# #'       )
+# #'     ),
+# #'     title = "Todo Lists"
+# #'   ),
+# #'   server = function(input, output) { }
+# #'  )
+# #' }
+# #'
+# #' @export
+# todoList <- function(..., sortable = TRUE) {
+#   
+#   items <- list(...)
+#   
+#   if (sortable) {
+#     for (i in seq_along(items)) {
+#       items[[i]]$children[[1]]$attribs$class <- paste(items[[i]]$children[[1]]$attribs$class, "ui-sortable-handle")
+#     }
+#   }
+#   
+#   todoListTag <- shiny::tags$ul(
+#     class = if (sortable) "todo-list ui-sortable" else "todo-list",
+#     `data-widget` = "todo-list",
+#     items
+#   )
+#   
+#   todoListTag
+#   
+# }
+# 
+# 
+# 
+# #' @title AdminLTE2 todo list item
+# #'
+# #' @description Create a todo list item
+# #'
+# #' @param ... any element such as labels, ...
+# #' @param checked Whether the list item is checked or not.
+# #' @param label item label.
+# #'
+# #' @author David Granjon, \email{dgranjon@@ymail.com}
+# #'
+# #' @export
+# todoListItem <- function(..., checked = FALSE, label = NULL) {
+#   cl <- NULL
+#   if (checked) cl <- "done"
+#   
+#   shiny::tags$li(
+#     class = cl,
+#     
+#     # sortable icon
+#     shiny::tags$span(
+#       class = "handle",
+#       shiny::tags$i(class = "fa fa-ellipsis-v"),
+#       shiny::tags$i(class = "fa fa-ellipsis-v")
+#     ),
+#     
+#     # checkbox trigger
+#     # need to be implemented (custom binding js)
+#     #shiny::tags$input(type = "checkbox"),
+#     
+#     # label
+#     shiny::tags$span(class = "text", label),
+#     
+#     # any element
+#     shiny::tags$small(
+#       ...
+#     )
+#   )
+#   
+# }#
+
+
+
+
+#' Create a Boostrap 4 ribbon
+#'
+#' Build a bootstrap 4 ribbon
+#'
+#' @param text Ribbon text.
+#' @param status Ribbon status: "primary", "danger", "success", "warning", "info" and 
+#' "secondary".
+#' @param size NULL by default: "lg" or "xl".
+#' 
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(bs4Dash)
+#'  shinyApp(
+#'   ui = bs4DashPage(
+#'     navbar = bs4DashNavbar(), 
+#'     sidebar = bs4DashSidebar(),
+#'     body = bs4DashBody(
+#'      fluidRow(
+#'       bs4Box(
+#'        width = 4,
+#'        title = "Normal ribbon",
+#'        bs4Ribbon(
+#'         text = "New",
+#'         status = "primary"
+#'        )
+#'       ),
+#'       bs4Box(
+#'        width = 4,
+#'        title = "Large ribbon",
+#'        bs4Ribbon(
+#'         text = "New",
+#'         status = "secondary",
+#'         size = "lg"
+#'        )
+#'       ),
+#'       bs4Box(
+#'        width = 4,
+#'        title = "XLarge ribbon",
+#'        bs4Ribbon(
+#'         text = "New",
+#'         status = "danger",
+#'         size = "xl"
+#'        )
+#'       )
+#'      )
+#'     ), 
+#'     footer = bs4DashFooter()
+#'   ),
+#'   server = function(input, output) { }
+#'  )
+#' }
+#' 
+#'
+#' @author David Granjon, \email{dgranjon@@ymail.com}
+#'
+#' @export
+bs4Ribbon <- function(text, status = c("primary", "danger", "success", "warning", "info", "secondary"),
+                      size = NULL) {
+  status <- match.arg(status)
+  ribbonCl <- paste0("ribbon bg-", status) 
+  ribbonWrapperCl <- "ribbon-wrapper"
+  if (!is.null(size)) {
+    ribbonWrapperCl <- paste0(ribbonWrapperCl, " ribbon-", size)
+    ribbonCl <- paste0(ribbonCl, " text-", size)
+  }
+  shiny::tags$div(
+    class = ribbonWrapperCl,
+    shiny::tags$div(class = ribbonCl, text)
+  )
+}
+
+
+
+
+#' Create a Boostrap 4 block quote
+#'
+#' Build a bootstrap 4 block quote
+#'
+#' @param ... Content.
+#' @param status Block status: "primary", "danger", "success", "warning", "info" and 
+#' "secondary" or any other supported colors. See \url{https://adminlte.io/themes/dev/AdminLTE/pages/UI/general.html}.
+#' 
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(bs4Dash)
+#'  shinyApp(
+#'   ui = bs4DashPage(
+#'     navbar = bs4DashNavbar(), 
+#'     sidebar = bs4DashSidebar(),
+#'     body = bs4DashBody(
+#'      fluidRow(
+#'       bs4Quote("Blablabla", status = "indigo"),
+#'       bs4Quote("Blablabla", status = "danger"),
+#'       bs4Quote("Blablabla", status = "teal"),
+#'       bs4Quote("Blablabla", status = "orange"),
+#'       bs4Quote("Blablabla", status = "warning"),
+#'       bs4Quote("Blablabla", status = "fuchsia")
+#'      )
+#'     ), 
+#'     footer = bs4DashFooter()
+#'   ),
+#'   server = function(input, output) { }
+#'  )
+#' }
+#' 
+#'
+#' @author David Granjon, \email{dgranjon@@ymail.com}
+#'
+#' @export
+bs4Quote <- function(..., status) {
+  shiny::tags$blockquote(
+    class = paste0("quote-", status),
+    ...
+  )
+}
+
+
+
+#' Get all AdminLTE colors.
+#' @export
+getAdminLTEColors <- function() {
+  return(
+    c(
+      "dark",
+      "navy",
+      "gray-dark",
+      "gray",
+      "secondary",
+      "indigo",
+      "purple",
+      "primary",
+      "info",
+      "success",
+      "olive",
+      "teal",
+      "lime",
+      "warning",
+      "orange",
+      "danger",
+      "fuchsia",
+      "maroon",
+      "pink",
+      "light"
+    )
+  )
 }

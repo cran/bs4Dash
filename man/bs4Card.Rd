@@ -5,24 +5,70 @@
 \alias{box}
 \title{Create a Boostrap 4 card}
 \usage{
-bs4Card(..., title = NULL, footer = NULL, status = NULL,
-  elevation = NULL, solidHeader = FALSE, headerBorder = TRUE,
-  gradientColor = NULL, width = 6, height = NULL,
-  collapsible = TRUE, collapsed = FALSE, closable = TRUE,
-  maximizable = FALSE, labelStatus = NULL, labelText = NULL,
-  labelTooltip = NULL, dropdownMenu = NULL, dropdownIcon = "wrench",
-  overflow = FALSE)
+bs4Card(
+  ...,
+  inputId = NULL,
+  title = NULL,
+  footer = NULL,
+  status = NULL,
+  elevation = NULL,
+  solidHeader = FALSE,
+  headerBorder = TRUE,
+  gradientColor = NULL,
+  width = 6,
+  height = NULL,
+  collapsible = TRUE,
+  collapsed = FALSE,
+  closable = TRUE,
+  maximizable = FALSE,
+  labelStatus = NULL,
+  labelText = NULL,
+  labelTooltip = NULL,
+  dropdownMenu = NULL,
+  dropdownIcon = "wrench",
+  overflow = FALSE,
+  enable_sidebar = FALSE,
+  sidebar_content = NULL,
+  sidebar_width = "25\%",
+  sidebar_background = "#333a40",
+  sidebar_start_open = FALSE,
+  sidebar_icon = "cogs"
+)
 
-box(..., title = NULL, footer = NULL, status = NULL,
-  elevation = NULL, solidHeader = FALSE, headerBorder = TRUE,
-  gradientColor = NULL, width = 6, height = NULL,
-  collapsible = TRUE, collapsed = FALSE, closable = TRUE,
-  maximizable = FALSE, labelStatus = NULL, labelText = NULL,
-  labelTooltip = NULL, dropdownMenu = NULL, dropdownIcon = "wrench",
-  overflow = FALSE)
+box(
+  ...,
+  inputId = NULL,
+  title = NULL,
+  footer = NULL,
+  status = NULL,
+  elevation = NULL,
+  solidHeader = FALSE,
+  headerBorder = TRUE,
+  gradientColor = NULL,
+  width = 6,
+  height = NULL,
+  collapsible = TRUE,
+  collapsed = FALSE,
+  closable = TRUE,
+  maximizable = FALSE,
+  labelStatus = NULL,
+  labelText = NULL,
+  labelTooltip = NULL,
+  dropdownMenu = NULL,
+  dropdownIcon = "wrench",
+  overflow = FALSE,
+  enable_sidebar = FALSE,
+  sidebar_content = NULL,
+  sidebar_width = "25\%",
+  sidebar_background = "#333a40",
+  sidebar_start_open = FALSE,
+  sidebar_icon = "cogs"
+)
 }
 \arguments{
 \item{...}{Contents of the box.}
+
+\item{inputId}{Get the state of the card. Optional.}
 
 \item{title}{Optional title.}
 
@@ -70,6 +116,18 @@ the user to collapse the box.}
 \item{dropdownIcon}{Dropdown icon. "wrench" by default.}
 
 \item{overflow}{Whether to enable overflow in the card body and footer. FALSE by default.}
+
+\item{enable_sidebar}{Whether to display the box sidebar. FALSE by default.}
+
+\item{sidebar_content}{Box sidebar content, if any.}
+
+\item{sidebar_width}{Box sidebar width in percentage. 25\% by default. A character value of any width CSS understands (e.g. "100px")}
+
+\item{sidebar_background}{Box sidebar background color. Dark by default.}
+
+\item{sidebar_start_open}{Whether the box sidebar is open at start. FALSE by default.}
+
+\item{sidebar_icon}{Box sidebar icon.}
 }
 \description{
 Build an adminLTE3 card
@@ -159,8 +217,10 @@ if(interactive()){
 
 }
 \seealso{
-Other cards: \code{\link{bs4InfoBox}},
-  \code{\link{bs4TabCard}}, \code{\link{bs4ValueBox}}
+Other cards: 
+\code{\link{bs4InfoBox}()},
+\code{\link{bs4TabCard}()},
+\code{\link{bs4ValueBox}()}
 }
 \author{
 David Granjon, \email{dgranjon@ymail.com}

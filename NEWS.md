@@ -1,3 +1,54 @@
+# bs4Dash 0.5.0
+
+## Breaking Changes
+- remove fixed parameters from `bs4DashNavbar()` since it does not exist in the new
+AdminLTE version
+- rework on `bs4DropdownMenuItem`: change text to message, date to time. Add new params: from, src, status and type.
+
+## Major Changes
+- add link back to https://www.glyphicons.com. Thanks @statnmap
+- upgrade AdminLTE3 version to rc4
+- add `bs4DashSidebar()` input binding to indicate the state (collapse: FALSE, open: TRUE) as well as 
+`updatebs4Sidebar()` to programmatically toggle its state
+- add `bs4Controlbar()` input binding to indicate the state (collapse: FALSE, open: TRUE) as well as 
+`updatebs4Controlbar()` to programmatically toggle its state
+- add `bs4Card()` input binding to indicate the state (collapse: FALSE, open: TRUE, maximize, closed, ...) as well as 
+`updatebs4Card()` to programmatically toggle its state
+- add `bs4InsertTab()` to programmatically insert `bs4TabPanel()` in `bs4TabSetPanel()`
+- add `bs4RemoveTab()` to programmatically remove `bs4TabPanel()` in `bs4TabSetPanel()`
+
+
+## New features
+- `bs4DashPage()` has a new sidebar_mini parameter. When TRUE, the sidebar has a minimum
+width when collapsed (you still see icons). When false, it behaves like in shinydashboard
+- `bs4InfoBox()` can now navigate between tabs if the tabName parameter is specified. It must however correspond
+to an existing `bs4TabItem()` in the body!
+- `bs4ValueBox()` has a footer argument. It is different from the href parameter. Thanks @stefanfritsch
+- add expand_on_hover parameter to `bs4DashSidebar()`
+- add compact parameters to `bs4DashNavbar()` to reduce the navbar size
+- add `getAdminLTEColors()` to preview all available color themes
+- by default, `bs4DashSidebar()` has a fixed layout. This prevent from not seeing sidebar items
+if the body contains too many elements
+- `bs4DashPage()` has options to change the `bs4Controlbar()` behavior when it expands (see controlbar_overlay)
+- `bs4SidebarMenu()` has 3 new parameters: flat (design effect), child_indent and compact
+- add sidebar in `bs4Card()`
+- add `bs4UserMenu()` for `bs4DashNavbar()`
+- add `bs4Ribbon()`, a sort of enhanced label for cards or any content
+- add `bs4Quote()`, an improved blockquote tag for Bootstrap 4
+
+## Bug Fix
+- fix #66 and #71: sidebar_collapsed was not working. Thanks @analytichealth and @federicomarini
+- remove hardcoded style for navbar dropdown icons
+- remove hardcoded style for navbar icons (fixed in the last adminLTE3 release). Thanks @federicomarini 
+- fix height issue in `bs4Card()`. Thanks @analytichealth
+- Rework the `column()` function from Shiny to make it work with Bootstrap 4. Thanks @federicomarini
+- fix `bs4DashNavbar()` background color issue. 
+- rework `bs4DashBody()` so that when no element is in the sidebar and no tabItems
+are in the body, margin between the sidebar, the controlbar is not 0
+- when btn_name is NULL in `bs4Jumbotron()`, do not show a button. Thanks @davidlvb
+- fix `bs4ProgressBar()`: remove height and width parameters. Add size parameter. This
+fix the progress behaviour which was wrong
+
 # bs4Dash 0.4.0
 
 ## Major changes

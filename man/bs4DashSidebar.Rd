@@ -5,16 +5,40 @@
 \alias{dashboardSidebar}
 \title{Create a Boostrap 4 dashboard main sidebar}
 \usage{
-bs4DashSidebar(..., disable = FALSE, title = NULL, skin = "dark",
-  status = "primary", brandColor = NULL, url = NULL, src = NULL,
-  elevation = 4, opacity = 0.8)
+bs4DashSidebar(
+  ...,
+  inputId = NULL,
+  disable = FALSE,
+  title = NULL,
+  skin = "dark",
+  status = "primary",
+  brandColor = NULL,
+  url = NULL,
+  src = NULL,
+  elevation = 4,
+  opacity = 0.8,
+  expand_on_hover = TRUE
+)
 
-dashboardSidebar(..., disable = FALSE, title = NULL, skin = "dark",
-  status = "primary", brandColor = NULL, url = NULL, src = NULL,
-  elevation = 4, opacity = 0.8)
+dashboardSidebar(
+  ...,
+  inputId = NULL,
+  disable = FALSE,
+  title = NULL,
+  skin = "dark",
+  status = "primary",
+  brandColor = NULL,
+  url = NULL,
+  src = NULL,
+  elevation = 4,
+  opacity = 0.8,
+  expand_on_hover = TRUE
+)
 }
 \arguments{
 \item{...}{Slot for \link{bs4SidebarMenu}.}
+
+\item{inputId}{Recover the state of the sidebar.}
 
 \item{disable}{If \code{TRUE}, the sidebar will be disabled.}
 
@@ -33,7 +57,9 @@ dashboardSidebar(..., disable = FALSE, title = NULL, skin = "dark",
 
 \item{elevation}{Sidebar elevation. 4 by default (until 5).}
 
-\item{opacity}{Sidebar opacity. From 0 to 1. 0.8 by default.}
+\item{opacity}{Sidebar brand opacity. From 0 to 1. 0.8 by default.}
+
+\item{expand_on_hover}{Whether to expand the sidebar om hover. TRUE by default.}
 }
 \description{
 Build an adminLTE3 dashboard main sidebar

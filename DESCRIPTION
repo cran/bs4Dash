@@ -1,7 +1,7 @@
 Package: bs4Dash
 Type: Package
 Title: A 'Bootstrap 4' Version of 'shinydashboard'
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(
   person("David", "Granjon", email = "dgranjon@ymail.com", role = c("aut", "cre")),
   person(family = "RinteRface", role = "cph"),
@@ -11,7 +11,7 @@ Authors@R: c(
 Maintainer: David Granjon <dgranjon@ymail.com>
 Description: Make 'Bootstrap 4' dashboards. Use the full power
     of 'AdminLTE3', a dashboard template built on top of 'Bootstrap 4' 
-    <https://github.com/almasaeed2010/AdminLTE/tree/v3-dev>.
+    <https://github.com/ColorlibHQ/AdminLTE>.
 URL: https://rinterface.github.io/bs4Dash/index.html,
         https://github.com/RinteRface/bs4Dash
 BugReports: https://github.com/RinteRface/bs4Dash/issues
@@ -20,19 +20,19 @@ Imports: shiny, htmltools
 Suggests: plotly, shinyWidgets, knitr, rmarkdown
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 VignetteBuilder: knitr
 Collate: 'update-functions.R' 'render-functions.R' 'cards.R'
         'dashboardSidebar.R' 'dashboardBody.R' 'dashboardFooter.R'
         'dashboardControlbar.R' 'dashboardNavbar.R' 'dashboardPage.R'
-        'aliases.R' 'bs4DashGallery.R' 'deps.R' 'useful-items.R'
-        'utils.R'
+        'aliases.R' 'bs4DashGallery.R' 'deps.R' 'grid.R'
+        'useful-items.R' 'utils.R'
 NeedsCompilation: no
-Packaged: 2019-07-25 12:20:54 UTC; granjda1
+Packaged: 2019-11-27 10:02:47 UTC; granjda1
 Author: David Granjon [aut, cre],
   RinteRface [cph],
   Almasaeed Studio [ctb, cph] (AdminLTE3 theme for Bootstrap 4),
   Winston Chang [ctb, cph] (Utils functions from shinydashboard),
   Thomas Park [ctb, cph] (Bootswatch Sketchy theme CSS)
 Repository: CRAN
-Date/Publication: 2019-07-25 12:40:04 UTC
+Date/Publication: 2019-11-27 10:20:02 UTC

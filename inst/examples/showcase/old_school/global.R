@@ -83,10 +83,9 @@ social_cards_tab <- bs4TabItem(
         status = "info"
       ),
       bs4ProgressBar(
-        value = 5,
+        value = 20,
         striped = TRUE,
-        status = "warning",
-        width = "20%"
+        status = "warning"
       )
     )
   ),
@@ -439,11 +438,20 @@ boxes_tab <- bs4TabItem(
     bs4Box(
       height = "600px",
       title = "Box 1",
+      bs4Ribbon(
+        text = "Plot 1",
+        status = "success"
+      ),
       plotlyOutput("plot2")
     ),
     bs4Box(
       height = "600px",
       title = "Box 2",
+      bs4Ribbon(
+        text = "Plot 2",
+        status = "danger",
+        size = "xl"
+      ),
       plotlyOutput("plot3")
     )
   )
@@ -575,6 +583,19 @@ gallery_1_tab <- bs4TabItem(
   ),
   fluidRow(
     bs4Card(
+      title = "bs4Quote",
+      fluidRow(
+        bs4Quote("Blablabla", status = "indigo"),
+        bs4Quote("Blablabla", status = "danger"),
+        bs4Quote("Blablabla", status = "teal"),
+        bs4Quote("Blablabla", status = "orange"),
+        bs4Quote("Blablabla", status = "warning"),
+        bs4Quote("Blablabla", status = "fuchsia")
+      )
+    )
+  ),
+  fluidRow(
+    bs4Card(
       title = "Progress bars",
       footer = tagList(
         bs4ProgressBar(
@@ -583,10 +604,9 @@ gallery_1_tab <- bs4TabItem(
           status = "info"
         ),
         bs4ProgressBar(
-          value = 5,
+          value = 20,
           striped = TRUE,
-          status = "warning",
-          width = "20%"
+          status = "warning"
         )
       ),
       bs4ProgressBar(
@@ -598,8 +618,7 @@ gallery_1_tab <- bs4TabItem(
         value = 100,
         vertical = TRUE,
         striped = TRUE,
-        status = "danger",
-        height = "80%"
+        status = "danger"
       )
     ),
     bs4Card(
