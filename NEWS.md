@@ -1,3 +1,234 @@
+# bs4Dash 2.0.0
+
+## Breaking changes
+This is to align with shinydashboard and shinydashboardPlus.
+### bs4DashPage/dashboardPage
+- `navbar` param becomes `header`.
+- Remove `old_school`, `sidebar_mini`, `sidebar_collapsed`, `controlbar_collapsed`, 
+  `controlbar_overlay`, `enable_preloader`, `loading_duration` and 
+  `loading_background`. These parameters move to dashboardSidebar, controlbar ...
+- New `freshTheme` parameter to pass `{fresh}` powered themes.
+- New `options` parameter to configure AdminLTE3.
+- New `preloader` to use `{waiter}` as a preloading engine.
+
+
+### bs4DashFooter
+- `...` becomes `left`.
+- `right_text` becomes `right`.
+
+### bs4DashNavbar/dashboardHeader
+- `controlbarIcon` accepts `shiny::icon` instead of the icon name.
+- `sidebarIcon` accepts `shiny::icon` instead of the icon name.
+- add `title`, `titleWidth` and `disable`
+
+### bs4UserMenu
+- `src` becomes `image`.
+
+
+### bs4DashControlbar/dashboardControlbar
+- Add `collapsed` and `overlay`.
+- Remove `title`.
+- Rename `inputId` to `id`.
+
+
+### updatebs4Controlbar
+- `inputId` becomes `id`.
+- New alias: `updateControlbar`.
+- `session` is not mandatory
+
+
+### bs4DashSidebar/dashboardSidebar/updateSidebar
+- `inputId` moved to the end.
+- `inputId` renamed to `id`.
+- Added `collapsed` and `minified`.
+- Add `width`.
+- Remove `opacity`, `title`, `brandColor`, `url` and `src`.
+
+### bs4SidebarMenu
+- `child_indent` becomes `childIndent`.
+- Add `.list` to pass programmatically generated `bs4SidebarMenuItem`.
+
+### bs4SidebarMenuItem
+- Add `href` and `newTab`.
+- `icon` expects `shiny::icon`.
+
+
+### bs4SidebarUserPanel
+- `img` and `text` become `image` and `name`, respectively.
+
+
+### bs4Card
+- Change `solidHeader` behavior.
+- Remove all sidebar related parameters from `bs4Card()`. This is now part of
+ the new `bs4CardSidebar()`.
+- Remove dropdownIcon parameter from `bs4Card()`. It is now part of the `dropdownItemList()`.
+- Remove labelStatus, labelText and labelTooltip params from `bs4Card()`. This is to reduce the number of parameters of cards.
+- By default, `closable` is now FALSE for `bs4Card()`.
+- Rename `dropdownItemList` by `cardDropdown`
+- Rename `dropdownItemListItem` by `cardDropdownItem`
+
+
+### bs4CardSidebar
+- `inputId` becomes `id`.
+- `icon` expects `shiny::icon`.
+
+### bs4TabCard
+- Change `solidHeader` behavior. 
+
+
+### bs4ValueBox
+- `status` becomes `color`. 
+- `icon` expects `shiny::icon`.
+
+### bs4InfoBox
+- `status` becomes color
+- Remove `...` for `subtitle`
+- Remove `iconStatus`.
+- Add `href` and `fill`.
+- Rename `gradientColor` to `gradient`.
+
+### bs4UserCard
+- `src` becomes `image`.
+- `status` becomes `color`.
+
+### bs4SocialBox
+- rework component
+- add `userBlock()` to pass on title.
+
+
+### attachmentBlock
+- `src` becomes `image`.
+- `titleUrl` becomes `href`.
+
+### descriptionBlock
+- `icon` expects `shiny::icon`.
+
+
+### bs4Box 
+- This component has been removed
+
+
+### bs4TabCard
+- rework component. Like `tabBox()` from `{shinydashboard}`
+
+
+### bs4DropdownMenu
+- `badge` becomes `badgeStatus`
+- Add `type`.
+- icon expects `shiny::icon`.
+- Replace `labelText` by `headerText`.
+- Add `.list` and `href`.
+- Remove `align`.
+
+### bs4DropdownMenuItem
+- This has been replaced by `notificationItem()` and `messageItem()`
+
+
+### Others
+- Reworked `bs4Table()` API.
+- In `bs4Stars()`: `grade` and `maxstar`, respectively become `value` and `grade`.
+- In `listGroupItem()`, remove `type` and put it in `listGroup()`. `src` becomes `href`.
+- `status` becomes `color` in `blockQuote`.
+- Remove `src` from `carouselItem()`
+- In `bs4Ribbon()`, `status` becomes `color`. Remove `size`.
+- In `bs4Badge()`, `status` becomes `color`.
+- In `userMessage()`, `src` becomes `image` and `side` becomes `type`.
+- In `timelineItemMedia()`, `src` becomes `image`.
+- In `timelineItem()`, `timelineStart()` and `timelineEnd()`, `icon` expects `shiny::icon`.
+- `status` becomes `color` in `timelineItem()`, `timelineLabel()`, `timelineStart()` and `timelineEnd()`.
+- In `userPost()` and `userPostMedia()`, `src` becomes `image`. Removed `collapseStatus`.
+- In `bs4Stars()`, status becomes `color`.
+- Remove `bs4ShowTab()`, `bs4HideTab()` and `bs4RemoveTab()`. shiny vanilla function should work well now.
+- Remove `bs4TabPanel()`.
+- `bs4TabSetPanel()` becomes `bs4TabsetPanel()` and is built on top of `shiny::tabsetPanel`.
+- In `cardProfile()`, add `bordered`. `src` becomes `image`. 
+- Remove `cardProfileItemList()`.
+- `updatebs4TabSetPanel()`: selected takes the name of the tab instead of its index. This is more convenient (same as in shinydashboard)
+- value is now mandatory in `bs4InfoBox()`
+- change `attachmentBlock()` title_url to titleUrl (to match with a new upcoming package...)
+- `descriptionBlock()`: number_color, number_icon, right_border and margin_bottom become
+camel case parms (numberColor, numberIcon, rightBorder and marginBottom)
+- numberIcon in `descriptionBlock()` only need the name of the icon ('times') instead
+- `bs4Jumbotron()`: btn_name becomes btnName
+- `userPost()`: collapse_status becomes collapseStatus 
+
+## New features
+- Add `easyClose` param to `boxSidebar()` to allow to close sidebar on outside-click. Thanks @predict42-patrick for the suggestion and JS code. 
+- New `gradient` parameter to `valuebox()`.
+- New help mode in `dashboardPage()` to automatically toggle all tooltips and popovers. Use
+with `bs4TooltipUI()` and `bs4PopoverUI()`. 
+- New `useAutoColor()` leveraging new Shiny features and {thematic} to automatically
+style plots depending on the dashboard background color.
+- New bottom area for `dashboardSidebar()`.
+- Add fullscreen widget to `dashboardPage()`.
+- New `updateAccordion()`.
+- `actionButton()` is updated to provide Bootstrap 4 features.
+- New `appButton()`.
+- New `updateUserMessages()`.
+- New `userList()` and `userListItem()`.
+- New `productList()` and `productListItem()`.
+- New `userDescription()` and `userBlock()`.
+- New built-in `skinSelector`.
+- New built-in dark/light mode switcher.
+- New "go to top" feature.
+- New `dashboardUserItem()`, `userOutput()` and `renderUser()`.
+- New `bs4DashBrand` for better dashboard titles.
+- add `bs4ShowTab()` and `bs4HideTab()`: thanks @fmmattioni for the reminder ;)
+- New `bs4CardLayout()`: simplify the way to deal with `bs4Card()`!
+- New `bs4CloseAlert()`: programmatically close `bs4Alert()`
+- New `bs4Toast()`: include the builtin AdminLTE3 toasts!
+- Add options to select `bs4SidebarMenuItem()` and `bs4SidebarMenuSubItem()` at start.
+- Now `bs4DropdownMenuItem()` may act as an actionButton
+- Whenever a `bs4Card()` is maximized, the collapsible icon is hidden (does not make sense to have it)
+- new `bs4CardLabel()` to add text labels in `bs4Card()`
+- new `bs4CardSidebar()`: access the status via input$id. Add `updatebs4CardSidebar()` to toggle the card sidebar
+- add `bs4PopoverServer()`, `bs4PopoverUI()`, `bs4TooltipUI()` and `bs4TooltipServer()`
+- `bs4TabSetPanel()`: you may access the currently selected tab with input$id
+- add type parameter to `bs4TabSetPanel()` and `bs4TabCard()` so as to select
+between pills or tabs (cosmetic choice). If type is not provided, the behaviour is unchanged (pills are the default)
+- add fixed param to `bs4DashFooter()`
+- add fixed parameter to `bs4DashSidebar()`. Thanks @mppallante
+- re-add fixed parameter to `bs4DashNavbar()`. This is reintroduced by adminlte with a new css class name
+- add animated, label parameters to `bs4ProgressBar()`
+- add iconStatus parameter to `bs4InfoBox()` to allow icon color
+to be independant from the card status (https://adminlte.io/themes/v3/pages/widgets.html). Thanks @rolando-gsw
+
+## Minor change
+- `bs4Sortable()` is initialized each time a new sortable element is added. Fixes #198.
+- New `taskItem()`.
+- Add `indicators` and `.list` to `carousel()`.
+- `insertTab()` is using more shiny vanilla elements.
+- `bs4UserMenu()` does not close when clicked inside.
+- Add glyphicons as an html dependency
+- New legacy parameter in `bs4SidebarMenu()`: to use old AdminLTE2 styling for 
+item selection
+- Now, clicking outside the `bs4DashControlbar()` when it is opened will close it.
+To keep it open, see below
+- New pinned option for `bs4DashControlbar()`: allow to block the controlbar state
+- New expandedName param for `bs4SidebarMenuItem` to align with shinydashboard
+- id is NULL in `bs4TabSetPanel()` by default
+- side is default to left in `bs4TabSetPanel()`
+- change `bs4TabPanel()` param order to align with shiny
+
+## Bug Fix
+- Fix #200: simplified `bs4Table()` API. 
+- Fix #189: `hidden` type is not available for `bs4Dash::tabsetPanel` that uses an old version of the
+`shiny::tabsetPanel`. Thanks @zilch42.
+- Upgrade AdminLTE to 3.1.0. This fixes many sidebar issues!!!
+- Fix issue #110: due to the fact that the `bs4Controlbar()` now collapse when clicked outside, clicking on an input triggering the `updatebs4Controlbar()` would toggle it twice. Thanks @dwhdai
+- Fix issue #112 with `sliderInput` z-index and `bs4DashPage()` preloader. Thanks @analytichealth for the report
+- Fix issue in `bs4DashSidebar()` url link. Thanks @pvictor
+- Fix #30: programmatically close `bs4Alert()`
+- Fix #47: Control bar not showing top elements when collapsed is FALSE
+- Fix #99: rework the way sidebar items work. By default, when sidebar items has subitems and is selected, the first item is not selected. We leave the choice to the user. Thanks @analytichealth
+- Fix `bs4DropdownMenu()` example
+- fix #94: cannot render element with dependencies in `bs4InsertTab()`
+- fix #93: set default inputId when it is not provided in `bs4DashControlbar()` so that
+`renderUI` works. Thanks @artemklevtsov
+- fix #86 : cannot use `updatebs4TabSetPanel()` with `renderUI`. Thanks @jyjek
+- add condition argument to `bs4SidebarMenuItem()`. See https://github.com/RinteRface/bs4Dash/issues/35. Thanks @aldomann
+- some vignettes examples were not up to date
+
 # bs4Dash 0.5.0
 
 ## Breaking Changes

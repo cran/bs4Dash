@@ -3,19 +3,61 @@
 #' Build an adminLTE3 card
 #'
 #' @param ... Contents of the box.
-#' @param inputId Get the state of the card. Optional.
 #' @param title Optional title.
 #' @param footer Optional footer text.
-#' @param status The status of the card header. "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent". NULL by default.
-#' @param elevation Card elevation. 
+#' @param status The status of the item. This determines the item's background
+#'   color.  Valid statuses are defined as follows:
+#' \itemize{
+#'   \item \code{primary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#007bff")}.
+#'   \item \code{secondary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6c757d")}.
+#'   \item \code{info}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#17a2b8")}.
+#'   \item \code{success}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#28a745")}.
+#'   \item \code{warning}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ffc107")}.
+#'   \item \code{danger}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#dc3545")}.
+#'   \item \code{gray-dark}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#343a40")}.
+#'   \item \code{gray}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#adb5bd")}.
+#'   \item \code{white}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#fff")}.
+#'   \item \code{indigo}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6610f2")}.
+#'   \item \code{lightblue}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3c8dbc")}.
+#'   \item \code{navy}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#001f3f")}.
+#'   \item \code{purple}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#605ca8")}.
+#'   \item \code{fuchsia}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#f012be")}.
+#'   \item \code{pink}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#e83e8c")}.
+#'   \item \code{maroon}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#d81b60")}.
+#'   \item \code{orange}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ff851b")}.
+#'   \item \code{lime}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#01ff70")}.
+#'   \item \code{teal}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#39cccc")}.
+#'   \item \code{olive}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3d9970")}.
+#' }
 #' @param solidHeader Should the header be shown with a solid color background?
-#' @param headerBorder Whether to display a border between the header and body.
-#' TRUE by default
-#' @param gradientColor If NULL (the default), the background of the box will be
-#'   white. Otherwise, a color string. "primary", "success", "warning" or "danger".
+#' @param background If NULL (the default), the background of the box will be
+#'   white. Otherwise, a color string. Valid colors are listed in
+#'   \link{validColors}. See below:
+#' \itemize{
+#'  \item \code{primary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#007bff")}.
+#'   \item \code{secondary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6c757d")}.
+#'   \item \code{info}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#17a2b8")}.
+#'   \item \code{success}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#28a745")}.
+#'   \item \code{warning}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ffc107")}.
+#'   \item \code{danger}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#dc3545")}.
+#'   \item \code{gray-dark}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#343a40")}.
+#'   \item \code{gray}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#adb5bd")}.
+#'   \item \code{white}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#fff")}.
+#'   \item \code{indigo}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6610f2")}.
+#'   \item \code{lightblue}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3c8dbc")}.
+#'   \item \code{navy}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#001f3f")}.
+#'   \item \code{purple}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#605ca8")}.
+#'   \item \code{fuchsia}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#f012be")}.
+#'   \item \code{pink}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#e83e8c")}.
+#'   \item \code{maroon}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#d81b60")}.
+#'   \item \code{orange}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ff851b")}.
+#'   \item \code{lime}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#01ff70")}.
+#'   \item \code{teal}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#39cccc")}.
+#'   \item \code{olive}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3d9970")}.
+#' }
 #' @param width The width of the box, using the Bootstrap grid system. This is
 #'   used for row-based layouts. The overall width of a region is 12, so the
-#'   default width of 4 occupies 1/3 of that width. For column-based
+#'   default card width of 4 occupies 1/3 of that width. For column-based
 #'   layouts, use \code{NULL} for the width; the width is set by the column that
 #'   contains the box.
 #' @param height The height of a box, in pixels or other CSS unit. By default
@@ -26,393 +68,501 @@
 #'   \code{collapsible=TRUE}.
 #' @param closable If TRUE, display a button in the upper right that allows the user to close the box.
 #' @param maximizable If TRUE, the card can be displayed in full screen mode.
-#' @param labelStatus status of the box label: "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent".
-#' @param labelText Label text.
-#' @param labelTooltip Label tooltip displayed on hover.
-#' @param dropdownMenu List of items in the the boxtool dropdown menu. Use \link{dropdownItemList}.
-#' @param dropdownIcon Dropdown icon. "wrench" by default.
-#' @param overflow Whether to enable overflow in the card body and footer. FALSE by default.
-#' @param enable_sidebar Whether to display the box sidebar. FALSE by default.
-#' @param sidebar_content Box sidebar content, if any.
-#' @param sidebar_width Box sidebar width in percentage. 25\% by default. A character value of any width CSS understands (e.g. "100px")
-#' @param sidebar_background Box sidebar background color. Dark by default.
-#' @param sidebar_start_open Whether the box sidebar is open at start. FALSE by default.
-#' @param sidebar_icon Box sidebar icon. 
-#' 
+#' @param icon Header icon. Displayed before title. Expect \code{\link[shiny]{icon}}.
+#' @param gradient Whether to allow gradient effect for the background color. Default to FALSE.
+#' @param boxToolSize Size of the toolbox: choose among "xs", "sm", "md", "lg".
+#' @param elevation Card elevation.
+#' @param headerBorder Whether to display a border between the header and body.
+#' TRUE by default
+#' @param label Slot for \link{boxLabel}.
+#' @param dropdownMenu List of items in the boxtool dropdown menu. Use \link{boxDropdown}.
+#' @param sidebar Slot for \link{boxSidebar}.
+#' @param id Box unique id. \link{updateBox} target.
+#'
+#' @rdname box
 #' @family cards
 #'
 #' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
+#' # A box with label, sidebar, dropdown menu
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
 #'
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'     navbar = bs4DashNavbar(),
-#'     sidebar = bs4DashSidebar(),
-#'     controlbar = bs4DashControlbar(),
-#'     footer = bs4DashFooter(),
-#'     title = "test",
-#'     body = bs4DashBody(
-#'     fluidRow(
-#'      column(
-#'       width = 6,
-#'       bs4Card(
-#'        title = "Closable Box with dropdown", 
-#'        closable = TRUE, 
-#'        width = 12,
-#'        status = "warning", 
-#'        solidHeader = FALSE, 
-#'        collapsible = TRUE,
-#'        labelText = 1,
-#'        labelStatus = "danger",
-#'        labelTooltip = "Hi Bro!",
-#'        dropdownIcon = "wrench",
-#'        dropdownMenu = dropdownItemList(
-#'          dropdownItem(url = "http://www.google.com", name = "Link to google"),
-#'          dropdownItem(url = "#", name = "item 2"),
-#'          dropdownDivider(),
-#'          dropdownItem(url = "#", name = "item 3")
-#'        ),
-#'        p("Box Content")
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       dashboardHeader(),
+#'       dashboardSidebar(),
+#'       dashboardBody(
+#'         box(
+#'           title = "Closable Box with dropdown",
+#'           closable = TRUE,
+#'           width = 12,
+#'           status = "warning",
+#'           solidHeader = FALSE,
+#'           collapsible = TRUE,
+#'           label = boxLabel(
+#'             text = 1,
+#'             status = "danger"
+#'           ),
+#'           dropdownMenu = boxDropdown(
+#'             boxDropdownItem("Link to google", href = "http://www.google.com"),
+#'             boxDropdownItem("item 2", href = "#"),
+#'             dropdownDivider(),
+#'             boxDropdownItem("item 3", href = "#", icon = icon("th"))
+#'           ),
+#'           sidebar = boxSidebar(
+#'             startOpen = TRUE,
+#'             id = "mycardsidebar",
+#'             sliderInput(
+#'               "obs",
+#'               "Number of observations:",
+#'               min = 0,
+#'               max = 1000,
+#'               value = 500
+#'             )
+#'           ),
+#'           plotOutput("distPlot")
+#'         )
 #'       )
-#'      ),
-#'      column(
-#'       width = 6, 
-#'       bs4Card(
-#'        title = "Closable Box with gradient", 
-#'        closable = TRUE, 
-#'        width = 12,
-#'        status = "warning", 
-#'        solidHeader = FALSE, 
-#'        gradientColor = "success",
-#'        collapsible = TRUE,
-#'        p("Box Content")
-#'       )
-#'      )
-#'      ),
-#'      fluidRow(
-#'       bs4Card(
-#'        title = "Closable Box with solidHeader", 
-#'        closable = TRUE, 
-#'        width = 6,
-#'        solidHeader = TRUE, 
-#'        status = "primary",
-#'        collapsible = TRUE,
-#'        p("Box Content")
-#'       ),
-#'       bs4Card(
-#'        title = "Maximizable Card", 
-#'        width = 6,
-#'        status = "warning", 
-#'        closable = FALSE,
-#'        maximizable = TRUE, 
-#'        collapsible = FALSE,
-#'        sliderInput("obs", "Number of observations:",
-#'                    min = 0, max = 1000, value = 500
-#'        ),
-#'        plotOutput("distPlot")
-#'       )
-#'      )
-#'     )
-#'    ),
-#'    server = function(input, output) {
-#'     output$distPlot <- renderPlot({
-#'      hist(rnorm(input$obs))
-#'     })
-#'    }
-#'  )
+#'     ),
+#'     server = function(input, output) {
+#'       output$distPlot <- renderPlot({
+#'         hist(rnorm(input$obs))
+#'       })
+#'     }
+#'   )
 #' }
-#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
-bs4Card <- function(..., inputId = NULL, title = NULL, footer = NULL, status = NULL, elevation = NULL,
-                    solidHeader = FALSE, headerBorder = TRUE, gradientColor = NULL, 
-                    width = 6, height = NULL, collapsible = TRUE, collapsed = FALSE, 
-                    closable = TRUE, maximizable = FALSE, labelStatus = NULL, labelText = NULL, 
-                    labelTooltip = NULL, dropdownMenu = NULL, dropdownIcon = "wrench",
-                    overflow = FALSE, enable_sidebar = FALSE, sidebar_content = NULL, 
-                    sidebar_width = "25%", sidebar_background = "#333a40", 
-                    sidebar_start_open = FALSE, sidebar_icon = "cogs") {
-  
-  if (!is.null(height) & overflow) {
-    stop(
-      "overlow and height are not compatible. Please choose only one property. 
-      When overflow is TRUE, the maximum height is 500px"
-    )
-  }
-  
-  cardCl <- if (!is.null(gradientColor)) {
-    paste0("card bg-gradient-", gradientColor)
-  } else {
-    if (is.null(status)) {
-      "card card-default"
-    } else {
-      if (isTRUE(solidHeader)) {
-        paste0("card card-outline card-", status)
-      } else {
-        paste0("card card-", status)
-      }
-    }
-  }
-  
-  if (enable_sidebar) {
-    if (sidebar_start_open) {
-      cardCl <- paste0(cardCl, " direct-chat direct-chat-contacts-open")
-    } else {
-      cardCl <- paste0(cardCl, " direct-chat")
-    }
-  }
-  
-  if (isTRUE(collapsible) & isTRUE(collapsed)) cardCl <- paste0(cardCl, " collapsed-card")
-  if (!is.null(elevation)) cardCl <- paste0(cardCl, " elevation-", elevation)
-  
-  cardToolTag <- shiny::tags$div(
-    class = "card-tools",
-    
-    # labels
-    if (!is.null(labelText) || !is.null(labelStatus) || !is.null(labelTooltip)) {
-      shiny::tags$span(
-        class = paste0("badge bg-", labelStatus),
-        title = if (!is.null(labelTooltip)) labelTooltip,
-        `data-toggle` = "tooltip",
-        labelText
-      )
-    },
-    
-    if (!is.null(dropdownMenu)) {
-      shiny::tags$div(
-        class = "btn-group",
-        shiny::tags$button(
-          type = "button",
-          class = "btn btn-tool dropdown-toggle",
-          `data-toggle` = "dropdown",
-          shiny::icon(dropdownIcon)
-        ),
-        dropdownMenu
-      )
-    },
-    
-    # collapse
-    if (isTRUE(collapsible)) {
-      collapseIcon <- if (collapsed) 
-        "plus"
-      else "minus"
-      shiny::tags$button(
-        type = "button",
-        class = "btn btn-tool",
-        `data-card-widget` = "collapse",
-        shiny::icon(collapseIcon)
-      )
-    },
-    
-    # close
-    if (isTRUE(closable)) {
-      shiny::tags$button(
-        type = "button",
-        class = "btn btn-tool",
-        `data-card-widget` = "remove",
-        shiny::tags$i(class = "fa fa-times")
-      )
-    },
-    
-    # maximize
-    if (maximizable) {
-      shiny::tags$button(
-        type = "button",
-        class = "btn btn-tool",
-        `data-card-widget` = "maximize",
-        shiny::tags$i(class = "fa fa-expand")
-      )
-    },
-    
-    # sidebar
-    if (enable_sidebar) {
-      sidebarTag <- shiny::tags$button(
-        class = "btn btn-tool",
-        `data-widget` = "chat-pane-toggle",
-        `data-toggle` = "tooltip",
-        `data-original-title` = "More",
-        title = NA,
-        type = "button",
-        shiny::icon(sidebar_icon)
-      )
-    }
-  )
-  
-  # header
-  if (is.null(title) & (isTRUE(maximizable) | isTRUE(closable) | isTRUE(collapsible))) title <- "\u200C"
-  
-  headerTag <- shiny::tags$div(
-    class = if (isTRUE(headerBorder)) "card-header" else "card-header no-border",
-    if (!is.null(title)) shiny::tags$h3(class = "card-title", title) else NULL
-  )
-  headerTag <- if (!is.null(title)) shiny::tagAppendChild(headerTag, cardToolTag)
-  
+bs4Card <- function(..., title = NULL, footer = NULL, status = NULL,
+                    solidHeader = FALSE, background = NULL, width = 6, height = NULL,
+                    collapsible = TRUE, collapsed = FALSE, closable = FALSE, maximizable = FALSE, icon = NULL,
+                    gradient = FALSE, boxToolSize = "sm", elevation = NULL, headerBorder = TRUE, label = NULL, dropdownMenu = NULL,
+                    sidebar = NULL, id = NULL) {
 
+  if (is.null(status)) solidHeader <- TRUE
   
+  # multiple validation
+  validateBoxProps(
+    title = title,
+    label = label,
+    sidebar = sidebar,
+    dropdownMenu = dropdownMenu,
+    status = status,
+    gradient = gradient,
+    collapsible = collapsible,
+    collapsed = collapsed,
+    solidHeader = solidHeader,
+    background = background,
+    elevation = elevation,
+    width = width
+  )
+
+  props <- dropNulls(
+    list(
+      title = if (!is.null(title)) {
+        if (inherits(title, "list")) {
+          unlist(
+            dropNulls(
+              lapply(title, function(e) {
+                if (inherits(e, "shiny.tag.list") ||
+                  inherits(e, "shiny.tag")) {
+                  as.character(e)
+                }
+              })
+            )
+          )
+        } else {
+          as.character(title)
+        }
+      } else {
+        title
+      },
+      status = status,
+      solidHeader = solidHeader,
+      background = background,
+      width = width,
+      height = height,
+      collapsible = collapsible,
+      closable = closable,
+      maximizable = maximizable,
+      gradient = gradient
+    )
+  )
+
+  # set card class
+  cardCl <- setBoxClass(
+    status, 
+    solidHeader, 
+    collapsible, 
+    collapsed,
+    elevation, 
+    gradient, 
+    background, 
+    sidebar
+  )
+
+  # set style
+  style <- setBoxStyle(height, sidebar)
+
+
+  cardToolTag <- NULL
+  # create card tools whenever necessary
+  if (collapsible || closable || maximizable || 
+      !is.null(dropdownMenu) || !is.null(sidebar) || !is.null(label)) {
+    cardToolTag <- shiny::tags$div(class = "card-tools float-right")
+  }
+
+  # update boxToolTag
+  cardToolTag <- shiny::tagAppendChildren(
+    cardToolTag,
+    label,
+    createBoxTools(
+      collapsible, 
+      collapsed, 
+      closable, 
+      maximizable, 
+      sidebar, 
+      dropdownMenu,
+      boxToolSize,
+      status,
+      background,
+      solidHeader
+    )
+  )
+
+
+
+  # header
+  if (is.null(title) && 
+    (maximizable || closable || collapsible || 
+    !is.null(dropdownMenu) || !is.null(sidebar) || !is.null(label)
+  )) title <- "\u200C"
+
+  headerTag <- shiny::tags$div(
+    class = if (headerBorder) "card-header" else "card-header border-0",
+    icon,
+    shiny::tags$h3(class = "card-title", title)
+  )
+  headerTag <- shiny::tagAppendChild(headerTag, cardToolTag)
+
+
   # body
   bodyTag <- shiny::tags$div(
     class = "card-body",
-    style = if (!is.null(height)) {
-      paste0("height: ", shiny::validateCssUnit(height))
-    } else {
-      if (overflow) "overflow-y: auto; max-height: 500px;" else NULL
-    },
+    style = style,
     ...,
-    if (enable_sidebar) {
-      shiny::tags$div(
-        style = "z-index: 10000;",
-        class = "direct-chat-contacts",
-        shiny::tags$ul(
-          class = "contacts-list", 
-          shiny::tags$li(
-            style = paste0("width: ", sidebar_width, ";"), 
-            sidebar_content
-          )
-        )
-      )
-    }
+    sidebar[[2]]
   )
-  
+
+  # footer
   footerTag <- if (!is.null(footer)) {
     shiny::tags$div(
       class = "card-footer",
-      style = if (overflow) "overflow-y: auto; max-height: 500px;" else NULL,
       footer
-    ) 
+    )
   }
-  
-  cardTag <- shiny::tags$div(
-    class = cardCl,
-    id = inputId
-  )
+
+  cardTag <- shiny::tags$div(class = cardCl, id = id)
   cardTag <- shiny::tagAppendChildren(cardTag, headerTag, bodyTag, footerTag)
   
-  cardWrapper <- shiny::tags$div(
+  # wrapper
+  shiny::tags$div(
     class = if (!is.null(width)) paste0("col-sm-", width),
-    cardTag
-  )
-  
-  # for the sidebar
-  translation_rate <- paste0("calc(100% - ", sidebar_width, ")")
-  
-  shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$style(
-          shiny::HTML(
-            paste0(
-              ".direct-chat-contacts {
-                 -webkit-transform: translate(100%, 0);
-                 -ms-transform: translate(100%, 0);
-                 -o-transform: translate(100%, 0);
-                 transform: translate(100%, 0);
-                 position: absolute;
-                 top: 0;
-                 bottom: 0;
-                 height: 100%;
-                 width: 100%;
-                 background: ", sidebar_background, ";
-                 color: #fff;
-                 overflow: auto;
-              }
-              .direct-chat-contacts-open .direct-chat-contacts {
-                -webkit-transform: translate(", translation_rate, ", 0);
-                -ms-transform: translate(", translation_rate, ", 0);
-                -o-transform: translate(", translation_rate, ", 0);
-                transform: translate(", translation_rate, ", 0);
-              }
-              "
-            )
-          )
-        )
+    cardTag,
+    # config script to be used by card input binding
+    shiny::tags$script(
+      type = "application/json",
+      `data-for` = id,
+      jsonlite::toJSON(
+        x = props,
+        auto_unbox = TRUE,
+        json_verbatim = TRUE
       )
-    ),
-    cardWrapper
+    )
   )
-  
 }
 
 
 
 
-#' update an AdminLTE3 card from the server side
+#' Create a label for Boostrap 4 card
 #'
-#' @param inputId Card inputId
-#' @param session Shiny session
-#' @param action Action to trigger: \code{c("remove", "toggle", "toggleMaximize", "restore")}.
-#' 
+#' @param text Label text. In practice only few letters or a number.
+#' @param status label color status. See \link{getAdminLTEColors}.
+#' @param tooltip Label tooltip text on hover.
+#' @family boxWidgets
+#' @rdname boxLabel
+#' @export
+bs4CardLabel <- function(text, status, tooltip = NULL) {
+  if (nchar(text) > 10) warning("Avoid long texts in avaCardLabel.")
+
+  shiny::tags$span(
+    class = paste0("badge bg-", status),
+    title = if (!is.null(tooltip)) tooltip,
+    `data-toggle` = if (!is.null(tooltip)) "tooltip",
+    text
+  )
+}
+
+
+
+
+
+#' Create a sidebar for Boostrap 4 card
+#'
+#' To insert in the sidebar slot of \link{box}.
+#'
+#' @param ... Sidebar content.
+#' @param id Unique sidebar id. Useful if you want to use \link{updateBoxSidebar}.
+#' @param width Sidebar opening width in percentage. 50\% by default, 
+#' means the card sidebar will take 50% of the card width, when opened. 
+#' A numeric value between 25 and 100.
+#' @param background Sidebar background color. Dark by default.
+#' @param startOpen Whether the sidebar is open at start. FALSE by default.
+#' @param icon Sidebar icon. Expect \code{\link[shiny]{icon}}.
+#' @param easyClose Whether to close sidebar on click outside. Default to TRUE. 
+#'
+#' @rdname boxSidebar
+#' @family boxWidgets
+#' @export
+bs4CardSidebar <- function(..., id = NULL, width = 50, background = "#333a40",
+                           startOpen = FALSE, icon = shiny::icon("cogs"), 
+                           easyClose = TRUE) {
+
+  stopifnot(width >= 25 && width <= 100)
+  
+  # Toggle to insert in bs4Card
+  toolbarTag <- shiny::tags$button(
+    id = id,
+    `data-background`= background, 
+    `data-width` = width,
+    `data-widget` = "chat-pane-toggle",
+    `data-toggle` = "tooltip",
+    `data-original-title` = "More",
+    `data-start-open` = tolower(startOpen),
+    `data-easy-close` = tolower(easyClose),
+    type = "button",
+    icon
+  )
+
+  # sidebar content
+  contentTag <- shiny::tags$div(
+    style = "z-index: 1; height: inherit;",
+    class = "direct-chat-contacts",
+    shiny::tags$ul(
+      class = "contacts-list",
+      shiny::tags$li(
+        ...
+      )
+    )
+  )
+
+  shiny::tagList(toolbarTag, contentTag)
+}
+
+
+
+
+#' Update an AdminLTE3 card from the server side
+#'
+#' To update \link{box} on the server side.
+#'
+#' @param id Card id.
+#' @param action Action to trigger: \code{c("remove", "toggle", "toggleMaximize", "restore", "update")}.
+#' @param options If action is update, a list of new options to configure the box, such as
+#' \code{list(title = "new title", status = NULL, solidHeader = FALSE,
+#' background = "red", width = 6, height = "200px", collapsible = FALSE, closable = FALSE)}.
+#' @param session Shiny session.
+#'
 #' @export
 #'
+#' @rdname box
+#'
 #' @examples
+#' # Toggle a box on the client
 #' if (interactive()) {
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  
-#'  shiny::shinyApp(
-#'    ui = dashboardPage(
-#'      sidebar_collapsed = TRUE,
-#'      navbar = dashboardHeader(),
-#'      sidebar = dashboardSidebar(),
-#'      body = dashboardBody(
-#'        actionButton(inputId = "triggerCard", label = "Trigger Card Action"),
-#'        selectInput(
-#'          inputId = "cardAction", 
-#'          label = "Card action", 
-#'          choices = c(
-#'            "remove",
-#'            "toggle",
-#'            "toggleMaximize",
-#'            "restore"
-#'          )
-#'        ),
-#'        
-#'        bs4Card(
-#'          inputId = "mycard",
-#'          title = "The plot is visible when you maximize the card", 
-#'          closable = TRUE, 
-#'          maximizable = TRUE,
-#'          width = 12,
-#'          status = "warning", 
-#'          solidHeader = FALSE, 
-#'          collapsible = TRUE,
-#'          sliderInput("obs", "Number of observations:",
-#'                      min = 0, max = 1000, value = 500
-#'          ),
-#'          plotOutput("distPlot")
-#'        )
-#'      )
-#'    ),
-#'    server = function(input, output, session) {
-#'      
-#'      output$distPlot <- renderPlot({
-#'        if (input$mycard$maximized) {
-#'          hist(rnorm(input$obs)) 
-#'        }
-#'      })
-#'      
-#'      observeEvent(input$triggerCard, {
-#'        updatebs4Card(inputId = "mycard", session = session, action = input$cardAction)
-#'      })
-#'      
-#'      observe({
-#'        print(
-#'          list(
-#'            collapsed = input$mycard$collapsed,
-#'            maximized = input$mycard$maximized,
-#'            visible = input$mycard$visible
-#'          )
-#'        )
-#'      })
-#'    }
-#'  )
+#'   library(shiny)
+#'   library(bs4Dash)
+#'
+#'   ui <- dashboardPage(
+#'     dashboardHeader(),
+#'     dashboardSidebar(),
+#'     dashboardBody(
+#'       tags$style("body { background-color: ghostwhite}"),
+#'       fluidRow(
+#'         actionButton("toggle_box", "Toggle Box"),
+#'         actionButton("remove_box", "Remove Box", class = "bg-danger"),
+#'         actionButton("restore_box", "Restore Box", class = "bg-success")
+#'       ),
+#'       actionButton("update_box", "Update Box", class = "bg-info"),
+#'       actionButton("update_box2", "Update Box 2", class = "bg-info"),
+#'       br(),
+#'       br(),
+#'       box(
+#'         title = textOutput("box_state"),
+#'         id = "mybox",
+#'         status = "danger",
+#'         background = "maroon",
+#'         solidHeader = TRUE,
+#'         gradient = TRUE,
+#'         collapsible = TRUE,
+#'         closable = TRUE,
+#'         plotOutput("plot")
+#'       )
+#'     )
+#'   )
+#'
+#'   server <- function(input, output, session) {
+#'     output$plot <- renderPlot({
+#'       req(!input$mybox$collapsed)
+#'       plot(rnorm(200))
+#'     })
+#'
+#'     output$box_state <- renderText({
+#'       state <- if (input$mybox$collapsed) "collapsed" else "uncollapsed"
+#'       paste("My box is", state)
+#'     })
+#'
+#'     observeEvent(input$toggle_box, {
+#'       updateBox("mybox", action = "toggle")
+#'     })
+#'
+#'     observeEvent(input$remove_box, {
+#'       updateBox("mybox", action = "remove")
+#'     })
+#'
+#'     observeEvent(input$restore_box, {
+#'       updateBox("mybox", action = "restore")
+#'     })
+#'
+#'     observeEvent(input$mybox$visible, {
+#'       collapsed <- if (input$mybox$collapsed) "collapsed" else "uncollapsed"
+#'       visible <- if (input$mybox$visible) "visible" else "hidden"
+#'       message <- paste("My box is", collapsed, "and", visible)
+#'       showNotification(message, type = "warning", duration = 1)
+#'     })
+#'
+#'     observeEvent(input$update_box, {
+#'       updateBox(
+#'         "mybox",
+#'         action = "update",
+#'         options = list(
+#'           title = h2("hello", dashboardBadge(1, color = "primary")),
+#'           status = "warning",
+#'           solidHeader = TRUE,
+#'           width = 12,
+#'           background = NULL,
+#'           height = "900px",
+#'           closable = FALSE
+#'         )
+#'       )
+#'     })
+#'
+#'     observeEvent(input$update_box2, {
+#'       updateBox(
+#'         "mybox",
+#'         action = "update",
+#'         options = list(
+#'           status = NULL,
+#'           solidHeader = FALSE,
+#'           width = 4,
+#'           background = "green",
+#'           height = "500px",
+#'           closable = TRUE
+#'         )
+#'       )
+#'     })
+#'   }
+#'
+#'   shinyApp(ui, server)
 #' }
-updatebs4Card <- function(inputId, session, action = c("remove", "toggle", "toggleMaximize", "restore")) {
+updatebs4Card <- function(id, action = c("remove", "toggle", "toggleMaximize", "restore", "update"),
+                          options = NULL, session = shiny::getDefaultReactiveDomain()) {
   action <- match.arg(action)
-  session$sendInputMessage(inputId, action)
+  # for update, we take a list of options
+  if (action == "update") {
+    # handle case whare options are shiny tag or a list of tags ...
+    options <- lapply(options, function(o) {
+      if (inherits(o, "shiny.tag") || inherits(o, "shiny.tag.list")) {
+        o <- as.character(o)
+        return(o)
+      }
+      if (inherits(o, "list")) {
+        o <- unlist(
+          dropNulls(
+            lapply(o, function(e) {
+              if (inherits(e, "shiny.tag.list") ||
+                inherits(e, "shiny.tag")) {
+                as.character(e)
+              } else {
+                e
+              }
+            })
+          )
+        )
+      }
+      o
+    })
+    message <- dropNulls(c(action = action, options = list(options)))
+    session$sendInputMessage(id, message)
+  } else {
+    session$sendInputMessage(id, message = match.arg(action))
+  }
+  session$sendInputMessage(id, action)
 }
+
+
+
+
+#' Programmatically toggle a bs4Card sidebar
+#'
+#' @param id Card sidebar id.
+#' @param session Shiny session object.
+#'
+#' @rdname boxSidebar
+#'
+#' @export
+#' @examples
+#' # Toggle a box sidebar
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
+#'
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       body = dashboardBody(
+#'         box(
+#'           title = "Update box sidebar",
+#'           closable = TRUE,
+#'           width = 12,
+#'           height = "500px",
+#'           solidHeader = FALSE,
+#'           collapsible = TRUE,
+#'           actionButton("update", "Toggle card sidebar"),
+#'           sidebar = boxSidebar(
+#'             id = "mycardsidebar",
+#'             p("Sidebar Content")
+#'           )
+#'         )
+#'       ),
+#'       sidebar = dashboardSidebar()
+#'     ),
+#'     server = function(input, output, session) {
+#'       observe(print(input$mycardsidebar))
+#'
+#'       observeEvent(input$update, {
+#'         updateBoxSidebar("mycardsidebar")
+#'       })
+#'     }
+#'   )
+#' }
+updatebs4CardSidebar <- function(id, session = shiny::getDefaultReactiveDomain()) {
+  session$sendInputMessage(id, NULL)
+}
+
 
 
 
@@ -420,44 +570,69 @@ updatebs4Card <- function(inputId, session, action = c("remove", "toggle", "togg
 #'
 #' Can be used to add dropdown items to a cardtool.
 #'
-#' @param ... Slot for \link{dropdownItem}.
-#' 
+#' @param ... Slot for \link{cardDropdownItem}.
+#' @param icon Dropdown menu icon.
+#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
+#' @rdname boxDropdown
+#' @family boxWidgets
 #' @export
-dropdownItemList <- function(...) {
-  shiny::tags$div(
+cardDropdown <- function(..., icon = shiny::icon("wrench")) {
+  contentTag <- shiny::tags$div(
     class = "dropdown-menu dropdown-menu-right",
     role = "menu",
+    ...
+  )
+
+  # for bs4Card toolbar
+  toolbarTag <- shiny::tags$div(
+    class = "btn-group",
+    shiny::tags$button(
+      type = "button",
+      `data-toggle` = "dropdown",
+      icon
+    ),
+    contentTag
+  )
+
+  toolbarTag
+}
+
+
+
+
+#' Create a box dropdown item
+#'
+#' To insert in \link{boxDropdown}.
+#'
+#' @param ... Item content.
+#' @param id If passed, the item will behave like an action button.
+#' @param href Target url or page.
+#' @param icon Optional icon. Expect \link[shiny]{icon}.
+#'
+#' @rdname boxDropdown
+#'
+#' @export
+cardDropdownItem <- function(..., id = NULL, href = NULL, icon = NULL) {
+  shiny::tags$a(
+    id = id,
+    class = paste0("dropdown-item", if (!is.null(id)) " action-button"),
+    href = if (!is.null(href)) href else "#",
+    target = if (!is.null(href)) {
+      "_blank"
+    },
+    icon,
     ...
   )
 }
 
 
 
-#' Create a box dropdown item 
-#'
-#' @param url Target url or page.
-#' @param name Item name.
-#' 
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#'
-#' @export
-dropdownItem <- function(url = NULL, name = NULL) {
-  shiny::tags$a(
-    class = "dropdown-item",
-    href = url,
-    target = "_blank",
-    name 
-  )
-}
-
-
-
-#' Create a box dropdown divider 
+#' Create a box dropdown divider
 #'
 #' @note Useful to separate 2 sections of dropdown items.
-#' 
+#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
@@ -476,101 +651,165 @@ dropdownDivider <- function() {
 #' @param value The value to display in the box. Usually a number or short text.
 #' @param subtitle Subtitle text.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
-#' @param elevation Value box elevation. 
-#' @param status A color for the box. "primary", "info", "success", "warning", "danger" or NULL.
+#' @param color The color of the item. This determines the item's background
+#'   color.  Valid colors are defined as follows:
+#' \itemize{
+#'
+#'   \item \code{primary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#007bff")}.
+#'   \item \code{secondary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6c757d")}.
+#'   \item \code{info}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#17a2b8")}.
+#'   \item \code{success}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#28a745")}.
+#'   \item \code{warning}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ffc107")}.
+#'   \item \code{danger}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#dc3545")}.
+#'   \item \code{gray-dark}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#343a40")}.
+#'   \item \code{gray}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#adb5bd")}.
+#'   \item \code{white}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#fff")}.
+#'   \item \code{indigo}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6610f2")}.
+#'   \item \code{lightblue}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3c8dbc")}.
+#'   \item \code{navy}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#001f3f")}.
+#'   \item \code{purple}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#605ca8")}.
+#'   \item \code{fuchsia}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#f012be")}.
+#'   \item \code{pink}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#e83e8c")}.
+#'   \item \code{maroon}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#d81b60")}.
+#'   \item \code{orange}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ff851b")}.
+#'   \item \code{lime}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#01ff70")}.
+#'   \item \code{teal}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#39cccc")}.
+#'   \item \code{olive}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3d9970")}.
+#' }
 #' @param width The width of the box, using the Bootstrap grid system. This is
 #'   used for row-based layouts. The overall width of a region is 12, so the
 #'   default width of 4 occupies 1/3 of that width. For column-based
 #'   layouts, use \code{NULL} for the width; the width is set by the column that
 #'   contains the box.
-#' @param footer Optional html content for the footer of the box.
 #' @param href An optional URL to link to in the footer. Should both `footer`
-#'   and this parameter be set, `footer` will take precedence. 
-#' 
+#'   and this parameter be set, `footer` will take precedence.
+#' @param footer Optional html content for the footer of the box.
+#' @param gradient Whether to use gradient style for background color. Default to FALSE.
+#' @param elevation Value box elevation.
+#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
+#'
+#' @rdname valueBox
 #'
 #' @family cards
 #' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'      navbar = bs4DashNavbar(),
-#'      sidebar = bs4DashSidebar(),
-#'      controlbar = bs4DashControlbar(),
-#'      footer = bs4DashFooter(),
-#'      title = "test",
-#'      body = bs4DashBody(
-#'       fluidRow(
-#'        bs4ValueBox(
-#'         value = 150,
-#'         subtitle = "New orders",
-#'         status = "primary",
-#'         icon = "shopping-cart",
-#'         href = "#"
-#'        ),
-#'        bs4ValueBox(
-#'         value = "53%",
-#'         subtitle = "New orders",
-#'         status = "danger",
-#'         icon = "cogs",
-#'         footer = shiny::div("Hello World")
-#'        ),
-#'        bs4ValueBox(
-#'         value = "44",
-#'         subtitle = "User Registrations",
-#'         status = "warning",
-#'         icon = "sliders"
-#'        )
-#'       )
-#'      )
-#'    ),
-#'    server = function(input, output) {}
-#'  )
-#' }
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
 #'
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(),
+#'       controlbar = dashboardControlbar(),
+#'       footer = dashboardFooter(),
+#'       title = "test",
+#'       body = bs4DashBody(
+#'         fluidRow(
+#'           valueBox(
+#'             value = 150,
+#'             subtitle = "New orders",
+#'             color = "primary",
+#'             icon = icon("shopping-cart")
+#'           ),
+#'           valueBox(
+#'             value = "53%",
+#'             subtitle = "New orders",
+#'             color = "indigo",
+#'             icon = icon("cogs"),
+#'             footer = div("Hello World")
+#'           ),
+#'           valueBox(
+#'             value = "44",
+#'             subtitle = "User Registrations",
+#'             color = "teal",
+#'             icon = icon("sliders")
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#' }
 #' @export
-bs4ValueBox <- function(value, subtitle, icon = NULL, elevation = NULL,
-                        status = NULL, width = 3, footer = NULL, href = NULL) {
-  
+bs4ValueBox <- function(value, subtitle, icon = NULL, color = NULL, width = 3,
+                        href = NULL, footer = NULL, gradient = FALSE, elevation = NULL) {
+  if (!is.null(icon)) {
+    tagAssert(icon, type = "i")
+  }
+
+  if (is.null(color) && gradient) {
+    stop("color cannot be NULL when gradient is TRUE. 
+         fill cannot be TRUE when color is NULL.")
+  }
+
+  # check conditions
+  if (!is.null(width)) {
+    stopifnot(is.numeric(width))
+    # respect the bootstrap grid
+    stopifnot(width <= 12)
+    stopifnot(width >= 0)
+  }
+
+  if (!is.null(elevation)) {
+    stopifnot(is.numeric(elevation))
+    stopifnot(elevation < 6)
+    stopifnot(elevation >= 0)
+  }
+
+  if (!is.null(footer) & !is.null(href)) {
+    stop("Choose either href or footer.")
+  }
+
+
   valueBoxCl <- "small-box"
-  if (!is.null(status)) valueBoxCl <- paste0(valueBoxCl, " bg-", status)
+  if (!is.null(color)) {
+    validateStatusPlus(color)
+    if (gradient) {
+      valueBoxCl <- paste0(valueBoxCl, " bg-gradient-", color)
+    } else {
+      valueBoxCl <- paste0(valueBoxCl, " bg-", color)
+    }
+  }
   if (!is.null(elevation)) valueBoxCl <- paste0(valueBoxCl, " elevation-", elevation)
-  
+
   innerTag <- shiny::tags$div(
     class = "inner",
     value,
-    shiny::tags$p(class = "small-box-subtitle",
-                  subtitle)
+    shiny::tags$p(class = "small-box-subtitle", subtitle)
   )
-  
-  iconTag <- shiny::tags$div(
-    class = "icon",
-    shiny::icon(icon)
-  )
-  
-  if (!is.null(footer)) {
-    footerTag <- shiny::tags$div(
+
+  iconTag <- if (!is.null(icon)) {
+    shiny::tags$div(
+      class = "icon",
+      icon
+    )
+  } else {
+    NULL
+  }
+
+  footerTag <- if (!is.null(footer)) {
+    shiny::tags$div(
       class = "small-box-footer",
       footer
     )
   } else {
-    footerTag <- shiny::tags$a(
-      href = href,
-      target = "_blank",
-      class = "small-box-footer",
-      if (!is.null(href)) "More info" else NULL,
-      if (!is.null(href)) shiny::icon("arrow-circle-right") else shiny::br()
-    )
+    if (!is.null(href)) {
+      shiny::tags$a(
+        href = href,
+        target = "_blank",
+        class = "small-box-footer",
+        "More info",
+        shiny::icon("arrow-circle-right")
+      )
+    } else {
+      shiny::tags$div(class = "small-box-footer", style = "height: 30px;")
+    }
   }
-  
-  valueBoxTag <- shiny::tags$div(
-    class = valueBoxCl
-  )
+
+  valueBoxTag <- shiny::tags$div(class = valueBoxCl)
   valueBoxTag <- shiny::tagAppendChildren(valueBoxTag, innerTag, iconTag, footerTag)
-  
+
   shiny::tags$div(
     class = if (!is.null(width)) paste0("col-sm-", width),
     valueBoxTag
@@ -583,108 +822,208 @@ bs4ValueBox <- function(value, subtitle, icon = NULL, elevation = NULL,
 #'
 #' A beautiful AdminLTE3 info box.
 #'
-#' @param ... Any extra UI element.
-#' @param tabName Optional: \link{bs4InfoBox} may be used to navigate between tabs.
 #' @param title Info box title.
 #' @param value The value to display in the box. Usually a number or short text.
+#' @param subtitle Any extra UI element.
 #' @param icon An icon tag, created by \code{\link[shiny]{icon}}.
-#' @param iconElevation Icon elevation compared to the main content (relief). 3 by default.
-#' @param status A color for the box. "primary", "info", "success", "warning", "danger" or NULL.
-#' @param gradientColor If NULL (the default), the background of the box will be
-#'   white. Otherwise, a color string. "primary", "success", "warning" or "danger".
+#' @param color A color for the box. Valid colors are defined as follows:
+#' \itemize{
+#'   \item \code{primary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#007bff")}.
+#'   \item \code{secondary}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6c757d")}.
+#'   \item \code{info}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#17a2b8")}.
+#'   \item \code{success}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#28a745")}.
+#'   \item \code{warning}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ffc107")}.
+#'   \item \code{danger}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#dc3545")}.
+#'   \item \code{gray-dark}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#343a40")}.
+#'   \item \code{gray}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#adb5bd")}.
+#'   \item \code{white}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#fff")}.
+#'   \item \code{indigo}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#6610f2")}.
+#'   \item \code{lightblue}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3c8dbc")}.
+#'   \item \code{navy}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#001f3f")}.
+#'   \item \code{purple}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#605ca8")}.
+#'   \item \code{fuchsia}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#f012be")}.
+#'   \item \code{pink}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#e83e8c")}.
+#'   \item \code{maroon}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#d81b60")}.
+#'   \item \code{orange}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#ff851b")}.
+#'   \item \code{lime}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#01ff70")}.
+#'   \item \code{teal}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#39cccc")}.
+#'   \item \code{olive}: \Sexpr[results=rd, stage=render]{bs4Dash:::rd_color_tag("#3d9970")}.
+#' }
 #' @param width The width of the box, using the Bootstrap grid system. This is
 #'   used for row-based layouts. The overall width of a region is 12, so the
 #'   default width of 4 occupies 1/3 of that width. For column-based
 #'   layouts, use \code{NULL} for the width; the width is set by the column that
 #'   contains the box.
-#' @param elevation Infobox elevation.
-#'   
+#' @param href An optional URL to link to.
+#' @param fill If FALSE (the default), use a white background for the content, and
+#' the color argument for the background of the icon. If TRUE, use the color argument
+#' for the background of the content; the icon will use the same color with a slightly
+#' darkened background.
+#' @param gradient Whether to use gradient style for background color. Default to FALSE.
+#' @param elevation Box elevation.
+#' @param iconElevation Icon elevation compared to the main content (relief). 3 by default.
+#' @param tabName Optional: \link{infoBox} behaves like \link{menuItem} and
+#' may be used to navigate between multiple \link{tabItem}.
+#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
+#' @rdname infoBox
 #'
 #' @family cards
 #' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'      navbar = bs4DashNavbar(),
-#'      sidebar = bs4DashSidebar(),
-#'      controlbar = bs4DashControlbar(),
-#'      footer = bs4DashFooter(),
-#'      title = "test",
-#'      body = bs4DashBody(
-#'       fluidRow(
-#'        bs4InfoBox(
-#'         title = "Messages",
-#'         value = 1410,
-#'         icon = "envelope"
-#'        ),
-#'        bs4InfoBox(
-#'         title = "Bookmarks",
-#'         status = "info",
-#'         value = 240,
-#'         icon = "bookmark"
-#'        ),
-#'        bs4InfoBox(
-#'         title = "Comments",
-#'         gradientColor = "danger",
-#'         value = 41410,
-#'         icon = "comments"
-#'        )
-#'       )
-#'      )
-#'    ),
-#'    server = function(input, output) {}
-#'  )
-#' }
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
 #'
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(
+#'         sidebarMenu(
+#'           menuItem(
+#'             text = "Item 1",
+#'             tabName = "tab1"
+#'           ),
+#'           menuItem(
+#'             text = "Item 2",
+#'             tabName = "tab2"
+#'           )
+#'         )
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       footer = dashboardFooter(),
+#'       title = "test",
+#'       body = dashboardBody(
+#'         tabItems(
+#'           tabItem(
+#'             tabName = "tab1",
+#'             fluidRow(
+#'               infoBox(
+#'                 title = "Messages",
+#'                 value = 1410,
+#'                 icon = icon("envelope"),
+#'                 color = "orange",
+#'                 fill = TRUE,
+#'               ),
+#'               infoBox(
+#'                 title = "Bookmarks",
+#'                 color = "info",
+#'                 value = 240,
+#'                 icon = icon("bookmark"),
+#'                 tabName = "tab2"
+#'               )
+#'             )
+#'           ),
+#'           tabItem(
+#'             tabName = "tab2",
+#'             infoBox(
+#'               title = "Comments",
+#'               color = "indigo",
+#'               gradient = TRUE,
+#'               value = 41410,
+#'               subtitle = "A subtitle",
+#'               icon = icon("comments"),
+#'               tabName = "tab1"
+#'             )
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#' }
 #' @export
-bs4InfoBox <- function(..., tabName = NULL, title, value = NULL, icon = NULL, 
-                       iconElevation = 3, status = NULL, 
-                       gradientColor = NULL, width = 4,
-                       elevation = NULL) {
-  
-  
-  infoBoxCl <- if (!is.null(gradientColor)) {
-    paste0("info-box bg-gradient-", gradientColor)
-  } else {
-    if (is.null(status)) {
-      "info-box"
-    } else {
-      paste0("info-box bg-", status)
+bs4InfoBox <- function(title, value = NULL, subtitle = NULL, icon = shiny::icon("bar-chart"),
+                       color = NULL, width = 4, href = NULL, fill = FALSE, gradient = FALSE,
+                       elevation = NULL, iconElevation = NULL, tabName = NULL) {
+
+  # check conditions
+  tagAssert(icon, "i")
+  if (!is.null(color)) validateStatusPlus(color)
+
+  if (is.null(color) && (fill || gradient)) {
+    stop("color cannot be NULL when gradient is TRUE. 
+         fill cannot be TRUE when color is NULL.")
+  }
+
+  if (gradient && !fill) {
+    stop("gradient cannot be TRUE when fill is FALSE.")
+  }
+
+  if (!is.null(width)) {
+    stopifnot(is.numeric(width))
+    # respect the bootstrap grid
+    stopifnot(width <= 12)
+    stopifnot(width >= 0)
+  }
+
+  if (!is.null(elevation)) {
+    stopifnot(is.numeric(elevation))
+    stopifnot(elevation < 6)
+    stopifnot(elevation >= 0)
+  }
+
+  if (!is.null(iconElevation)) {
+    stopifnot(is.numeric(iconElevation))
+    stopifnot(iconElevation < 6)
+    stopifnot(iconElevation >= 0)
+  }
+
+  infoBoxCl <- "info-box"
+  if (!is.null(color)) {
+    if (fill) {
+      if (gradient) {
+        infoBoxCl <- paste0(infoBoxCl, " bg-gradient-", color)
+      } else {
+        infoBoxCl <- paste0(infoBoxCl, " bg-", color)
+      }
     }
   }
-  
+
   if (!is.null(elevation)) infoBoxCl <- paste0(infoBoxCl, " elevation-", elevation)
-  
+
+  # icon is mandatory
+  infoBoxIconCl <- "info-box-icon"
+  if (!is.null(color)) {
+    if (!fill) infoBoxIconCl <- paste0(infoBoxIconCl, " bg-", color)
+  }
+  if (!is.null(iconElevation)) infoBoxIconCl <- paste0(infoBoxIconCl, " elevation-", iconElevation)
+
   iconTag <- shiny::tags$span(
-    class = "info-box-icon",
-    id = paste0("icon-", tabName),
-    class = if (!is.null(iconElevation)) paste0("elevation-", iconElevation),
+    class = infoBoxIconCl,
+    id = if (!is.null(tabName)) paste0("icon-", tabName),
     # icon
-    shiny::icon(icon)
+    icon
   )
-  
+
+
   contentTag <- shiny::tags$div(
     class = "info-box-content",
     shiny::tags$span(
       class = "info-box-text",
       title
     ),
-    shiny::tags$span(
-      class = "info-box-number",
-      value
-    ),
-    ...
+    if (!is.null(value)) {
+      shiny::tags$span(
+        class = "info-box-number",
+        value
+      )
+    },
+    if (!is.null(subtitle)) shiny::p(subtitle)
   )
-  
-  
+
+  if (!is.null(href)) {
+    contentTag <- shiny::a(
+      href = href,
+      contentTag,
+      target = "_blank",
+      style = "color: inherit;"
+    )
+  }
+
+
   infoBoxTag <- shiny::tags$div(class = infoBoxCl)
-  
   infoBoxTag <- shiny::tagAppendChildren(infoBoxTag, iconTag, contentTag)
-  
+
   # handle icon color (white or black depending on the box background)
   infoBoxTag <- shiny::tagList(
     shiny::singleton(
@@ -705,8 +1044,8 @@ bs4InfoBox <- function(..., tabName = NULL, title, value = NULL, icon = NULL,
     ),
     infoBoxTag
   )
-  
-  
+
+
   shiny::tags$div(
     class = if (!is.null(width)) paste0("col-sm-", width),
     infoBoxTag
@@ -720,504 +1059,373 @@ bs4InfoBox <- function(..., tabName = NULL, title, value = NULL, icon = NULL,
 #'
 #' Build an adminLTE3 card with tabs
 #'
-#' @param ... Contents of the box: should be \link{bs4TabPanel}.
-#' @param id Unique \link{bs4TabSetPanel} id.
-#' @param title TabCard title.
-#' @param width The width of the box, using the Bootstrap grid system. This is
-#'   used for row-based layouts. The overall width of a region is 12, so the
-#'   default width of 4 occupies 1/3 of that width. For column-based
-#'   layouts, use \code{NULL} for the width; the width is set by the column that
-#'   contains the box.
-#' @param height The height of a box, in pixels or other CSS unit. By default
-#'   the height scales automatically with the content.
-#' @param elevation tabCard elevation. 
-#' @param side Side of the box the tabs should be on (\code{"left"} or
-#'   \code{"right"}).
-#'   
 #' @inheritParams bs4Card
-#' @inheritParams bs4TabSetPanel
-#' 
+#' @inheritParams tabsetPanel
+#' @param side \link[shiny]{tabPanel} side. Either left or right.
+#'
 #' @family cards
+#' @rdname tabBox
+#'
+#' @note User will access the \link{tabBox} input with input$<id>_box. This allows
+#' to get the state of the box and update it on the server with \link{updateBox}.
 #'
 #' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
 #'
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'     navbar = bs4DashNavbar(),
-#'     sidebar = bs4DashSidebar(),
-#'     controlbar = bs4DashControlbar(),
-#'     footer = bs4DashFooter(),
-#'     title = "test",
-#'     body = bs4DashBody(
-#'      bs4TabCard(
-#'       id = "tabcard",
-#'       title = "A card with tabs",
-#'       bs4TabPanel(
-#'        tabName = "Tab 1", 
-#'        active = FALSE,
-#'        "Content 1"
-#'       ),
-#'       bs4TabPanel(
-#'        tabName = "Tab 2", 
-#'        active = TRUE,
-#'        "Content 2"
-#'       ),
-#'       bs4TabPanel(
-#'        tabName = "Tab 3", 
-#'        active = FALSE,
-#'        "Content 3"
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(),
+#'       controlbar = dashboardControlbar(),
+#'       footer = dashboardFooter(),
+#'       title = "tabBox",
+#'       body = dashboardBody(
+#'         tabBox(
+#'           id = "tabcard",
+#'           title = "A card with tabs",
+#'           selected = "Tab 2",
+#'           status = "primary",
+#'           solidHeader = FALSE,
+#'           type = "tabs",
+#'           tabPanel(
+#'             title = "Tab 1",
+#'             "Content 1"
+#'           ),
+#'           tabPanel(
+#'             title = "Tab 2",
+#'             "Content 2"
+#'           ),
+#'           tabPanel(
+#'             title = "Tab 3",
+#'             "Content 3"
+#'           )
+#'         )
 #'       )
-#'      )
-#'     )
-#'    ),
-#'    server = function(input, output) {}
-#'  )
+#'     ),
+#'     server = function(input, output) {}
+#'   )
 #' }
-#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @export
-bs4TabCard <- function(..., id, title = NULL, status = NULL, elevation = NULL, 
-                       solidHeader = FALSE, headerBorder = TRUE, gradientColor = NULL,
-                       tabStatus = NULL, width = 6, height = NULL,  
-                       collapsible = TRUE, collapsed = FALSE, closable = TRUE,
-                       maximizable = FALSE, overflow = FALSE, side = c("left", "right")) {
-  
-  found_active <- FALSE
+bs4TabCard <- function(..., id = NULL, selected = NULL, title = NULL, width = 6,
+                       height = NULL, side = c("left", "right"), type = NULL,
+                       footer = NULL, status = NULL, solidHeader = FALSE, background = NULL,
+                       collapsible = TRUE, collapsed = FALSE, closable = FALSE, maximizable = FALSE,
+                       icon = NULL, gradient = FALSE, boxToolSize = "sm", elevation = NULL,
+                       headerBorder = TRUE, label = NULL, dropdownMenu = NULL,
+                       sidebar = NULL) {
   side <- match.arg(side)
-  
-  tabCardCl <- if (!is.null(gradientColor)) {
-    paste0("card bg-gradient-", gradientColor)
-  } else {
-    if (is.null(status)) {
-      "card card-default"
-    } else {
-      if (isTRUE(solidHeader)) {
-        paste0("card card-outline card-", status)
-      } else {
-        paste0("card card-", status)
-      }
-    }
-  }
-  if (isTRUE(collapsible) & isTRUE(collapsed)) tabCardCl <- paste0(tabCardCl, " collapsed-card")
-  if (!is.null(elevation)) tabCardCl <- paste0(tabCardCl, " elevation-", elevation)
-  
-  # tools collapse/closable
-  if (isTRUE(closable) | isTRUE(collapsible) | isTRUE(maximizable)) {
-    cardToolTag <- shiny::tags$div(
-      class = "tools pt-3 pb-3 pr-2 mr-2",
-      
-      # collapse
-      if (isTRUE(collapsible)) {
-        collapseIcon <- if (collapsed) 
-          "plus"
-        else "minus"
-        shiny::tags$button(
-          type = "button",
-          class = "btn btn-tool pb-0 pt-0",
-          `data-card-widget` = "collapse",
-          shiny::icon(collapseIcon)
-        )
-      },
-      
-      # close
-      if (isTRUE(closable)) {
-        shiny::tags$button(
-          type = "button",
-          class = "btn btn-tool pb-0 pt-0",
-          `data-card-widget` = "remove",
-          shiny::tags$i(class = "fa fa-times")
-        )
-      },
-      
-      # maximize
-      if (maximizable) {
-        shiny::tags$button(
-          type = "button",
-          class = "btn btn-tool",
-          `data-card-widget` = "maximize",
-          shiny::tags$i(class = "fa fa-expand")
-        )
-      }
-    )
-  } else {
-    cardToolTag <- shiny::tags$div()
-  }
-  
-  # header
-  tabMenu <- bs4TabSetPanel(..., id = id, side = side, tabStatus = tabStatus)[[2]]
-  if (is.null(title) & (isTRUE(maximizable) | isTRUE(closable) | isTRUE(collapsible))) title <- "\u200C"
-  
-  headerTag <- shiny::tags$div(
-    class = if (isTRUE(headerBorder)) "card-header d-flex p-0" else "card-header d-flex p-0 no-border",
-    if (side == "right") {
-      shiny::tagList(
-        if (!is.null(title)) shiny::tags$h3(class = "card-title p-3", title) else NULL,
-        # tab menu
-        tabMenu
-      )
-    } else {
-      shiny::tagList(
-        # tab menu
-        tabMenu,
-        if (!is.null(title)) shiny::tags$h3(class = "card-title p-3 ml-auto", title) else NULL
-      )
-    }
-  )
-  headerTag <- if (!is.null(title)) shiny::tagAppendChild(headerTag, cardToolTag)
-  
-  
-  # body
-  panelContent <- bs4TabSetPanel(..., id = id, side = side, tabStatus = tabStatus)[c(1, 3)]
-  bodyTag <- shiny::tags$div(
-    class = "card-body",
-    style = if (overflow) "overflow-y: auto; max-height: 500px;" else NULL,
-    panelContent
-  )
-  
-  style <- NULL
-  if (!is.null(height)) {
-    style <- paste0("height: ", shiny::validateCssUnit(height))
-  }
-  
-  tabCardTag <- shiny::tags$div(
-    class = tabCardCl,
-    style = if (!is.null(style)) style
-  )
-  
-  tabCardTag <- shiny::tagAppendChildren(tabCardTag, headerTag, bodyTag)
-  
-  shiny::tags$div(
-    class = paste0("col-sm-", width),
-    tabCardTag
-  )
-}
+  if (is.null(type)) type <- "pills"
 
-
-
-#' Create a tabSetPanel
-#' 
-#' Imported by \link{bs4TabCard} but can be used alone.
-#'
-#' @param ... Slot for \link{bs4TabPanel}.
-#' @param id Unique \link{bs4TabSetPanel} id.
-#' @param side Side of the box the tabs should be on (\code{"left"} or
-#'   \code{"right"}).
-#' @param tabStatus The status of the tabs buttons over header. "primary", "secondary", "success", "warning", "danger", "white", "light", "dark", "transparent".
-#'  NULL by default, "light" if status is set.   
-#'  A vector is possible with a colour for each tab button
-#' @param .list When elements are programmatically added, pass them here instead of in ...
-#' @param vertical Whether to display tabs in a vertical mode. FALSE by default.
-#' 
-#' @inheritParams bs4Card
-#' 
-#' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
-#'
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'     navbar = bs4DashNavbar(),
-#'     sidebar = bs4DashSidebar(),
-#'     controlbar = bs4DashControlbar(),
-#'     footer = bs4DashFooter(),
-#'     title = "test",
-#'     body = bs4DashBody(
-#'      
-#'      # manually inserted panels
-#'      bs4TabSetPanel(
-#'       id = "tabcard",
-#'       side = "left",
-#'       bs4TabPanel(
-#'        tabName = "Tab 1", 
-#'        active = FALSE,
-#'        "Content 1"
-#'       ),
-#'       bs4TabPanel(
-#'        tabName = "Tab 2", 
-#'        active = TRUE,
-#'        "Content 2"
-#'       ),
-#'       bs4TabPanel(
-#'        tabName = "Tab 3", 
-#'        active = FALSE,
-#'        "Content 3"
-#'       )
-#'      ),
-#'      
-#'      br(), br(),
-#'      # programmatically inserted panels
-#'      bs4TabSetPanel(
-#'        id = "tabset",
-#'        side = "left",
-#'        .list = lapply(1:3, function(i) {
-#'          bs4TabPanel(
-#'            tabName = paste0("Tab", i), 
-#'            active = FALSE,
-#'            paste("Content", i)
-#'          )
-#'        })
-#'       ),
-#'       
-#'       br(), br(),
-#'       # vertical tabset
-#'       bs4TabSetPanel(
-#'        id = "verttabset",
-#'        side = "left",
-#'        vertical = TRUE,
-#'        .list = lapply(1:3, function(i) {
-#'          bs4TabPanel(
-#'            tabName = paste0("Tab", i), 
-#'            active = FALSE,
-#'            paste("Content", i)
-#'          )
-#'        })
-#'       )
-#'     )
-#'    ),
-#'    server = function(input, output) {}
-#'  )
-#' }
-#' 
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#'
-#' @export
-bs4TabSetPanel <- function(..., id, side, status = NULL, tabStatus = NULL, 
-                           .list = NULL, vertical = FALSE) {
-  
-  # to make tab ids in the namespace of the tabSetPanel
-  ns <- shiny::NS(id)
-  
-  tabs <- c(list(...), .list)
-  found_active <- FALSE
-  selected <- NULL
-  tabStatus <- if (!is.null(tabStatus)) rep(tabStatus, length.out = length(tabs))
-  # handle tabs
-  tabSetPanelItem <- lapply(seq_along(tabs), FUN = function(i) {
-    
-    tabName <- tabs[[i]][[1]]
-    tabsTag <- tabs[[i]][[2]]
-    
-    tabClass <- tabsTag$attribs$class
-    
-    # make sure that if the user set 2 tabs active at the same time, 
-    # only the first one is selected
-    active <- sum(grep(x = tabClass, pattern = "active")) == 1
-    if (!found_active) {
-      if (active) {
-        found_active <<- TRUE
-        selected <<- i - 1
-        # if no items are selected, we select the first
-      } else {
-        selected <<- 0
-      }
-      # do not allow more than 1 active item
-    } else {
-      if (active) {
-        stop("Cannot set 2 active tabs at the same time.")
-      }
-    }
-    
-    id <- tabsTag$attribs$id
-    
-    shiny::tags$li(
-      class = if (!is.null(status) & is.null(tabStatus[i])) {
-        "nav-item bg-light"
-      } else if (!is.null(tabStatus[i])) {
-        paste0("nav-item bg-", tabStatus[i])
-      } else {
-        "nav-item"
-      },
-      shiny::tags$a(
-        class = if (active) "nav-link active show" else "nav-link",
-        href = paste0("#", ns(id)),
-        `data-toggle` = "tab",
-        tabName
-      )
-    )
-  })
-  
-  # support vertical tabs
-  tabSetCl <- if (side == "right") {
-    "nav nav-pills ml-auto p-2"
-  } else {
-    "nav nav-pills p-2"
-  }
-  if (vertical) tabSetCl <- paste0(tabSetCl, " flex-column")
-  
-  tabSetMenu <- shiny::tags$ul(
+  # Build tabs
+  content <- tabsetPanel(
+    ...,
     id = id,
-    class = tabSetCl,
-    `aria-orientation` = if (vertical) "vertical" else NULL
+    selected = selected,
+    type = type,
+    position = NULL
   )
-  tabSetMenu <- shiny::tagAppendChildren(tabSetMenu, tabSetPanelItem)
-  
-  # content
-  tabSetContent <- shiny::tags$div(
-    class = "tab-content",
-    lapply(seq_along(tabs), FUN = function(i) {
-      
-      # put the correct namespace on ids
-      tabs[[i]][[2]]$attribs$id <- ns(tabs[[i]][[2]]$attribs$id)
-      tabs[[i]][[2]]
-    })
+
+  # Re-use box function
+  boxTag <- box(
+    content$children[[2]],
+    title = title,
+    footer = footer,
+    status = status,
+    solidHeader = solidHeader,
+    background = background,
+    width = width,
+    height = height,
+    collapsible = collapsible,
+    collapsed = collapsed,
+    closable = closable,
+    maximizable = maximizable,
+    icon = icon,
+    gradient = gradient,
+    boxToolSize = boxToolSize,
+    elevation = elevation,
+    headerBorder = headerBorder,
+    label = label,
+    dropdownMenu = dropdownMenu,
+    sidebar = sidebar,
+    id = NULL
   )
-  
-  # tabSet JS wrapper to handle vertical 
-  tabSetJS <- shiny::singleton(
-    shiny::tags$head(
-      shiny::tags$script(
-        paste0(
-          "$(function () {
-              $('#", id," li:eq(", selected,") a').tab('show');
-            })
-            "
-        )
-      )
-    )
-  )
-  
-  # Wrapper
-  if (vertical) {
-    if (side == "left") {
-      shiny::fluidRow(
-        tabSetJS,
-        shiny::column(width = 3, tabSetMenu),
-        shiny::column(width = 9, tabSetContent)
-      )
+
+  # add card-tabs class
+  boxTag$children[[1]]$attribs$class <- paste0(
+    boxTag$children[[1]]$attribs$class,
+    if (solidHeader) {
+      " card-tabs"
     } else {
-      shiny::fluidRow(
-        tabSetJS,
-        shiny::column(width = 9, tabSetContent),
-        shiny::column(width = 3, tabSetMenu)
-      )
+      " card-outline-tabs"
     }
-  } else {
-    shiny::tagList(tabSetJS, tabSetMenu, tabSetContent)
-  }
-}
-
-
-
-#' Create a tabPanel
-#' 
-#' To be included in a bs4TabCard
-#'
-#' @param ... Tab content
-#' @param tabName Tab name: it will be also passed as the id argument. Should be unique.
-#' @param active Whether the tab is active or not. FALSE bu default.
-#' 
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#'
-#' @export
-bs4TabPanel <- function(..., tabName, active = FALSE) {
-  
-  
-  id <- tabName
-  # handle punctuation
-  id <- gsub(x = id, pattern = "[[:punct:]]", replacement = "")
-  # handle tab names with space
-  id <- gsub(x = id, pattern = " ", replacement = "")
-  
-  tabPanelTag <- shiny::tags$div(
-    class = if (active) "tab-pane active" else "tab-pane",
-    id = id,
-    ...
   )
-  return(list(tabName, tabPanelTag))
+
+  # change header class
+  boxTag$children[[1]]$children[[1]]$attribs$class <- paste0(
+    boxTag$children[[1]]$children[[1]]$attribs$class,
+    if (solidHeader) {
+      " p-0 pt-1"
+    } else {
+      " p-0 border-bottom-0"
+    }
+  )
+
+
+  # Remove title and add it to tab list
+  titleTag <- boxTag$children[[1]]$children[[1]]$children[[2]]
+  boxTag$children[[1]]$children[[1]]$children[[2]] <- NULL
+  titleNavTag <- shiny::tags$li(
+    class = "pt-2 px-3",
+    titleTag
+  )
+  
+  boxToolTag <- boxTag$children[[1]]$children[[1]]$children[[2]]
+  boxTag$children[[1]]$children[[1]]$children[[2]] <- NULL
+  
+  if (side == "right") {
+    content$children[[1]] <- tagInsertChild(
+      content$children[[1]],
+      titleNavTag,
+      1
+    )
+  } else {
+    content$children[[1]] <- tagInsertChild(
+      content$children[[1]],
+      titleNavTag,
+      length(content$children[[1]])
+    )
+  }
+  
+  # Insert box tools at the end of the list
+  content$children[[1]] <- tagInsertChild(
+    content$children[[1]],
+    shiny::tags$li(class = "ml-auto", boxToolTag),
+    length(content$children[[1]])
+  )
+
+  # Insert tabs at different position in the header tag
+  if (side == "right") {
+    boxTag$children[[1]]$children[[1]] <- tagInsertChild(
+      boxTag$children[[1]]$children[[1]],
+      content$children[[1]],
+      length(boxTag$children[[1]]$children[[1]])
+    )
+  } else {
+    boxTag$children[[1]]$children[[1]] <- tagInsertChild(
+      boxTag$children[[1]]$children[[1]],
+      content$children[[1]],
+      1
+    )
+  }
+
+  # add custom input id. User will access the tabBox input with input$<tabset_id>_box
+  boxTag$children[[1]]$attribs$id <- if (!is.null(id)) paste0(id, "_box")
+  boxTag$children[[2]]$attribs$`data-for` <- if (!is.null(id)) paste0(id, "_box")
+  boxTag
 }
+
 
 
 
 #' @title AdminLTE3 widget user card
 #'
-#' @description Create widget user card
+#' @description \link{userBox} creates a user card.
 #'
-#' @param ... Footer content.
-#' @param type User card type. Either NULL or 2.
-#' @param status User card color. "primary", "warning", "danger", "info" or "success".
-#' @param src User image url or path.
-#' @param elevation User card elevation (numeric). NULL by default.
-#' @param imageElevation User card image elevation (numeric). NULL by default.
-#' @param title User card title.
-#' @param subtitle User card subtitle.
-#' @param width The width of the card, using the Bootstrap grid system.
-#' 
+#' @inheritParams bs4Card
+#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
-#' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'      navbar = bs4DashNavbar(),
-#'      sidebar = bs4DashSidebar(),
-#'      controlbar = bs4DashControlbar(),
-#'      footer = bs4DashFooter(),
-#'      title = "test",
-#'      body = bs4DashBody(
-#'       fluidRow(
-#'       bs4UserCard(
-#'         src = "https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg",
-#'         status = "info",
-#'         title = "User card type 1",
-#'         subtitle = "a subtitle here",
-#'         elevation = 4,
-#'         "Any content here"
-#'        ),
-#'        bs4UserCard(
-#'         type = 2,
-#'         src = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
-#'         status = "success",
-#'         imageElevation = 4,
-#'         title = "User card type 2",
-#'         subtitle = "a subtitle here",
-#'         bs4ProgressBar(
-#'          value = 5,
-#'          striped = FALSE,
-#'          status = "info"
-#'          ),
-#'         bs4ProgressBar(
-#'           value = 5,
-#'           striped = TRUE,
-#'           status = "warning",
-#'           width = "20%"
-#'         )
-#'        )
-#'       )
-#'      )
-#'    ),
-#'    server = function(input, output) {}
-#'  )
-#' }
+#' @rdname userBox
+#' @family cards
 #'
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
+#'
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(),
+#'       controlbar = dashboardControlbar(),
+#'       footer = dashboardFooter(),
+#'       title = "test",
+#'       body = dashboardBody(
+#'         userBox(
+#'           title = userDescription(
+#'             title = "Nadia Carmichael",
+#'             subtitle = "lead Developer",
+#'             type = 2,
+#'             image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
+#'           ),
+#'           status = "primary",
+#'           gradient = TRUE,
+#'           background = "primary",
+#'           boxToolSize = "xl",
+#'           "Some text here!",
+#'           footer = "The footer here!"
+#'         ),
+#'         userBox(
+#'           title = userDescription(
+#'             title = "Alexander Pierce",
+#'             subtitle = "Founder & CEO",
+#'             type = 1,
+#'             image = "https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg",
+#'           ),
+#'           status = "indigo",
+#'           closable = TRUE,
+#'           "Some text here!",
+#'           footer = "The footer here!"
+#'         ),
+#'         userBox(
+#'           title = userDescription(
+#'             title = "Elizabeth Pierce",
+#'             subtitle = "Web Designer",
+#'             image = "https://adminlte.io/themes/AdminLTE/dist/img/user3-128x128.jpg",
+#'             backgroundImage = "https://cdn.statically.io/img/wallpaperaccess.com/full/1119564.jpg",
+#'           ),
+#'           status = "olive",
+#'           closable = TRUE,
+#'           maximizable = TRUE,
+#'           "Some text here!",
+#'           footer = "The footer here!"
+#'         )
+#'       )
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#' }
 #' @export
-bs4UserCard <- function(..., type = NULL, src = NULL, elevation = NULL, imageElevation = NULL,
-                        status = c("primary", "warning", "danger", "info", "success"),
-                        title = NULL, subtitle = NULL, width = 6) {
+bs4UserCard <- function(..., title = NULL, footer = NULL, status = NULL,
+                        background = NULL, width = 6, height = NULL,
+                        collapsible = TRUE, collapsed = FALSE, closable = FALSE, maximizable = FALSE,
+                        gradient = FALSE, boxToolSize = "sm", elevation = NULL, headerBorder = TRUE,
+                        label = NULL, dropdownMenu = NULL, sidebar = NULL, id = NULL) {
+
+  # userBox is built on top of the box function. The difference is the title tag
+  # that is replaced by userDescription ...
+  boxTag <- box(
+    ...,
+    title = title,
+    footer = footer,
+    status = status,
+    solidHeader = TRUE,
+    background = background,
+    width = width,
+    height = height,
+    collapsible = collapsible,
+    collapsed = collapsed,
+    closable = closable,
+    maximizable = maximizable,
+    icon = NULL,
+    gradient = gradient,
+    boxToolSize = boxToolSize,
+    elevation = elevation,
+    headerBorder = headerBorder,
+    label = label,
+    dropdownMenu = dropdownMenu,
+    sidebar = sidebar,
+    id = id
+  )
   
-  status <- match.arg(status)
-  
-  userCardCl <- "card card-widget"
+  # remove status class from box that is not necessary for userBox
+  if (!is.null(status)) {
+    temp_pattern <- paste0("card-", status)
+    boxTag$children[[1]]$attribs$class <- gsub(temp_pattern, "", boxTag$children[[1]]$attribs$class) 
+  }
+
+  # find the selected type
+  type <- title[[2]]
+
+  # specific class for userDescription
+  boxTag$children[[1]]$attribs$class <- paste0(boxTag$children[[1]]$attribs$class, " card-widget user-card")
   if (!is.null(type)) {
-    userCardCl <- paste0(userCardCl, " widget-user-", type)
+    boxTag$children[[1]]$attribs$class <- paste0(boxTag$children[[1]]$attribs$class, " widget-user-", type)
   } else {
-    userCardCl <- paste0(userCardCl, " widget-user") 
-  } 
-  
-  if (!is.null(elevation)) userCardCl <- paste0(userCardCl, " elevation-", elevation)
-  
-  
+    boxTag$children[[1]]$attribs$class <- paste0(boxTag$children[[1]]$attribs$class, " widget-user")
+  }
+
+
+  # Change color
+  if (!is.null(status)) {
+    if (gradient) {
+      if (inherits(title[[1]], "shiny.tag.list")) {
+        title[[1]][[1]]$attribs$class <- paste0(title[[1]][[1]]$attribs$class, " bg-gradient-", status)
+      } else {
+        title[[1]]$attribs$class <- paste0(title[[1]]$attribs$class, " bg-gradient-", status)
+      }
+    } else {
+      if (inherits(title[[1]], "shiny.tag.list")) {
+        title[[1]][[1]]$attribs$class <- paste0(title[[1]][[1]]$attribs$class, " bg-", status)
+      } else {
+        title[[1]]$attribs$class <- paste0(title[[1]]$attribs$class, " bg-", status)
+      }
+    }
+  }
+
+
+  # recover box tools
+  boxTools <- boxTag$children[[1]]$children[[1]]$children[[3]]
+
+  # replace title tag by the user widget
+  boxTag$children[[1]]$children[[1]] <- title[[1]]
+
+  # inject box tools
+  if (inherits(boxTag$children[[1]]$children[[1]], "shiny.tag.list")) {
+    boxTag$children[[1]]$children[[1]][[1]] <- tagInsertChild(
+      boxTag$children[[1]]$children[[1]][[1]],
+      boxTools,
+      1
+    )
+  } else {
+    boxTag$children[[1]]$children[[1]] <- tagInsertChild(
+      boxTag$children[[1]]$children[[1]],
+      boxTools,
+      1
+    )
+  }
+
+  boxTag
+}
+
+#' User Description
+#'
+#' \link{userDescription} creates a customized title tag for \link{userBox}.
+#'
+#' @param title User card title.
+#' @param subtitle User card subtitle.
+#' @param image User image url or path.
+#' @param backgroundImage image url, if any. Background needs to be TRUE.
+#' @param type User card type. Either 1 or 2. 1 corresponds to a centered user image,
+#' while 2 is a left aligned user image.
+#' @param imageElevation User card image elevation (numeric). NULL by default.
+#'
+#' @rdname userBox
+#' @export
+bs4UserDescription <- function(title, subtitle = NULL, image, backgroundImage = NULL,
+                               type = c(1, 2), imageElevation = NULL) {
   headerCl <- "widget-user-header"
-  if (!is.null(status)) headerCl <- paste0(headerCl, " bg-", status)
-  
-  
+
+  # if type is not explicitly provided, it will use the default value, c(1, 2).
+  # Below we ensure that whenever it is the case, we only select the first element
+  # by default. We also need to convert to character for match.arg
+  if (length(type) == 2) {
+    type <- as.character(type[1])
+    type <- match.arg(type)
+  }
+
+  # once type is assigned, if it is "1" we actually put it back to NULL since
+  # the class widget-user-1 does not exist (only widget-user-2).
+  if (!is.null(type)) {
+    type <- as.character(type)
+    type <- match.arg(type)
+    if (type == "1") type <- NULL
+  }
+
   headerImageTag <- shiny::tags$div(
     class = "widget-user-image",
     shiny::tags$img(
@@ -1226,319 +1434,148 @@ bs4UserCard <- function(..., type = NULL, src = NULL, elevation = NULL, imageEle
       } else {
         "img-circle"
       },
-      src = src
+      src = image,
+      alt = "User Avatar"
     )
   )
-  
-  headerTag <- if (is.null(type)) {
+
+  if (!is.null(backgroundImage)) headerCl <- paste0(headerCl, " bg-black")
+
+  userDescriptionTag <- if (is.null(type)) {
     shiny::tagList(
       shiny::tags$div(
         class = headerCl,
+        style = if (!is.null(backgroundImage)) {
+          paste0("background: url('", backgroundImage, "') center center;")
+        },
         # title and subtitle
         shiny::tags$h3(class = "widget-user-username", title),
-        shiny::tags$h5(class = "widget-user-desc", subtitle)
+        if (!is.null(subtitle)) shiny::tags$h5(class = "widget-user-desc", subtitle)
       ),
       headerImageTag
     )
   } else {
     shiny::tags$div(
       class = headerCl,
+      style = if (!is.null(backgroundImage)) {
+        paste0("background: url('", backgroundImage, "') center center;")
+      },
       headerImageTag,
       # title and subtitle
       shiny::tags$h3(class = "widget-user-username", title),
-      shiny::tags$h5(class = "widget-user-desc", subtitle)
+      if (!is.null(subtitle)) shiny::tags$h5(class = "widget-user-desc", subtitle)
     )
   }
-  
-  
-  footerTag <- shiny::tags$div(
-    class = "card-footer",
-    style = "overflow-y: auto; max-height: 500px;",
-    ...
-  )
-  
-  userCardTag <- shiny::tags$div(class = userCardCl)
-  userCardTag <- shiny::tagAppendChildren(userCardTag, headerTag, footerTag)
-  
-  shiny::tags$div(
-    class = if (!is.null(width)) paste0("col-sm-", width),
-    userCardTag
-  )
+
+  list(userDescriptionTag, type)
 }
 
 
 
 
 
-#' @title AdminLTE3 simple box
+#' AdminLTE3 card profile
 #'
-#' @description Create nice and epurated box
+#' \link{boxProfile} goes inside a \link{box}. Displays user informations in an elegant
+#' container.
 #'
-#' @param ... Body content.
-#' @param title Box title.
-#' @param width The width of the box, using the Bootstrap grid system.
-#' @param height The height of a box, in pixels or other CSS unit. By default
-#'   the height scales automatically with the content.
-#' 
-#' 
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#'
-#' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'      navbar = bs4DashNavbar(),
-#'      sidebar = bs4DashSidebar(
-#'       bs4SidebarMenu(
-#'        bs4SidebarHeader("Main content"),
-#'        bs4SidebarMenuItem(
-#'          "Basic boxes",
-#'          tabName = "boxes",
-#'          icon = "desktop"
-#'        )
-#'       )
-#'      ),
-#'      controlbar = bs4DashControlbar(),
-#'      footer = bs4DashFooter(),
-#'      title = "test",
-#'      body = bs4DashBody(
-#'       bs4TabItems(
-#'        bs4TabItem(
-#'          tabName = "boxes",
-#'          fluidRow(
-#'           bs4Box(
-#'            height = "600px",
-#'            title = "Box 1",
-#'            plotOutput("plot"),
-#'            column(
-#'             width = 12,
-#'             align = "center",
-#'             sliderInput(
-#'               "obs",
-#'               "Number of observations:",
-#'               min = 0, max = 1000,
-#'               value = 500
-#'             )
-#'            )
-#'           ),
-#'           bs4Box(
-#'            height = "600px",
-#'            title = "Box 2",
-#'            plotOutput("distPlot"),
-#'            column(
-#'             width = 12,
-#'             align = "center",
-#'             radioButtons(
-#'               "dist", 
-#'               inline = TRUE,
-#'               "Distribution type:",
-#'               c("Norm" = "norm",
-#'                 "Unif" = "unif",
-#'                 "LogNorm" = "lnorm",
-#'                 "Exp" = "exp")
-#'             )
-#'            )
-#'           )
-#'          )
-#'        )
-#'       )
-#'      )
-#'    ),
-#'    server = function(input, output) {
-#'     output$plot <- renderPlot({
-#'      hist(rnorm(input$obs))
-#'      })
-#'      
-#'      output$distPlot <- renderPlot({
-#'        dist <- switch(
-#'        input$dist,
-#'        norm = rnorm,
-#'        unif = runif,
-#'        lnorm = rlnorm,
-#'        exp = rexp,
-#'        rnorm
-#'      )
-#'        
-#'        hist(dist(500))
-#'      })
-#'    }
-#'  )
-#' }
-#'
-#' @export
-bs4Box <- function(..., title = NULL, width = 6, height = NULL) {
-  
-  
-  boxHeader <- shiny::tags$div(
-    class = "card-header no-border",
-    shiny::tags$div(
-      class = "d-flex justify-content-between",
-      shiny::tags$h3(class = "card-title", title)
-    )
-  )
-  
-  boxBody <- shiny::tags$div(
-    class = "card-body",
-    style = "overflow-y: auto; max-height: 800px;",
-    ...
-  )
-  
-  style <- NULL
-  if (!is.null(height)) {
-    style <- paste0("height: ", shiny::validateCssUnit(height))
-  }
-  
-  boxTag <- shiny::tags$div(class = "card card-box", style = if (!is.null(style)) style)
-  boxTag <- shiny::tagAppendChildren(boxTag, boxHeader, boxBody)
-  
-  boxWrapper <- shiny::tags$div(
-    class = if (!is.null(width)) paste0("col-sm-", width),
-    boxTag
-  )
-  
-  shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$style(
-          shiny::HTML(
-            ".card-box {
-              box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-              transition: 0.3s;
-              border-radius: 5px; /* 5px rounded corners */
-            }
-            
-            /* On mouse-over, add a deeper shadow */
-            .card-box:hover {
-             box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
-            }
-            "
-          )
-        )
-      )
-    ),
-    boxWrapper
-  )
-}
-
-
-
-#' @title AdminLTE3 card profile
-#'
-#' @description Create card profile
-#'
-#' @param ... Any element such as \link{cardProfileItemList}.
-#' @param src Profile image, if any.
+#' @param ... Any element such as \link{boxProfileItem}.
+#' @param image Profile image, if any.
 #' @param title Title.
 #' @param subtitle Subtitle.
-#'
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#' 
-#' @examples
-#' if (interactive()) {
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'      navbar = bs4DashNavbar(),
-#'      sidebar = bs4DashSidebar(
-#'       bs4SidebarMenu(
-#'        bs4SidebarHeader("Main content"),
-#'        bs4SidebarMenuItem(
-#'          "Profile Card",
-#'          tabName = "profile_card",
-#'          icon = "desktop"
-#'        )
-#'       )
-#'      ),
-#'      controlbar = bs4DashControlbar(),
-#'      footer = bs4DashFooter(),
-#'      title = "test",
-#'      body = bs4DashBody(
-#'       bs4TabItems(
-#'        bs4TabItem(
-#'          tabName = "profile_card",
-#'          bs4Card(
-#'           status = "primary",
-#'           solidHeader = TRUE,
-#'           cardProfile(
-#'            src = "https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg",
-#'            title = "Nina Mcintire",
-#'            subtitle = "Software Engineer",
-#'            cardProfileItemList(
-#'             bordered = TRUE,
-#'             cardProfileItem(
-#'              title = "Followers",
-#'              description = 1322
-#'             ),
-#'             cardProfileItem(
-#'              title = "Following",
-#'              description = 543
-#'             ),
-#'             cardProfileItem(
-#'              title = "Friends",
-#'              description = 13287
-#'             )
-#'            )
-#'           )
-#'         )
-#'        )
-#'       )
-#'      )
-#'    ),
-#'    server = function(input, output) {}
-#'  )
-#' }
-#' 
-#' @export
-cardProfile <- function(..., src = NULL, title = NULL, subtitle = NULL) {
-  
-  shiny::tags$div(
-    class = "card-body card-profile",
-    shiny::tags$div(
-      class = "text-center",
-      shiny::img(class = "profile-user-img img-fluid img-circle", src = src)
-    ),
-    shiny::h3(class = "profile-username text-center", title),
-    shiny::p(class = "text-muted text-center", subtitle),
-    ...
-  ) 
-}
-
-#' @title AdminLTE3 card profile item container
-#'
-#' @description Create card profile item list
-#'
-#' @param ... Slot for \link{cardProfileItem}.
 #' @param bordered Whether the container should have a border or not. FALSE by default.
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
-#' 
+#'
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
+#'
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(
+#'         sidebarMenu(
+#'           sidebarHeader("Main content"),
+#'           menuItem(
+#'             "Profile Card",
+#'             tabName = "profile_card",
+#'             icon = icon("desktop")
+#'           )
+#'         )
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       footer = dashboardFooter(),
+#'       title = "boxProfile",
+#'       body = dashboardBody(
+#'         tabItems(
+#'           tabItem(
+#'             tabName = "profile_card",
+#'             bs4Card(
+#'               status = "primary",
+#'               solidHeader = TRUE,
+#'               boxProfile(
+#'                 image = "https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg",
+#'                 title = "Nina Mcintire",
+#'                 subtitle = "Software Engineer",
+#'                 bordered = TRUE,
+#'                 boxProfileItem(
+#'                   title = "Followers",
+#'                   description = 1322
+#'                 ),
+#'                 boxProfileItem(
+#'                   title = "Following",
+#'                   description = 543
+#'                 ),
+#'                 boxProfileItem(
+#'                   title = "Friends",
+#'                   description = 13287
+#'                 )
+#'               )
+#'             )
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#' }
+#' @rdname boxProfile
+#' @family boxWidgets
 #' @export
-cardProfileItemList <- function(..., bordered = FALSE) {
-  
-  cl <- if (isTRUE(bordered)) "list-group mb-3" else "list-group list-group-unbordered mb-3"
-  
-  shiny::tags$ul(
-    class = cl,
-    ...
+cardProfile <- function(..., image = NULL, title, subtitle = NULL, bordered = FALSE) {
+  cl <- if (bordered) "list-group" else "list-group list-group-unbordered"
+
+  shiny::tags$div(
+    class = "card-profile",
+    if (!is.null(image)) {
+      shiny::tags$div(
+        class = "text-center",
+        shiny::img(class = "profile-user-img img-fluid img-circle", src = image)
+      )
+    },
+    shiny::h3(class = "profile-username text-center", title),
+    if (!is.null(subtitle)) shiny::p(class = "text-muted text-center", subtitle),
+    shiny::tags$ul(
+      class = cl,
+      ...
+    )
   )
 }
 
-#' @title AdminLTE3 card profile item 
+
+#' @title AdminLTE3 card profile item
 #'
-#' @description Create card profile item 
+#' @description Create card profile item
 #'
 #' @param title Item title.
 #' @param description Item info.
 #'
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#' 
+#' @rdname boxProfile
+#'
 #' @export
-cardProfileItem <- function(title = NULL, description = NULL) {
+cardProfileItem <- function(title, description) {
   shiny::tags$li(
     class = "list-group-item",
     shiny::strong(title),
@@ -1551,146 +1588,139 @@ cardProfileItem <- function(title = NULL, description = NULL) {
 
 #' @title AdminLTE3 social card
 #'
-#' @description Create social card
+#' @description \link{socialBox} Creates social card
 #'
-#' @param ... Body content. May include \link{attachmentBlock} for instance.
-#' @param src Header image, if any.
-#' @param title Card title.
-#' @param subtitle card subtitle.
-#' @param width Card width (between 1 and 12). 
-#' @param height Card height.
-#' @param collapsible If TRUE, display a button in the upper right that allows the user to collapse the card. 
-#' @param closable If TRUE, display a button in the upper right that allows the user to close the card.
-#' @param comments Slot for \link{cardComment}.
-#' @param footer Card footer, if any.
+#' @inheritParams bs4Card
+#'
+#' @rdname socialBox
+#' @family cards
 #'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
 #' @examples
 #' if (interactive()) {
-#'  library(shiny)
-#'  library(bs4Dash)
-#'  shinyApp(
-#'   ui = bs4DashPage(
-#'     navbar = bs4DashNavbar(),
-#'     sidebar = bs4DashSidebar(
-#'      bs4SidebarMenu(
-#'        bs4SidebarHeader("Main content"),
-#'        bs4SidebarMenuItem(
-#'          "Social Card",
-#'          tabName = "social_card",
-#'          icon = "desktop"
-#'        )
-#'       )
-#'     ),
-#'     footer = bs4DashFooter(),
-#'     body = bs4DashBody(
-#'      bs4TabItems(
-#'        bs4TabItem(
-#'          tabName = "profile_card",
-#'          bs4SocialCard(
-#'           title = "Social Card",
-#'           subtitle = "example-01.05.2018",
-#'           src = "https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg",
+#'   library(shiny)
+#'   library(bs4Dash)
+#'
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       dashboardHeader(),
+#'       dashboardSidebar(),
+#'       dashboardBody(
+#'         socialBox(
+#'           title = userBlock(
+#'             image = "https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg",
+#'             title = "Social Box",
+#'             subtitle = "example-01.05.2018"
+#'           ),
 #'           "Some text here!",
-#'           comments = tagList(
-#'            lapply(X = 1:10, FUN = function(i) {
-#'              cardComment(
-#'               src = "https://adminlte.io/themes/AdminLTE/dist/img/user3-128x128.jpg",
+#'           attachmentBlock(
+#'             image = "https://adminlte.io/themes/AdminLTE/dist/img/photo1.png",
+#'             title = "Test",
+#'             href = "https://google.com",
+#'             "This is the content"
+#'           ),
+#'           lapply(X = 1:10, FUN = function(i) {
+#'             boxComment(
+#'               image = "https://adminlte.io/themes/AdminLTE/dist/img/user3-128x128.jpg",
 #'               title = paste("Comment", i),
 #'               date = "01.05.2018",
 #'               paste0("The ", i, "-th comment")
-#'              )
-#'             })
-#'           ),
+#'             )
+#'           }),
 #'           footer = "The footer here!"
-#'          )
-#'        )
-#'      )
-#'    ),
-#'    title = "socialCard"
-#'   ),
-#'   server = function(input, output) { }
-#'  )
+#'         )
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       title = "socialBox"
+#'     ),
+#'     server = function(input, output) { }
+#'   )
 #' }
+#' @export
+bs4SocialCard <- function(..., title = NULL, footer = NULL, width = 6, height = NULL,
+                          collapsible = TRUE, collapsed = FALSE, closable = FALSE, maximizable = FALSE,
+                          boxToolSize = "sm", elevation = NULL, headerBorder = TRUE, label = NULL, dropdownMenu = NULL,
+                          sidebar = NULL, id = NULL) {
+  items <- list(...)
+  # recover comments
+
+  comments <- extractSocialItem(items)
+  otherItems <- extractSocialItem(items, FALSE)
+
+  # userBox is built on top of the box function. The difference is the title tag
+  # that is replaced by userDescription ...
+  boxTag <- box(
+    ...,
+    title = title,
+    footer = footer,
+    width = width,
+    height = height,
+    collapsible = collapsible,
+    collapsed = collapsed,
+    closable = closable,
+    maximizable = maximizable,
+    icon = NULL,
+    gradient = FALSE,
+    boxToolSize = boxToolSize,
+    elevation = elevation,
+    headerBorder = headerBorder,
+    label = label,
+    dropdownMenu = dropdownMenu,
+    sidebar = sidebar,
+    id = id
+  )
+
+  # specific class
+  boxTag$children[[1]]$attribs$class <- paste0(boxTag$children[[1]]$attribs$class, " card-widget social-card")
+
+  # replace title tag by the user widget
+  boxTag$children[[1]]$children[[1]]$children[[2]] <- title
+
+
+  # inject any comments
+  if (length(comments) > 0) {
+    commentsTag <- shiny::tags$div(
+      class = "card-footer card-comments",
+      style = "overflow-y: auto; max-height: 150px; display: block;",
+      comments
+    )
+
+    # insert in boxTag structure
+    boxTag$children[[1]]$children[[2]]$children <- otherItems
+    boxTag$children[[1]] <- tagInsertChild(
+      boxTag$children[[1]],
+      commentsTag,
+      3
+    )
+  }
+
+  boxTag
+}
+
+
+
+#' User block
+#'
+#' \link{userBlock} goes in the title of \link{socialBox}.
+#'
+#' @param image User image.
+#' @param title A title, user name,...
+#' @param subtitle Any subtitle.
+#'
+#' @rdname socialBox
+#' @family boxWidgets
 #'
 #' @export
-bs4SocialCard <- function(..., src = NULL, title = NULL, subtitle = NULL, 
-                          width = 6, height = NULL, collapsible = TRUE,
-                          closable = TRUE, comments = NULL, footer = NULL) {
-  
-  style <- NULL
-  if (!is.null(height)) {
-    style <- paste0("height: ", shiny::validateCssUnit(height), ";")
-  }
-  
-  shiny::column(
-    width = width,
-    shiny::tags$div(
-      class = "card card-widget",
-      style = paste0(style, " display: block;"),
-      
-      # header
-      shiny::tags$div(
-        class = "card-header",
-        
-        # userblock
-        shiny::tags$div(
-          class = "user-block",
-          shiny::img(class = "img-circle", src = src),
-          shiny::tags$span(
-            class = "username",
-            shiny::a(href = "javascript:void(0)", title)
-          ),
-          shiny::tags$span(class = "description", subtitle)
-        ),
-        
-        # cardTool
-        shiny::tags$div(
-          class = "card-tools",
-          if (collapsible) {
-            shiny::tags$button(
-              class = "btn btn-tool",
-              `data-card-widget` = "collapse",
-              type = "button",
-              shiny::tags$i(class = "fa fa-minus")
-            )
-          },
-          if (closable) {
-            shiny::tags$button(
-              class = "btn btn-tool",
-              `data-card-widget` = "remove",
-              type = "button",
-              shiny::tags$i(class = "fa fa-times")
-            )
-          }
-        )
-      ),
-      
-      # card body
-      shiny::tags$div(
-        class = "card-body",
-        ...
-      ),
-      
-      # card comments
-      if (!is.null(comments)) {
-        shiny::tags$div(
-          class = "card-footer card-comments",
-          style = "overflow-y: auto; max-height: 150px; display: block;",
-          comments
-        ) 
-      },
-      
-      # footer
-      if (!is.null(footer)) {
-        shiny::tags$div(
-          class = "card-footer", 
-          style = "display: block;",
-          footer
-        ) 
-      }
-    )
+userBlock <- function(image, title, subtitle = NULL) {
+  shiny::tags$div(
+    class = "user-block",
+    shiny::img(class = "img-circle", src = image),
+    shiny::tags$span(
+      class = "username",
+      shiny::a(href = "javascript:void(0)", title)
+    ),
+    if (!is.null(subtitle)) shiny::tags$span(class = "description", subtitle)
   )
 }
 
@@ -1698,28 +1728,148 @@ bs4SocialCard <- function(..., src = NULL, title = NULL, subtitle = NULL,
 
 #' @title BS4 card comment container
 #'
-#' @description Create a card comment to insert in \link{bs4SocialCard}
+#' @description Create a card comment to insert in \link{socialBox}
 #'
 #' @param ... Comment content.
-#' @param src Author image, if any.
+#' @param image Author image, if any.
 #' @param title Comment title.
 #' @param date Date of publication.
 #'
-#' @author David Granjon, \email{dgranjon@@ymail.com}
-#' 
+#' @rdname socialBox
+#' @family boxWidgets
+#'
 #' @export
-cardComment <- function(..., src = NULL, title = NULL, date = NULL) {
-  shiny::tags$div(
+cardComment <- function(..., image, title = NULL, date = NULL) {
+  comment <- list(...)
+  if (length(comment) == 0) stop("You must enter a comment.")
+
+  cardCommentTag <- shiny::tags$div(
     class = "card-comment",
-    shiny::img(class = "img-circle img-sm", src = src),
+    shiny::img(class = "img-circle img-sm", src = image),
     shiny::tags$div(
       class = "comment-text",
       shiny::tags$span(
-        class = "username", 
+        class = "username",
         title,
-        shiny::tags$span(class = "text-muted float-right", date)
+        if (!is.null(date)) shiny::tags$span(class = "text-muted float-right", date)
       ),
       ...
     )
   )
+
+  class(cardCommentTag) <- c(class(cardCommentTag), "card-comment")
+  cardCommentTag
+}
+
+
+
+
+#' Bootstrap 4 container for cards
+#'
+#' @param ... Slot for bs4Dash cards.
+#' @param type Container type. See \url{https://getbootstrap.com/docs/4.0/components/card/#card-layout}
+#' for more details.
+#' @export
+#'
+#' @family cards
+#'
+#' @note Cards must have width argument set to NULL.
+#' @rdname boxLayout
+#'
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
+#'
+#'   # with group
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(),
+#'       body = dashboardBody(
+#'         boxLayout(
+#'           type = "group",
+#'           lapply(1:4, function(i) {
+#'             box(
+#'               width = NULL,
+#'               title = paste("Card", i),
+#'               closable = FALSE,
+#'               collapsible = FALSE,
+#'               "Lorem ipsum is so fun!"
+#'             )
+#'           })
+#'         )
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       title = "Box layout group"
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#'
+#'   # with deck
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(),
+#'       body = dashboardBody(
+#'         boxLayout(
+#'           type = "deck",
+#'           lapply(1:4, function(i) {
+#'             box(
+#'               width = NULL,
+#'               title = paste("Card", i),
+#'               closable = FALSE,
+#'               collapsible = FALSE,
+#'               "Lorem ipsum is so fun!"
+#'             )
+#'           })
+#'         )
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       title = "Box layout deck"
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#'
+#'   # with columns
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       header = dashboardHeader(),
+#'       sidebar = dashboardSidebar(),
+#'       body = dashboardBody(
+#'         boxLayout(
+#'           type = "columns",
+#'           lapply(1:12, function(i) {
+#'             box(
+#'               width = NULL,
+#'               title = paste("Card", i),
+#'               closable = FALSE,
+#'               collapsible = FALSE,
+#'               height = if (i %% 2 == 1) "200px",
+#'               status = if (i %% 2 == 0) "primary",
+#'               if (i %% 2 == 0) "Lorem ipsum is so fun!",
+#'               if (i == 1 | i == 7 | i == 12) img(src = "https://via.placeholder.com/290x160")
+#'             )
+#'           })
+#'         )
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       title = "Box layout columns"
+#'     ),
+#'     server = function(input, output) {}
+#'   )
+#' }
+bs4CardLayout <- function(..., type = c("group", "deck", "columns")) {
+  cards <- list(...)
+  if (inherits(cards[[1]], "list")) cards <- cards[[1]]
+  # stop if width is accidentally passed
+  cards <- lapply(seq_along(cards), function(i) {
+    if (length(grep("col-sm", cards[[i]]$attribs$class)) > 0) {
+      stop("The card width parameter must be NULL")
+    } else {
+      cards[[i]]
+    }
+  })
+  type <- match.arg(type)
+  shiny::tags$div(class = paste0("card-", type), cards)
 }

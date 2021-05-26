@@ -2,110 +2,153 @@
 #'
 #' Build an adminLTE3 dashboard page
 #'
-#' @param navbar Slot for \link{bs4DashNavbar}.
+#' @param header Slot for \link{bs4DashNavbar}.
 #' @param sidebar Slot for \link{bs4DashSidebar}.
 #' @param body Slot for \link{bs4DashBody}.
 #' @param controlbar Slot for \link{bs4DashControlbar} (right side).
 #' @param footer Slot for \link{bs4DashFooter}.
 #' @param title App title.
-#' @param old_school Whether to use the wonderful sketchy design for Bootstrap 4. FALSE
-#' by default.
-#' @param sidebar_mini Whether to see sidebar icons when \link{bs4DashSidebar}.
-#' is collapsed. TRUE by default.
-#' @param sidebar_collapsed Whether the sidebar is collapsed of not at start. FALSE by default.
-#' @param controlbar_collapsed Whether the sidebar is collapsed of not at start. TRUE by default.
-#' @param controlbar_overlay Whether the sidebar covers the content when expanded.
-#' Default to TRUE.
-#' @param enable_preloader Whether to enable a page loader. FALSE by default.
-#' @param loading_duration Loader duration in seconds. 2s by default.
-#' @param loading_background  Background color during page startup. Blue by default: 
-#' \url{https://www.w3schools.com/cssref/css_colors.asp}.
+#' @param skin Deprecated skin parameters. See \link{skinSelector} for live theming.
+#' @param freshTheme A skin powered by the fresh package. Not compatible with skin.
+#' See \url{https://dreamrs.github.io/fresh/articles/vars-shinydashboard.html}.
+#' @param preloader bs4Dash uses waiter (see \url{https://waiter.john-coene.com/#/}).
+#' Pass a list like \code{list(html = spin_1(), color = "#333e48")} to configure \link[waiter]{waiter_show_on_load} (refer to
+#' the package help for all styles).
+#' @param options Extra option to overwrite the vanilla AdminLTE configuration. See
+#' \url{https://adminlte.io/themes/AdminLTE/documentation/index.html#adminlte-options}.
+#' Expect a list.
+#' @param fullscreen Whether to allow fullscreen feature in the navbar. Default to FALSE.
+#' @param help Whether to enable/disable popovers and tooltips. This allows to seamlessly use
+#' \link{tooltip} and \link{popover} without having to individually toggle them. Default to FALSE.
+#' if TRUE, a help icon is display in the navigation bar.
+#' @param dark Whether to display toggle to switch between dark and light mode in the \link{dashboardHeader}.
+#' Default to FALSE, app starts in light mode, with possibility to switch to dark. 
+#' If TRUE, the app starts in dark with possibility to switch back to light. If NULL,
+#' not toggle is shown and the app starts in light, as it has always been. 
+#' @param scrollToTop Whether to display a scroll to top button whenever the page height is too large.
+#' Default to FALSE.
 #'
 #' @examples
-#' if(interactive()){
-#'  library(shiny)
-#'  library(bs4Dash)
+#' if (interactive()) {
+#'   library(shiny)
+#'   library(bs4Dash)
+#'   library(fresh)
 #'
-#'  shiny::shinyApp(
-#'    ui = bs4DashPage(
-#'     enable_preloader = TRUE,
-#'     navbar = bs4DashNavbar(),
-#'     sidebar = bs4DashSidebar(),
-#'     controlbar = bs4DashControlbar(),
-#'     footer = bs4DashFooter(),
-#'     title = "test",
-#'     body = bs4DashBody()
-#'    ),
-#'    server = function(input, output) {}
-#'  )
+#'   shinyApp(
+#'     ui = dashboardPage(
+#'       freshTheme = create_theme(
+#'         bs4dash_vars(
+#'           navbar_light_color = "#bec5cb",
+#'           navbar_light_active_color = "#FFF",
+#'           navbar_light_hover_color = "#FFF"
+#'         ),
+#'         bs4dash_yiq(
+#'           contrasted_threshold = 10,
+#'           text_dark = "#FFF",
+#'           text_light = "#272c30"
+#'         ),
+#'         bs4dash_layout(
+#'           main_bg = "#353c42"
+#'         ),
+#'         bs4dash_sidebar_light(
+#'           bg = "#272c30",
+#'           color = "#bec5cb",
+#'           hover_color = "#FFF",
+#'           submenu_bg = "#272c30",
+#'           submenu_color = "#FFF",
+#'           submenu_hover_color = "#FFF"
+#'         ),
+#'         bs4dash_status(
+#'           primary = "#5E81AC", danger = "#BF616A", light = "#272c30"
+#'         ),
+#'         bs4dash_color(
+#'           gray_900 = "#FFF", white = "#272c30"
+#'         )
+#'       ),
+#'       options = NULL,
+#'       header = dashboardHeader(
+#'         title = dashboardBrand(
+#'           title = "My dashboard",
+#'           color = "primary",
+#'           href = "https://adminlte.io/themes/v3",
+#'           image = "https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png"
+#'         )
+#'       ),
+#'       sidebar = dashboardSidebar(),
+#'       body = dashboardBody(
+#'         box(status = "danger"),
+#'         box(status = "primary"),
+#'         box(status = "orange")
+#'       ),
+#'       controlbar = dashboardControlbar(),
+#'       title = "DashboardPage"
+#'     ),
+#'     server = function(input, output) { }
+#'   )
 #' }
-#'
 #' @author David Granjon, \email{dgranjon@@ymail.com}
 #'
+#' @rdname dashboardPage
+#'
 #' @export
-bs4DashPage <- function(navbar = NULL, sidebar = NULL, body = NULL, 
-                        controlbar = NULL, footer = NULL, title = NULL,
-                        old_school = FALSE, sidebar_mini = TRUE, 
-                        sidebar_collapsed = FALSE, controlbar_collapsed = TRUE, 
-                        controlbar_overlay = TRUE, enable_preloader = FALSE, 
-                        loading_duration = 2, loading_background = "#1E90FF"){
+bs4DashPage <- function(header, sidebar, body, controlbar = NULL, footer = NULL, title = NULL,
+                        skin = NULL, freshTheme = NULL, preloader = NULL, options = NULL,
+                        fullscreen = FALSE, help = FALSE, dark = FALSE, scrollToTop = FALSE) {
+  titleTag <- header[[2]]
   
-  sidebar_cl <- "layout-fixed"
-  if (sidebar_mini) sidebar_cl <- paste0(sidebar_cl, " sidebar-mini")
-  
-  if (!is.null(controlbar)) {
-    if (!controlbar_collapsed) {
-      sidebar_cl <- paste0(sidebar_cl, " control-sidebar-slide-open")
+  sidebarDisabled <- sidebar$attribs$`data-disable`
+
+  # layout changes if main sidebar is disabled
+  if (!sidebarDisabled) {
+    tagAssert(sidebar, type = "aside", class = "main-sidebar")
+    # look for custom area and move it to third slot
+    if (length(sidebar$children) > 2) {
+      sidebar$children[[4]] <- sidebar$children[[3]]
     }
-    if (!controlbar_overlay) {
-      sidebar_cl <- paste0(sidebar_cl, " control-sidebar-push-slide")
-    } 
+    # sidebar stuff are moved to second child
+    sidebar$children[[3]] <- sidebar$children[[2]]
+
+    # header content (brand logo) is moved to sidebar first child
+    sidebar$children[[2]] <- if (!is.null(titleTag)) {
+      if (inherits(titleTag, "shiny.tag")) {
+        titleTag
+      } else {
+        shiny::div(class = "brand-link", titleTag)
+      }
+    }
+  } else {
+    header[[1]] <- tagInsertChild(header[[1]], header[[2]], 1)
+    # remove navbar padding to better fit the brand logo
+    header[[1]]$attribs$style <- "padding: 0rem 0rem;"
   }
-  
+
+
+  # some checks
+  tagAssert(header[[1]], type = "nav", class = "main-header")
+  tagAssert(body, type = "div", class = "content-wrapper")
+  if (!is.null(controlbar)) {
+    tagAssert(controlbar[[2]], type = "aside", class = "control-sidebar")
+  }
+  if (!is.null(footer)) {
+    tagAssert(footer, type = "footer", class = "main-footer")
+  }
+
   # create the body content
   bodyContent <- shiny::tags$div(
     class = "wrapper",
-    style = if (enable_preloader) "visibility: hidden;" else NULL,
-    navbar,
-    sidebar,
+    header[[1]],
+    if (!sidebarDisabled) sidebar,
     # page content
     body,
     controlbar,
-    if (!is.null(footer)) footer
+    if (!is.null(footer)) footer,
+    if (!is.null(freshTheme)) {
+      fresh::use_theme(freshTheme)
+    }
   )
-  
-  # create the preloader tag if enabled
-  preloaderTag <- if (enable_preloader) {
-    shiny::tags$div(
-      class = "pre",
-      style = "z-index: 1000;",
-      shiny::HTML(
-        '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve" width="30" height="30">
 
-		      <rect fill="#FBBA44" width="15" height="15">
-            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="1.7s" values="0,0;15,0;15,15;0,15;0,0;" repeatCount="indefinite"/>
-		      </rect>	
-
-		      <rect x="15" fill="#E84150" width="15" height="15">
-            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="1.7s" values="0,0;0,15;-15,15;-15,0;0,0;" repeatCount="indefinite"/>
-		      </rect>	
-      
-		      <rect x="15" y="15" fill="#62B87B" width="15" height="15">
-            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="1.7s" values="0,0;-15,0;-15,-15;0,-15;0,0;" repeatCount="indefinite"/>
-		      </rect>	
-
-		      <rect y="15" fill="#2F6FB6" width="15" height="15">
-            <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="1.7s" values="0,0;0,-15;15,-15;15,0;0,0;" repeatCount="indefinite"/>
-		      </rect>
-        </svg>
-        '
-      )
-    )
-    
-  }
-  
   # page wrapper
-  shiny::tags$html(
+  shiny::tagList(
     # Head
     shiny::tags$head(
       shiny::tags$meta(charset = "utf-8"),
@@ -114,63 +157,43 @@ bs4DashPage <- function(navbar = NULL, sidebar = NULL, body = NULL,
         content = "width=device-width, initial-scale=1"
       ),
       shiny::tags$meta(`http-equiv` = "x-ua-compatible", content = "ie=edge"),
-      
       shiny::tags$title(title)
     ),
     # Body
-    addDeps(
-      theme = old_school,
+    add_bs4Dash_deps(
       shiny::tags$body(
-        class = sidebar_cl,
-        `sidebar-start-open` = tolower(!sidebar_collapsed),
-        
-        # set up a time-out for the preloader
-        # The body content disappears first,
-        # then 2s after, the preloader disappears and 
-        # the body content is shown
-        onload = if (enable_preloader) {
-          duration <- loading_duration * 1000
-          paste0(
-            "$(document).ready(function() {
-              setTimeout(function(){
-                $('.pre').remove();
-                $('.wrapper').css('visibility', 'visible');
-                $('body').css('background', '#fff');
-                }, ", duration, ");
-            });
-            "
+        `data-help` = if (help) 1 else 0,
+        `data-fullscreen` = if (fullscreen) 1 else 0,
+        `data-dark` = if (!is.null(dark)) {
+          if (dark) {
+            2
+          } else if (!dark) {
+            1
+          }
+        } else {
+          0
+        },
+        `data-scrollToTop` = if (scrollToTop) 1 else 0,
+        class = if (sidebarDisabled) "layout-top-nav",
+        if (!is.null(preloader)) {
+          shiny::tagList(
+            waiter::use_waiter(), # dependencies
+            do.call(waiter_show_on_load, preloader)
           )
         },
-        
-        # preloader, if any
-        if (enable_preloader) {
-          shiny::tagList(
-            # preloader CSS
-            shiny::singleton(
-              shiny::tags$style(
-                paste0(
-                  "body {
-                    background: ", loading_background, ";
-                   }
-                  .pre  {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    margin-top: -15px;
-                    margin-left: -15px;
-                  }
-                "
-                )
-              )
-            ),
-            # preloader tag
-            preloaderTag,
-            bodyContent
+        onload = if (!is.null(preloader)) {
+          paste0(
+            "window.ran = false;",
+            "$(document).on('shiny:idle', function(event){
+            if(!window.ran)
+              $('.waiter-overlay').fadeOut(1000);
+            window.ran = true;
+          });"
           )
-        } else {
-          bodyContent
-        }
-      )
+        },
+        bodyContent
+      ),
+      options = options
     )
   )
 }
