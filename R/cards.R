@@ -242,8 +242,7 @@ bs4Card <- function(..., title = NULL, footer = NULL, status = NULL,
 
   headerTag <- shiny::tags$div(
     class = if (headerBorder) "card-header" else "card-header border-0",
-    icon,
-    shiny::tags$h3(class = "card-title", title)
+    shiny::tags$h3(class = "card-title", icon, title)
   )
   headerTag <- shiny::tagAppendChild(headerTag, cardToolTag)
 
@@ -1024,24 +1023,26 @@ bs4InfoBox <- function(title, value = NULL, subtitle = NULL, icon = shiny::icon(
   infoBoxTag <- shiny::tags$div(class = infoBoxCl)
   infoBoxTag <- shiny::tagAppendChildren(infoBoxTag, iconTag, contentTag)
 
-  # handle icon color (white or black depending on the box background)
+  # handle tabName 
   infoBoxTag <- shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$script(
-          shiny::HTML(
-            paste0(
-              "$(function() {
+    if (!is.null(tabName)) {
+      shiny::singleton(
+        shiny::tags$head(
+          shiny::tags$script(
+            shiny::HTML(
+              paste0(
+                "$(function() {
                 $('#icon-", tabName, "').on('click', function() {
-                  $('#tab-", tabName, "').click();
+                  $('#tab-", tabName, ").click();
                 });
               });
               "
+              )
             )
           )
         )
       )
-    ),
+    },
     infoBoxTag
   )
 
@@ -1176,15 +1177,15 @@ bs4TabCard <- function(..., id = NULL, selected = NULL, title = NULL, width = 6,
 
 
   # Remove title and add it to tab list
-  titleTag <- boxTag$children[[1]]$children[[1]]$children[[2]]
-  boxTag$children[[1]]$children[[1]]$children[[2]] <- NULL
+  titleTag <- boxTag$children[[1]]$children[[1]]$children[[1]]
+  boxTag$children[[1]]$children[[1]]$children[[1]] <- NULL
   titleNavTag <- shiny::tags$li(
     class = "pt-2 px-3",
     titleTag
   )
   
-  boxToolTag <- boxTag$children[[1]]$children[[1]]$children[[2]]
-  boxTag$children[[1]]$children[[1]]$children[[2]] <- NULL
+  boxToolTag <- boxTag$children[[1]]$children[[1]]$children[[1]]
+  boxTag$children[[1]]$children[[1]]$children[[1]] <- NULL
   
   if (side == "right") {
     content$children[[1]] <- tagInsertChild(
@@ -1369,7 +1370,7 @@ bs4UserCard <- function(..., title = NULL, footer = NULL, status = NULL,
 
 
   # recover box tools
-  boxTools <- boxTag$children[[1]]$children[[1]]$children[[3]]
+  boxTools <- boxTag$children[[1]]$children[[1]]$children[[2]]
 
   # replace title tag by the user widget
   boxTag$children[[1]]$children[[1]] <- title[[1]]
@@ -1675,7 +1676,7 @@ bs4SocialCard <- function(..., title = NULL, footer = NULL, width = 6, height = 
   boxTag$children[[1]]$attribs$class <- paste0(boxTag$children[[1]]$attribs$class, " card-widget social-card")
 
   # replace title tag by the user widget
-  boxTag$children[[1]]$children[[1]]$children[[2]] <- title
+  boxTag$children[[1]]$children[[1]]$children[[1]] <- title
 
 
   # inject any comments
