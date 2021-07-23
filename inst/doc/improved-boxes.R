@@ -78,6 +78,9 @@
 #  
 #  shinyApp(ui, server)
 
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-api/", deps = TRUE)
+
 ## ----boxTools, echo=FALSE, fig.cap='Box Tools. From left to right: boxLabel, boxDropdown, collapsible and closable buttons, boxSidebar trigger.', fig.align = 'center', out.width='50%'----
 knitr::include_graphics("figures/boxTools.png")
 
@@ -122,6 +125,9 @@ knitr::include_graphics("figures/boxTools.png")
 #    }
 #  )
 
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-sidebar/")
+
 ## ----boxDropdown-code, eval=FALSE---------------------------------------------
 #  shinyApp(
 #    ui = dashboardPage(
@@ -158,6 +164,9 @@ knitr::include_graphics("figures/boxTools.png")
 #      })
 #    }
 #  )
+
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-dropdown/")
 
 ## ----user-description, eval=FALSE---------------------------------------------
 #  userDescription(
@@ -213,6 +222,9 @@ knitr::include_graphics("figures/boxTools.png")
 #      })
 #    }
 #  )
+
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userBox/")
 
 ## ----user-block, eval=FALSE---------------------------------------------------
 #  userBlock(
@@ -298,4 +310,7 @@ knitr::include_graphics("figures/boxTools.png")
 #      })
 #    }
 #  )
+
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-socialBox/")
 

@@ -58,6 +58,9 @@ knitr::opts_chunk$set(echo = TRUE)
 #    }
 #   )
 
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-accordions/", TRUE)
+
 ## ----message-code, eval=FALSE-------------------------------------------------
 #  list(
 #    author = "David",
@@ -165,4 +168,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #      })
 #    }
 #  )
+
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userMessages/")
 

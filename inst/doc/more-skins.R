@@ -1,4 +1,5 @@
 ## ----setup, include=FALSE-----------------------------------------------------
+library(shiny)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -30,6 +31,10 @@ knitr::opts_chunk$set(
 #    ),
 #    server = function(input, output) { }
 #  )
+
+## ---- echo=FALSE--------------------------------------------------------------
+# App output
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-skinSelector/", TRUE)
 
 ## ----fresh-code, eval=FALSE---------------------------------------------------
 #  library(fresh)
@@ -114,4 +119,8 @@ knitr::opts_chunk$set(
 #    ),
 #    server = function(input, output) { }
 #  )
+
+## ---- echo=FALSE--------------------------------------------------------------
+# App output
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-fresh-theming/")
 

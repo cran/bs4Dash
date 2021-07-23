@@ -30,3 +30,6 @@ knitr::opts_chunk$set(
 #      server = function(input, output) { }
 #  )
 
+## ---- echo=FALSE--------------------------------------------------------------
+bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-scrollToTop/", TRUE)
+

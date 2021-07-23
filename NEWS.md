@@ -1,3 +1,12 @@
+# bs4Dash 2.0.2
+
+Patch to fix CRAN warning on Mac M1. 
+
+## Minor changes
+
+- Move away from `shiny:::processDeps` in favor of `htmltools::renderTags`. Does not
+impact end user. 
+
 # bs4Dash 2.0.1
 
 ## Minor changes
