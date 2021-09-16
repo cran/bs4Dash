@@ -84,34 +84,6 @@ dropNulls <- function(x) {
 }
 
 
-createWebDependency <- function (dependency, scrubFile = TRUE) {
-  if (is.null(dependency)) 
-    return(NULL)
-  if (!inherits(dependency, "html_dependency")) 
-    stop("Unexpected non-html_dependency type")
-  if (is.null(dependency$src$href)) {
-    prefix <- paste(dependency$name, "-", dependency$version, 
-                    sep = "")
-    shiny::addResourcePath(prefix, dependency$src$file)
-    dependency$src$href <- prefix
-  }
-  if (scrubFile) 
-    dependency$src$file <- NULL
-  return(dependency)
-}
-
-# Given a Shiny tag object, process singletons and dependencies. Returns a list
-# with rendered HTML and dependency objects.
-processDeps <- function (tags, session) {
-  ui <- htmltools::takeSingletons(tags, session$singletons, desingleton = FALSE)$ui
-  ui <- htmltools::surroundSingletons(ui)
-  dependencies <- lapply(htmltools::resolveDependencies(htmltools::findDependencies(ui)), 
-                         createWebDependency)
-  names(dependencies) <- NULL
-  list(html = htmltools::doRenderTags(ui), deps = dependencies)
-}
-
-
 
 # Returns TRUE if a status is valid; throws error otherwise.
 validateStatus <- function(status) {
@@ -707,7 +679,7 @@ validateIcon <- function (icon)
 
 
 
-waiter_show_on_load <- function(
+waiterShowOnLoad <- function(
   html = waiter::spin_1(), color = "#333e48"
 ){
   
@@ -715,11 +687,11 @@ waiter_show_on_load <- function(
   html <- gsub("\n", "", html)
   
   show <- sprintf(
-    "show_waiter(
-      null,
-      html = '%s', 
-      color = '%s'
-    );",
+    "waiter.show({
+      id: null,
+      html: '%s', 
+      color: '%s'
+    });",
     html, color
   )
   
