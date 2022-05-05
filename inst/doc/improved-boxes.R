@@ -255,7 +255,7 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userBox/")
 #              attachmentBlock(
 #                image = "https://www.sammobile.com/wp-content/uploads/2017/11/Camel.png",
 #                title = "Test",
-#                href = "http://google.com",
+#                href = "https://google.com",
 #                "This is the content"
 #              )
 #            ),

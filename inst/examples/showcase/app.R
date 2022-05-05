@@ -1,7 +1,6 @@
 # Load packages
 library(shiny)
 library(bs4Dash)
-library(echarts4r)
 library(thematic)
 library(waiter)
 
@@ -13,18 +12,6 @@ toastOpts <- list(
   icon = "fas fa-home",
   close = FALSE,
   position = "bottomRight"
-)
-
-# echarts4r theme #3d444c
-echarts_dark_theme <- list(
-  options = '{
-    "color":["#6610f2", "#ffc107", "#e83e8c", "#ff851b", "#17a2b8", "#3d9970"], 
-    "backgroundColor": "#343a40", 
-    "textStyle": {
-        color: "#fff"
-    }
-  }',
-  name = "dark_theme"
 )
 
 # color statuses
@@ -51,16 +38,6 @@ statusColors <- c(
   "white"
 )
 
-# river charts 
-dates <- seq.Date(Sys.Date() - 30, Sys.Date(), by = "day")
-
-river <- data.frame(
-  dates = dates,
-  apples = runif(length(dates)),
-  bananas = runif(length(dates)),
-  pears = runif(length(dates))
-)
-
 #' basic_cards_tab ----
 basic_cards_tab <- tabItem(
   tabName = "cards",
@@ -77,7 +54,7 @@ basic_cards_tab <- tabItem(
         status = "danger"
       ),
       dropdownMenu = boxDropdown(
-        boxDropdownItem("Link to google", href = "http://www.google.com"),
+        boxDropdownItem("Link to google", href = "https://www.google.com"),
         boxDropdownItem("Item with inputId", id = "dropdown_item2"),
         dropdownDivider(),
         boxDropdownItem("item 3", href = "#", icon = icon("th"))
@@ -109,7 +86,7 @@ basic_cards_tab <- tabItem(
       status = "teal", 
       solidHeader = TRUE, 
       collapsible = FALSE,
-      echarts4rOutput("riverPlot")
+      "Empty card"
     )
   ),
   fluidRow(
@@ -121,7 +98,7 @@ basic_cards_tab <- tabItem(
       solidHeader = TRUE, 
       status = "primary",
       collapsible = TRUE,
-      echarts4rOutput("rosetype")
+      "Empty card"
     ),
     box(
       id = "card4",
@@ -224,7 +201,7 @@ social_cards_tab <- tabItem(
       ),
       "Some text here!",
       attachmentBlock(
-        image = "https://adminlte.io/themes/AdminLTE/dist/img/photo1.png",
+        image = "https://adminlte.io/themes/v3/dist/img/user1-128x128.jpg",
         title = "Test",
         href = "https://google.com",
         "This is the content"
@@ -446,7 +423,7 @@ tab_cards_tab <- tabItem(
     # manually inserted panels
     column(
       width = 6,
-      tabsetPanel(
+      bs4Dash::tabsetPanel(
         id = "tabsetpanel1",
         selected = "Tab 2",
         tabPanel(
@@ -467,7 +444,7 @@ tab_cards_tab <- tabItem(
     # programmatically inserted panels
     column(
       width = 6,
-      tabsetPanel(
+      bs4Dash::tabsetPanel(
         id = "tabsetpanel2",
         type = "pills",
         .list = lapply(1:3, function(i) {
@@ -620,7 +597,7 @@ value_boxes_tab <- tabItem(
       value = "44",
       subtitle = "User Registrations",
       color = "warning",
-      icon = icon("sliders")
+      icon = icon("sliders-h")
     ),
     valueBox(
       value = "53%",
@@ -711,13 +688,13 @@ gallery_1_tab <- tabItem(
         id = "mycarousel",
         width = 12,
         carouselItem(
-          tags$img(src = "https://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap")
+          tags$img(src = "https://via.placeholder.com/500")
         ),
         carouselItem(
-          tags$img(src = "https://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap")
+          tags$img(src = "https://via.placeholder.com/500")
         ),
         carouselItem(
-          tags$img(src = "https://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap")
+          tags$img(src = "https://via.placeholder.com/500")
         )
       )
     )
@@ -795,7 +772,7 @@ gallery_1_tab <- tabItem(
         timelineLabel("10 Feb. 2014", color = "info"),
         timelineItem(
           title = "Item 1",
-          icon = icon("gears"),
+          icon = icon("cogs"),
           color = "success",
           time = "now",
           footer = "Here is the footer",
@@ -810,8 +787,8 @@ gallery_1_tab <- tabItem(
           title = "Item 3",
           icon = icon("paint-brush"),
           color = "warning",
-          timelineItemMedia(image = "https://placehold.it/150x100"),
-          timelineItemMedia(image = "https://placehold.it/150x100")
+          timelineItemMedia(image = "https://via.placehold.com/150x100"),
+          timelineItemMedia(image = "https://via.placehold.com/150x100")
         ),
         timelineStart(color = "danger")
       )
@@ -822,7 +799,7 @@ gallery_1_tab <- tabItem(
       timelineLabel("10 Feb. 2014", color = "info"),
       timelineItem(
         title = "Item 1",
-        icon = icon("gears"),
+        icon = icon("cogs"),
         color = "success",
         time = "now",
         footer = "Here is the footer",
@@ -837,8 +814,8 @@ gallery_1_tab <- tabItem(
         title = "Item 3",
         icon = icon("paint-brush"),
         color = "warning",
-        timelineItemMedia(image = "https://placehold.it/150x100"),
-        timelineItemMedia(image = "https://placehold.it/150x100")
+        timelineItemMedia(image = "https://via.placehold.com/150x100"),
+        timelineItemMedia(image = "https://via.placehold.com/150x100")
       ),
       timelineStart(color = "danger")
     )
@@ -855,9 +832,9 @@ gallery_1_tab <- tabItem(
     box(
       title = "Attachment example",
       attachmentBlock(
-        image = "https://adminlte.io/themes/dev/AdminLTE/dist/img/photo1.png",
+        image = "https://adminlte.io/themes/v3/dist/img/user1-128x128.jpg",
         title = "Test",
-        href = "http://google.com",
+        href = "https://google.com",
         "This is the content"
       )
     )
@@ -931,19 +908,19 @@ gallery_2_tab <- tabItem(
         "Cras justo odio",
         active = TRUE, 
         disabled = FALSE, 
-        href = "http://www.google.fr"
+        href = "https://www.google.com"
       ),
       listGroupItem(
         active = FALSE, 
         disabled = FALSE, 
         "Dapibus ac facilisis in",
-        href = "http://www.google.fr"
+        href = "https://www.google.com"
       ),
       listGroupItem(
         "Morbi leo risus",
         active = FALSE, 
         disabled = TRUE, 
-        href = "http://www.google.fr"
+        href = "https://www.google.com"
       )
     ),
     listGroup(
@@ -999,7 +976,7 @@ shinyApp(
         title = "bs4Dash",
         color = "primary",
         href = "https://divadnojnarg.github.io/outstanding-shiny-ui/",
-        image = "https://adminlte.io/themes/AdminLTE/dist/img/user2-160x160.jpg",
+        image = "https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg",
         opacity = 0.8
       ),
       fixed = TRUE,
@@ -1069,7 +1046,7 @@ shinyApp(
         )
       ),
       sidebarUserPanel(
-        image = "https://image.flaticon.com/icons/svg/1149/1149168.svg",
+        image = "https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png",
         name = "Welcome Onboard!"
       ),
       sidebarMenu(
@@ -1081,7 +1058,7 @@ shinyApp(
         menuItem(
           "Basic cards",
           tabName = "cards",
-          icon = icon("sliders")
+          icon = icon("sliders-h")
         ),
         menuItem(
           "Cards API",
@@ -1098,7 +1075,7 @@ shinyApp(
         menuItem(
           "Tab cards",
           tabName = "tabcards",
-          icon = icon("picture-o")
+          icon = icon("layer-group")
         ),
         menuItem(
           "Sortable cards",
@@ -1108,7 +1085,7 @@ shinyApp(
         menuItem(
           "Stats elements",
           tabName = "statsboxes",
-          icon = icon("bank")
+          icon = icon("chart-area")
         ),
         sidebarHeader("Other boxes"),
         menuItem(
@@ -1142,7 +1119,7 @@ shinyApp(
               )
             ),
             tabName = "gallery1",
-            icon = icon("circle-thin")
+            icon = icon("circle")
           ),
           menuSubItem(
             text = HTML(
@@ -1161,7 +1138,6 @@ shinyApp(
       )
     ),
     body = dashboardBody(
-      e_theme_register(echarts_dark_theme$options, name = echarts_dark_theme$name),
       tabItems(
         basic_cards_tab,
         cards_api_tab,
@@ -1286,29 +1262,6 @@ shinyApp(
     output$plot <- renderPlot({
       hist(rnorm(input$obs))
     })
-
-    # this is not reactive but just for fixing the plot size on the client side.
-    output$riverPlot <- renderEcharts4r({
-      river %>%
-        e_charts(dates) %>%
-        e_river(apples) %>%
-        e_river(bananas) %>%
-        e_river(pears) %>%
-        e_tooltip(trigger = "axis") %>%
-        e_title("River charts", "(Streamgraphs)") %>%
-        e_theme("shine")
-    })
-
-    output$rosetype <- renderEcharts4r({
-      plot <- mtcars %>%
-        head() %>%
-        dplyr::mutate(model = row.names(.)) %>%
-        e_charts(model) %>%
-        e_pie(hp, roseType = "radius")
-      if (input$dark_mode) plot <- plot %>% e_theme(echarts_dark_theme$name)
-      plot
-    })
-
 
     observeEvent(input$current_tab, {
       if (input$current_tab == "cards") {

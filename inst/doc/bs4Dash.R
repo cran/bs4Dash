@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 #  library(bs4Dash)
 #  
 #  shinyApp(
-#      ui = dashboardPage(,
+#      ui = dashboardPage(
 #          header = dashboardHeader(
 #              title = dashboardBrand(
 #                  title = "My dashboard",

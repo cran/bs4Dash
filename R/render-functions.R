@@ -15,7 +15,7 @@
 #'
 #'   shiny::shinyApp(
 #'     ui = bs4DashPage(
-#'       navbar = bs4DashNavbar(),
+#'       header = bs4DashNavbar(),
 #'       sidebar = bs4DashSidebar(),
 #'       controlbar = bs4DashControlbar(),
 #'       footer = bs4DashFooter(),
@@ -253,9 +253,14 @@ menuItemOutput <- function(outputId) {
 #'
 #'   shinyApp(ui, server)
 #' }
-renderMenu <- function (expr, env = parent.frame(), quoted = FALSE, outputArgs = list()) {
+renderMenu <- function(expr, env = parent.frame(), quoted = FALSE, outputArgs = list()) {
+  if (!quoted) {
+    expr <- substitute(expr)
+    quoted <- TRUE
+  }
   shiny::renderUI(expr, env = env, quoted = quoted, outputArgs = outputArgs)
 }
+
   
   
 

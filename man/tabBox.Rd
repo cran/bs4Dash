@@ -29,7 +29,8 @@ bs4TabCard(
   headerBorder = TRUE,
   label = NULL,
   dropdownMenu = NULL,
-  sidebar = NULL
+  sidebar = NULL,
+  .list = NULL
 )
 
 tabBox(
@@ -56,7 +57,8 @@ tabBox(
   headerBorder = TRUE,
   label = NULL,
   dropdownMenu = NULL,
-  sidebar = NULL
+  sidebar = NULL,
+  .list = NULL
 )
 }
 \arguments{
@@ -72,7 +74,7 @@ tab will be selected.}
 
 \item{width}{The width of the box, using the Bootstrap grid system. This is
 used for row-based layouts. The overall width of a region is 12, so the
-default card width of 4 occupies 1/3 of that width. For column-based
+default card width of 6 occupies 1/2 of that width. For column-based
 layouts, use \code{NULL} for the width; the width is set by the column that
 contains the box.}
 
@@ -167,6 +169,8 @@ TRUE by default}
 \item{dropdownMenu}{List of items in the boxtool dropdown menu. Use \link{boxDropdown}.}
 
 \item{sidebar}{Slot for \link{boxSidebar}.}
+
+\item{.list}{In case of programmatically generated items. See example.}
 }
 \description{
 Build an adminLTE3 card with tabs
@@ -179,6 +183,13 @@ to get the state of the box and update it on the server with \link{updateBox}.
 if (interactive()) {
   library(shiny)
   library(bs4Dash)
+
+  menu_tab <- lapply(1:3, function(i) {
+    tabPanel(
+      sprintf("Menu \%s", i),
+      sprintf("Hello tab \%s", i)
+    )
+  })
 
   shinyApp(
     ui = dashboardPage(
@@ -207,10 +218,25 @@ if (interactive()) {
             title = "Tab 3",
             "Content 3"
           )
-        )
+        ),
+        tabBox(
+         id = "mybox2",
+         title = "",
+         .list = menu_tab
+        ),
+        selectInput(
+        "tab",
+        "Selected a tab",
+        choices = paste("Menu", 1:3),
+        "Menu 2"
+       )
       )
     ),
-    server = function(input, output) {}
+    server = function(input, output, session) {
+      observeEvent(input$tab, {
+       updateTabsetPanel(session, inputId = "mybox2", input$tab)
+      })
+    }
   )
 }
 }
