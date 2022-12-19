@@ -458,23 +458,21 @@ tab_cards_tab <- tabItem(
   ),
   br(), br(),
   # Vertical panels: TO DO
-  fluidRow(
-    tabsetPanel(
-      id = "tabsetpanel3",
-      selected = "Tab 2",
-      vertical = TRUE,
-      tabPanel(
-        "Tab 1",
-        "Content 1"
-      ),
-      tabPanel(
-        "Tab 2",
-        "Content 2"
-      ),
-      tabPanel(
-        "Tab 3",
-        "Content 3"
-      )
+  tabsetPanel(
+    id = "tabsetpanel3",
+    selected = "Tab 2",
+    vertical = TRUE,
+    tabPanel(
+      "Tab 1",
+      "Content 1"
+    ),
+    tabPanel(
+      "Tab 2",
+      "Content 2"
+    ),
+    tabPanel(
+      "Tab 3",
+      "Content 3"
     )
   )
 )
@@ -787,8 +785,8 @@ gallery_1_tab <- tabItem(
           title = "Item 3",
           icon = icon("paint-brush"),
           color = "warning",
-          timelineItemMedia(image = "https://via.placehold.com/150x100"),
-          timelineItemMedia(image = "https://via.placehold.com/150x100")
+          timelineItemMedia(image = "https://via.placeholder.com/150"),
+          timelineItemMedia(image = "https://via.placeholder.com/150")
         ),
         timelineStart(color = "danger")
       )
@@ -814,8 +812,8 @@ gallery_1_tab <- tabItem(
         title = "Item 3",
         icon = icon("paint-brush"),
         color = "warning",
-        timelineItemMedia(image = "https://via.placehold.com/150x100"),
-        timelineItemMedia(image = "https://via.placehold.com/150x100")
+        timelineItemMedia(image = "https://via.placeholder.com/150"),
+        timelineItemMedia(image = "https://via.placeholder.com/150")
       ),
       timelineStart(color = "danger")
     )
