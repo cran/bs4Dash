@@ -1,7 +1,7 @@
 Package: bs4Dash
 Type: Package
 Title: A 'Bootstrap 4' Version of 'shinydashboard'
-Version: 2.2.0
+Version: 2.2.1
 Authors@R: c(
   person("David", "Granjon", email = "dgranjon@ymail.com", role = c("aut", "cre")),
   person(family = "RinteRface", role = "cph"),
@@ -31,10 +31,10 @@ Collate: 'feedbacks.R' 'useful-items.R' 'tabs.R' 'render-functions.R'
         'inputs.R' 'skinSelector.R' 'utils.R'
 RdMacros: lifecycle
 NeedsCompilation: no
-Packaged: 2022-12-19 14:50:14 UTC; david
+Packaged: 2022-12-19 15:49:17 UTC; david
 Author: David Granjon [aut, cre],
   RinteRface [cph],
   Almasaeed Studio [ctb, cph] (AdminLTE3 theme for Bootstrap 4),
   Winston Chang [ctb, cph] (Utils functions from shinydashboard)
 Repository: CRAN
-Date/Publication: 2022-12-19 15:20:02 UTC
+Date/Publication: 2022-12-20 10:00:17 UTC
