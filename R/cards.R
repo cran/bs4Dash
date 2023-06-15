@@ -636,7 +636,7 @@ cardDropdownItem <- function(..., id = NULL, href = NULL, icon = NULL) {
 #'
 #' @export
 dropdownDivider <- function() {
-  shiny::tags$a(class = "divider")
+  shiny::div(class = "dropdown-divider")
 }
 
 
@@ -1069,6 +1069,9 @@ bs4InfoBox <- function(title, value = NULL, subtitle = NULL, icon = shiny::icon(
 #'
 #' @note User will access the \link{tabBox} input with input$<id>_box. This allows
 #' to get the state of the box and update it on the server with \link{updateBox}.
+#' Don't forget that the title should not be too long, especially
+#' if you have more than 3 tabs and want the box to be collapsible,
+#' closable and maximizable, as these elements take extra horizontal space.
 #'
 #' @examples
 #' if (interactive()) {
@@ -1142,6 +1145,14 @@ bs4TabCard <- function(..., id = NULL, selected = NULL, title = NULL, width = 6,
                        sidebar = NULL, .list = NULL) {
   side <- match.arg(side)
   if (is.null(type)) type <- "pills"
+  
+  # If the card has ribbon, we must apply more margin to the
+  # title when the tabs position is left (title right side).
+  body_items <- list(...)
+  has_ribbon <- unlist(lapply(body_items, function(item) {
+    if (item$attribs$class == "ribbon-wrapper") TRUE
+  }))
+  if (is.null(has_ribbon)) has_ribbon <- FALSE 
 
   # Build tabs
   content <- tabsetPanel(
@@ -1180,7 +1191,7 @@ bs4TabCard <- function(..., id = NULL, selected = NULL, title = NULL, width = 6,
   # add card-tabs class
   boxTag$children[[1]]$attribs$class <- paste0(
     boxTag$children[[1]]$attribs$class,
-    if (solidHeader) {
+    if (solidHeader || type == "pills") {
       " card-tabs"
     } else {
       " card-outline-tabs"
@@ -1190,19 +1201,31 @@ bs4TabCard <- function(..., id = NULL, selected = NULL, title = NULL, width = 6,
   # change header class
   boxTag$children[[1]]$children[[1]]$attribs$class <- paste0(
     boxTag$children[[1]]$children[[1]]$attribs$class,
-    if (solidHeader) {
-      " p-0 pt-1"
-    } else {
-      " p-0 border-bottom-0"
+    if (type != "pills") {
+      if (solidHeader) {
+        " p-0 pt-1"
+      } else {
+        " p-0 border-bottom-0"
+      } 
     }
   )
 
 
   # Remove title and add it to tab list
   titleTag <- boxTag$children[[1]]$children[[1]]$children[[1]]
+  if (type == "tabs") {
+    titleTag$attribs$class <- paste(
+      titleTag$attribs$class,
+      "pt-1"
+    )
+  }
   boxTag$children[[1]]$children[[1]]$children[[1]] <- NULL
   titleNavTag <- shiny::tags$li(
-    class = "pt-2 px-3",
+    class = if (side == "left") {
+      if (has_ribbon) "pt-2 px-5 ml-auto" else "pt-2 px-3 ml-auto"
+    } else {
+      "pt-2 px-3"
+    },
     titleTag
   )
   
@@ -1224,11 +1247,16 @@ bs4TabCard <- function(..., id = NULL, selected = NULL, title = NULL, width = 6,
   }
   
   # Insert box tools at the end of the list
-  content$children[[1]] <- tagInsertChild(
-    content$children[[1]],
-    shiny::tags$li(class = "ml-auto", boxToolTag),
-    length(content$children[[1]])
-  )
+  if (
+      length(boxToolTag$children[[1]]) > 0 || 
+      length(boxToolTag$children[[2]]) > 0
+  ) {
+    content$children[[1]] <- tagInsertChild(
+      content$children[[1]],
+      shiny::tags$li(class = if (side == "left") "ml-0" else "ml-auto", boxToolTag),
+      length(content$children[[1]])
+    ) 
+  }
 
   # Insert tabs at different position in the header tag
   if (side == "right") {
