@@ -78,7 +78,7 @@
 #  
 #  shinyApp(ui, server)
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-api/", deps = TRUE)
 
 ## ----boxTools, echo=FALSE, fig.cap='Box Tools. From left to right: boxLabel, boxDropdown, collapsible and closable buttons, boxSidebar trigger.', fig.align = 'center', out.width='50%'----
@@ -125,7 +125,7 @@ knitr::include_graphics("figures/boxTools.png")
 #    }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-sidebar/")
 
 ## ----boxDropdown-code, eval=FALSE---------------------------------------------
@@ -165,7 +165,7 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-sidebar/")
 #    }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-dropdown/")
 
 ## ----user-description, eval=FALSE---------------------------------------------
@@ -223,7 +223,7 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-box-dropdown/")
 #    }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userBox/")
 
 ## ----user-block, eval=FALSE---------------------------------------------------
@@ -233,7 +233,7 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userBox/")
 #    subtitle = "example-01.05.2018"
 #  )
 
-## ---- eval=FALSE--------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  shinyApp(
 #    ui = dashboardPage(
 #      dashboardHeader(),
@@ -311,6 +311,6 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userBox/")
 #    }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-socialBox/")
 

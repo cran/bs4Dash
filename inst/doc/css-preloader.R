@@ -26,6 +26,6 @@ knitr::opts_chunk$set(
 #    }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-preloader/", TRUE)
 

@@ -58,7 +58,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #    }
 #   )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-accordions/", TRUE)
 
 ## ----message-code, eval=FALSE-------------------------------------------------
@@ -169,6 +169,6 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-accordions/", TRU
 #    }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-userMessages/")
 

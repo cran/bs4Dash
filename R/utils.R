@@ -742,3 +742,9 @@ app_container <- function(url, deps = FALSE) {
     }
   } 
 }
+
+# Get parent function arguments
+get_parent_args <- function() {
+  cl <- sys.call(-3)
+  as.list(cl)[-1]
+}

@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
     collapse = TRUE,
     comment = "#>"
@@ -30,6 +30,6 @@ knitr::opts_chunk$set(
 #      server = function(input, output) { }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-scrollToTop/", TRUE)
 

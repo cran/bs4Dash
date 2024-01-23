@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
 #    server = function(input, output) { }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 # App output
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-skinSelector/", TRUE)
 
@@ -120,7 +120,7 @@ bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-skinSelector/", T
 #    server = function(input, output) { }
 #  )
 
-## ---- echo=FALSE--------------------------------------------------------------
+## ----echo=FALSE---------------------------------------------------------------
 # App output
 bs4Dash:::app_container("https://dgranjon.shinyapps.io/bs4Dash-fresh-theming/")
 

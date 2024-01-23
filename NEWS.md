@@ -1,3 +1,43 @@
+# bs4Dash 2.3.3
+
+## Breaking change (potential)
+
+- Fix #302: both `dashboardSidebar()` and `dashboardControlbar()` default __skin__ value is NULL.
+This allows them to inherit from the parent `dashboardPage()` __dark__ parameter and have either
+a full light or full dark skin. Therefore, it won't be possible anymore to apply a light sidebar background with the `dashboardPage()` when the main theme is dark and inversely. If you want to do so, you have to set `dark = NULL`, for instance:
+
+```r
+library(shiny)
+library(bs4Dash)
+
+shinyApp(
+  ui = dashboardPage(
+    dark = NULL,
+    header = dashboardHeader(
+      title = dashboardBrand(
+        title = "My dashboard",
+        color = "primary",
+        href = "https://adminlte.io/themes/v3",
+        image = "https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png"
+      )
+    ),
+    sidebar = dashboardSidebar(skin = "dark"),
+    body = dashboardBody(
+      box(status = "danger"),
+      box(status = "primary"),
+      box(status = "orange")
+    ),
+    controlbar = dashboardControlbar(skin = "dark"),
+    title = "DashboardPage"
+  ),
+  server = function(input, output) { }
+)
+```
+
+## Bug fixes
+- Remove unused `headTitles` parameter from `bs4Table()`.
+- Fix #315: alert title is not added to alert body and if Alert is not closable the header contains "undefined" key word. Thanks @MohammedFCIS.
+
 # bs4Dash 2.3.0
 
 ## New feature
