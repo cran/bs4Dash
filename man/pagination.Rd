@@ -77,7 +77,7 @@ if (interactive()) {
 
  shinyApp(
    ui = dashboardPage(
-    header = dashboardHeader(), 
+    header = dashboardHeader(),
     sidebar = dashboardSidebar(),
     body = dashboardBody(
      pagination(
@@ -106,13 +106,14 @@ if (interactive()) {
    }
  )
 }
+
 if (interactive()) {
  library(shiny)
  library(bs4Dash)
 
  shinyApp(
    ui = dashboardPage(
-    header = dashboardHeader(), 
+    header = dashboardHeader(),
     sidebar = dashboardSidebar(),
     body = dashboardBody(
      fluidRow(
@@ -121,6 +122,7 @@ if (interactive()) {
        actionButton("enable", "Enable page 1", class = "mx-2"),
        textOutput("selected_page")
      ),
+     br(),
      br(),
      pagination(
        id = "mypagination",
@@ -143,27 +145,30 @@ if (interactive()) {
     )
    ),
    server = function(input, output, session) {
-    
+
      observeEvent(input$update,{
        updatePagination("mypagination", selected = "page4")
      })
-    
+
      observeEvent(input$disable,{
        updatePagination("mypagination", disabled = "page1")
      })
-    
+
      observeEvent(input$enable,{
        updatePagination("mypagination", selected = "page1")
      })
-    
+
      output$selected_page <- renderText({
        sprintf("Currently selected page: \%s", input$mypagination)
      })
-    
+
      output$distPlot <- renderPlot({
        hist(rnorm(input$obs))
      })
    }
  )
 }
+}
+\author{
+David Granjon, \email{dgranjon@ymail.com}
 }

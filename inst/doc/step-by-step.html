@@ -12,7 +12,7 @@
 
 <meta name="author" content="David Granjon" />
 
-<meta name="date" content="2024-09-03" />
+<meta name="date" content="2025-08-25" />
 
 <title>How to start?</title>
 
@@ -50,8 +50,9 @@ overflow: visible;
 }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -62,7 +63,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -340,7 +341,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">How to start?</h1>
 <h4 class="author">David Granjon</h4>
-<h4 class="date">2024-09-03</h4>
+<h4 class="date">2025-08-25</h4>
 
 
 
@@ -463,24 +464,23 @@ skin.</p>
 as other items like <code>sidebarUserPanel()</code>,
 <code>sidebarHeader()</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">sidebarUserPanel</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="at">image =</span> <span class="st">&quot;https://image.flaticon.com/icons/svg/1149/1149168.svg&quot;</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;Welcome Onboard!&quot;</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="fu">sidebarMenu</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">&quot;sidebarmenu&quot;</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">sidebarHeader</span>(<span class="st">&quot;Header 1&quot;</span>),</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="fu">menuItem</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="st">&quot;Item 1&quot;</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="at">tabName =</span> <span class="st">&quot;item1&quot;</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;sliders&quot;</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  ),</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">menuItem</span>(</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="st">&quot;Item 2&quot;</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    <span class="at">tabName =</span> <span class="st">&quot;item2&quot;</span>,</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;id-card&quot;</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  )</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">&quot;Welcome Onboard!&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="fu">sidebarMenu</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">&quot;sidebarmenu&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="fu">sidebarHeader</span>(<span class="st">&quot;Header 1&quot;</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">menuItem</span>(</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="st">&quot;Item 1&quot;</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="at">tabName =</span> <span class="st">&quot;item1&quot;</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;sliders&quot;</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  ),</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  <span class="fu">menuItem</span>(</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    <span class="st">&quot;Item 2&quot;</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="at">tabName =</span> <span class="st">&quot;item2&quot;</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;id-card&quot;</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  )</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>)</span></code></pre></div>
 <p><code>sidebarMenu()</code> drives the navigation within your
 dashboard. It has an id parameter which allows to :</p>
 <ul>
@@ -766,117 +766,116 @@ Code
 <span id="cb14-54"><a href="#cb14-54" tabindex="-1"></a>      <span class="at">status =</span> <span class="st">&quot;primary&quot;</span>,</span>
 <span id="cb14-55"><a href="#cb14-55" tabindex="-1"></a>      <span class="at">elevation =</span> <span class="dv">3</span>,</span>
 <span id="cb14-56"><a href="#cb14-56" tabindex="-1"></a>      <span class="fu">sidebarUserPanel</span>(</span>
-<span id="cb14-57"><a href="#cb14-57" tabindex="-1"></a>        <span class="at">image =</span> <span class="st">&quot;https://image.flaticon.com/icons/svg/1149/1149168.svg&quot;</span>,</span>
-<span id="cb14-58"><a href="#cb14-58" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">&quot;Welcome Onboard!&quot;</span></span>
-<span id="cb14-59"><a href="#cb14-59" tabindex="-1"></a>      ),</span>
-<span id="cb14-60"><a href="#cb14-60" tabindex="-1"></a>      <span class="fu">sidebarMenu</span>(</span>
-<span id="cb14-61"><a href="#cb14-61" tabindex="-1"></a>        <span class="fu">sidebarHeader</span>(<span class="st">&quot;Header 1&quot;</span>),</span>
-<span id="cb14-62"><a href="#cb14-62" tabindex="-1"></a>        <span class="fu">menuItem</span>(</span>
-<span id="cb14-63"><a href="#cb14-63" tabindex="-1"></a>          <span class="st">&quot;Item 1&quot;</span>,</span>
-<span id="cb14-64"><a href="#cb14-64" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item1&quot;</span>,</span>
-<span id="cb14-65"><a href="#cb14-65" tabindex="-1"></a>          <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;sliders&quot;</span>)</span>
-<span id="cb14-66"><a href="#cb14-66" tabindex="-1"></a>        ),</span>
-<span id="cb14-67"><a href="#cb14-67" tabindex="-1"></a>        <span class="fu">menuItem</span>(</span>
-<span id="cb14-68"><a href="#cb14-68" tabindex="-1"></a>          <span class="st">&quot;Item 2&quot;</span>,</span>
-<span id="cb14-69"><a href="#cb14-69" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item2&quot;</span>,</span>
-<span id="cb14-70"><a href="#cb14-70" tabindex="-1"></a>          <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;id-card&quot;</span>)</span>
-<span id="cb14-71"><a href="#cb14-71" tabindex="-1"></a>        )</span>
-<span id="cb14-72"><a href="#cb14-72" tabindex="-1"></a>      )</span>
-<span id="cb14-73"><a href="#cb14-73" tabindex="-1"></a>    ),</span>
-<span id="cb14-74"><a href="#cb14-74" tabindex="-1"></a>    <span class="at">controlbar =</span> <span class="fu">dashboardControlbar</span>(</span>
-<span id="cb14-75"><a href="#cb14-75" tabindex="-1"></a>      <span class="at">skin =</span> <span class="st">&quot;light&quot;</span>,</span>
-<span id="cb14-76"><a href="#cb14-76" tabindex="-1"></a>      <span class="at">pinned =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-77"><a href="#cb14-77" tabindex="-1"></a>      <span class="at">collapsed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-78"><a href="#cb14-78" tabindex="-1"></a>      <span class="at">overlay =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-79"><a href="#cb14-79" tabindex="-1"></a>      <span class="fu">controlbarMenu</span>(</span>
-<span id="cb14-80"><a href="#cb14-80" tabindex="-1"></a>        <span class="at">id =</span> <span class="st">&quot;controlbarmenu&quot;</span>,</span>
-<span id="cb14-81"><a href="#cb14-81" tabindex="-1"></a>        <span class="fu">controlbarItem</span>(</span>
-<span id="cb14-82"><a href="#cb14-82" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Item 1&quot;</span>,</span>
-<span id="cb14-83"><a href="#cb14-83" tabindex="-1"></a>          <span class="fu">sliderInput</span>(</span>
-<span id="cb14-84"><a href="#cb14-84" tabindex="-1"></a>            <span class="at">inputId =</span> <span class="st">&quot;obs&quot;</span>,</span>
-<span id="cb14-85"><a href="#cb14-85" tabindex="-1"></a>            <span class="at">label =</span> <span class="st">&quot;Number of observations:&quot;</span>,</span>
-<span id="cb14-86"><a href="#cb14-86" tabindex="-1"></a>            <span class="at">min =</span> <span class="dv">0</span>,</span>
-<span id="cb14-87"><a href="#cb14-87" tabindex="-1"></a>            <span class="at">max =</span> <span class="dv">1000</span>,</span>
-<span id="cb14-88"><a href="#cb14-88" tabindex="-1"></a>            <span class="at">value =</span> <span class="dv">500</span></span>
-<span id="cb14-89"><a href="#cb14-89" tabindex="-1"></a>          ),</span>
-<span id="cb14-90"><a href="#cb14-90" tabindex="-1"></a>          <span class="fu">column</span>(</span>
-<span id="cb14-91"><a href="#cb14-91" tabindex="-1"></a>            <span class="at">width =</span> <span class="dv">12</span>,</span>
-<span id="cb14-92"><a href="#cb14-92" tabindex="-1"></a>            <span class="at">align =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb14-93"><a href="#cb14-93" tabindex="-1"></a>            <span class="fu">radioButtons</span>(</span>
-<span id="cb14-94"><a href="#cb14-94" tabindex="-1"></a>              <span class="at">inputId =</span> <span class="st">&quot;dist&quot;</span>,</span>
-<span id="cb14-95"><a href="#cb14-95" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">&quot;Distribution type:&quot;</span>,</span>
-<span id="cb14-96"><a href="#cb14-96" tabindex="-1"></a>              <span class="fu">c</span>(</span>
-<span id="cb14-97"><a href="#cb14-97" tabindex="-1"></a>                <span class="st">&quot;Normal&quot;</span> <span class="ot">=</span> <span class="st">&quot;norm&quot;</span>,</span>
-<span id="cb14-98"><a href="#cb14-98" tabindex="-1"></a>                <span class="st">&quot;Uniform&quot;</span> <span class="ot">=</span> <span class="st">&quot;unif&quot;</span>,</span>
-<span id="cb14-99"><a href="#cb14-99" tabindex="-1"></a>                <span class="st">&quot;Log-normal&quot;</span> <span class="ot">=</span> <span class="st">&quot;lnorm&quot;</span>,</span>
-<span id="cb14-100"><a href="#cb14-100" tabindex="-1"></a>                <span class="st">&quot;Exponential&quot;</span> <span class="ot">=</span> <span class="st">&quot;exp&quot;</span></span>
-<span id="cb14-101"><a href="#cb14-101" tabindex="-1"></a>              )</span>
-<span id="cb14-102"><a href="#cb14-102" tabindex="-1"></a>            )</span>
-<span id="cb14-103"><a href="#cb14-103" tabindex="-1"></a>          )</span>
-<span id="cb14-104"><a href="#cb14-104" tabindex="-1"></a>        ),</span>
-<span id="cb14-105"><a href="#cb14-105" tabindex="-1"></a>        <span class="fu">controlbarItem</span>(</span>
-<span id="cb14-106"><a href="#cb14-106" tabindex="-1"></a>          <span class="st">&quot;Item 2&quot;</span>,</span>
-<span id="cb14-107"><a href="#cb14-107" tabindex="-1"></a>          <span class="st">&quot;Simple text&quot;</span></span>
-<span id="cb14-108"><a href="#cb14-108" tabindex="-1"></a>        )</span>
-<span id="cb14-109"><a href="#cb14-109" tabindex="-1"></a>      )</span>
-<span id="cb14-110"><a href="#cb14-110" tabindex="-1"></a>    ),</span>
-<span id="cb14-111"><a href="#cb14-111" tabindex="-1"></a>    <span class="at">footer =</span> <span class="fu">dashboardFooter</span>(</span>
-<span id="cb14-112"><a href="#cb14-112" tabindex="-1"></a>      <span class="at">left =</span> <span class="fu">a</span>(</span>
-<span id="cb14-113"><a href="#cb14-113" tabindex="-1"></a>        <span class="at">href =</span> <span class="st">&quot;https://twitter.com/divadnojnarg&quot;</span>,</span>
-<span id="cb14-114"><a href="#cb14-114" tabindex="-1"></a>        <span class="at">target =</span> <span class="st">&quot;_blank&quot;</span>, <span class="st">&quot;@DivadNojnarg&quot;</span></span>
-<span id="cb14-115"><a href="#cb14-115" tabindex="-1"></a>      ),</span>
-<span id="cb14-116"><a href="#cb14-116" tabindex="-1"></a>      <span class="at">right =</span> <span class="st">&quot;2018&quot;</span></span>
-<span id="cb14-117"><a href="#cb14-117" tabindex="-1"></a>    ),</span>
-<span id="cb14-118"><a href="#cb14-118" tabindex="-1"></a>    <span class="at">body =</span> <span class="fu">dashboardBody</span>(</span>
-<span id="cb14-119"><a href="#cb14-119" tabindex="-1"></a>      <span class="fu">tabItems</span>(</span>
-<span id="cb14-120"><a href="#cb14-120" tabindex="-1"></a>        <span class="fu">tabItem</span>(</span>
-<span id="cb14-121"><a href="#cb14-121" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item1&quot;</span>,</span>
-<span id="cb14-122"><a href="#cb14-122" tabindex="-1"></a>          <span class="fu">fluidRow</span>(</span>
-<span id="cb14-123"><a href="#cb14-123" tabindex="-1"></a>            <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">FUN =</span> <span class="cf">function</span>(i) {</span>
-<span id="cb14-124"><a href="#cb14-124" tabindex="-1"></a>              <span class="fu">sortable</span>(</span>
-<span id="cb14-125"><a href="#cb14-125" tabindex="-1"></a>                <span class="at">width =</span> <span class="dv">4</span>,</span>
-<span id="cb14-126"><a href="#cb14-126" tabindex="-1"></a>                <span class="fu">p</span>(<span class="at">class =</span> <span class="st">&quot;text-center&quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;Column&quot;</span>, i)),</span>
-<span id="cb14-127"><a href="#cb14-127" tabindex="-1"></a>                <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">FUN =</span> <span class="cf">function</span>(j) {</span>
-<span id="cb14-128"><a href="#cb14-128" tabindex="-1"></a>                  <span class="fu">box</span>(</span>
-<span id="cb14-129"><a href="#cb14-129" tabindex="-1"></a>                    <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;I am the &quot;</span>, j, <span class="st">&quot;-th card of the &quot;</span>, i, <span class="st">&quot;-th column&quot;</span>),</span>
-<span id="cb14-130"><a href="#cb14-130" tabindex="-1"></a>                    <span class="at">width =</span> <span class="dv">12</span>,</span>
-<span id="cb14-131"><a href="#cb14-131" tabindex="-1"></a>                    <span class="st">&quot;Click on my header&quot;</span></span>
-<span id="cb14-132"><a href="#cb14-132" tabindex="-1"></a>                  )</span>
-<span id="cb14-133"><a href="#cb14-133" tabindex="-1"></a>                })</span>
-<span id="cb14-134"><a href="#cb14-134" tabindex="-1"></a>              )</span>
-<span id="cb14-135"><a href="#cb14-135" tabindex="-1"></a>            })</span>
-<span id="cb14-136"><a href="#cb14-136" tabindex="-1"></a>          )</span>
-<span id="cb14-137"><a href="#cb14-137" tabindex="-1"></a>        ),</span>
-<span id="cb14-138"><a href="#cb14-138" tabindex="-1"></a>        <span class="fu">tabItem</span>(</span>
-<span id="cb14-139"><a href="#cb14-139" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item2&quot;</span>,</span>
-<span id="cb14-140"><a href="#cb14-140" tabindex="-1"></a>          <span class="fu">box</span>(</span>
-<span id="cb14-141"><a href="#cb14-141" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">&quot;Card with messages&quot;</span>,</span>
-<span id="cb14-142"><a href="#cb14-142" tabindex="-1"></a>            <span class="at">width =</span> <span class="dv">9</span>,</span>
-<span id="cb14-143"><a href="#cb14-143" tabindex="-1"></a>            <span class="fu">userMessages</span>(</span>
-<span id="cb14-144"><a href="#cb14-144" tabindex="-1"></a>              <span class="at">width =</span> <span class="dv">12</span>,</span>
-<span id="cb14-145"><a href="#cb14-145" tabindex="-1"></a>              <span class="at">status =</span> <span class="st">&quot;success&quot;</span>,</span>
-<span id="cb14-146"><a href="#cb14-146" tabindex="-1"></a>              <span class="fu">userMessage</span>(</span>
-<span id="cb14-147"><a href="#cb14-147" tabindex="-1"></a>                <span class="at">author =</span> <span class="st">&quot;Alexander Pierce&quot;</span>,</span>
-<span id="cb14-148"><a href="#cb14-148" tabindex="-1"></a>                <span class="at">date =</span> <span class="st">&quot;20 Jan 2:00 pm&quot;</span>,</span>
-<span id="cb14-149"><a href="#cb14-149" tabindex="-1"></a>                <span class="at">image =</span> <span class="st">&quot;https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg&quot;</span>,</span>
-<span id="cb14-150"><a href="#cb14-150" tabindex="-1"></a>                <span class="at">type =</span> <span class="st">&quot;received&quot;</span>,</span>
-<span id="cb14-151"><a href="#cb14-151" tabindex="-1"></a>                <span class="st">&quot;Is this template really for free? That&#39;s unbelievable!&quot;</span></span>
-<span id="cb14-152"><a href="#cb14-152" tabindex="-1"></a>              ),</span>
-<span id="cb14-153"><a href="#cb14-153" tabindex="-1"></a>              <span class="fu">userMessage</span>(</span>
-<span id="cb14-154"><a href="#cb14-154" tabindex="-1"></a>                <span class="at">author =</span> <span class="st">&quot;Dana Pierce&quot;</span>,</span>
-<span id="cb14-155"><a href="#cb14-155" tabindex="-1"></a>                <span class="at">date =</span> <span class="st">&quot;21 Jan 4:00 pm&quot;</span>,</span>
-<span id="cb14-156"><a href="#cb14-156" tabindex="-1"></a>                <span class="at">image =</span> <span class="st">&quot;https://adminlte.io/themes/AdminLTE/dist/img/user5-128x128.jpg&quot;</span>,</span>
-<span id="cb14-157"><a href="#cb14-157" tabindex="-1"></a>                <span class="at">type =</span> <span class="st">&quot;sent&quot;</span>,</span>
-<span id="cb14-158"><a href="#cb14-158" tabindex="-1"></a>                <span class="st">&quot;Indeed, that&#39;s unbelievable!&quot;</span></span>
-<span id="cb14-159"><a href="#cb14-159" tabindex="-1"></a>              )</span>
-<span id="cb14-160"><a href="#cb14-160" tabindex="-1"></a>            )</span>
-<span id="cb14-161"><a href="#cb14-161" tabindex="-1"></a>          )</span>
-<span id="cb14-162"><a href="#cb14-162" tabindex="-1"></a>        )</span>
-<span id="cb14-163"><a href="#cb14-163" tabindex="-1"></a>      )</span>
-<span id="cb14-164"><a href="#cb14-164" tabindex="-1"></a>    )</span>
-<span id="cb14-165"><a href="#cb14-165" tabindex="-1"></a>  ),</span>
-<span id="cb14-166"><a href="#cb14-166" tabindex="-1"></a>  <span class="at">server =</span> <span class="cf">function</span>(input, output) {}</span>
-<span id="cb14-167"><a href="#cb14-167" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb14-57"><a href="#cb14-57" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">&quot;Welcome Onboard!&quot;</span></span>
+<span id="cb14-58"><a href="#cb14-58" tabindex="-1"></a>      ),</span>
+<span id="cb14-59"><a href="#cb14-59" tabindex="-1"></a>      <span class="fu">sidebarMenu</span>(</span>
+<span id="cb14-60"><a href="#cb14-60" tabindex="-1"></a>        <span class="fu">sidebarHeader</span>(<span class="st">&quot;Header 1&quot;</span>),</span>
+<span id="cb14-61"><a href="#cb14-61" tabindex="-1"></a>        <span class="fu">menuItem</span>(</span>
+<span id="cb14-62"><a href="#cb14-62" tabindex="-1"></a>          <span class="st">&quot;Item 1&quot;</span>,</span>
+<span id="cb14-63"><a href="#cb14-63" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item1&quot;</span>,</span>
+<span id="cb14-64"><a href="#cb14-64" tabindex="-1"></a>          <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;sliders&quot;</span>)</span>
+<span id="cb14-65"><a href="#cb14-65" tabindex="-1"></a>        ),</span>
+<span id="cb14-66"><a href="#cb14-66" tabindex="-1"></a>        <span class="fu">menuItem</span>(</span>
+<span id="cb14-67"><a href="#cb14-67" tabindex="-1"></a>          <span class="st">&quot;Item 2&quot;</span>,</span>
+<span id="cb14-68"><a href="#cb14-68" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item2&quot;</span>,</span>
+<span id="cb14-69"><a href="#cb14-69" tabindex="-1"></a>          <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">&quot;id-card&quot;</span>)</span>
+<span id="cb14-70"><a href="#cb14-70" tabindex="-1"></a>        )</span>
+<span id="cb14-71"><a href="#cb14-71" tabindex="-1"></a>      )</span>
+<span id="cb14-72"><a href="#cb14-72" tabindex="-1"></a>    ),</span>
+<span id="cb14-73"><a href="#cb14-73" tabindex="-1"></a>    <span class="at">controlbar =</span> <span class="fu">dashboardControlbar</span>(</span>
+<span id="cb14-74"><a href="#cb14-74" tabindex="-1"></a>      <span class="at">skin =</span> <span class="st">&quot;light&quot;</span>,</span>
+<span id="cb14-75"><a href="#cb14-75" tabindex="-1"></a>      <span class="at">pinned =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-76"><a href="#cb14-76" tabindex="-1"></a>      <span class="at">collapsed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-77"><a href="#cb14-77" tabindex="-1"></a>      <span class="at">overlay =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-78"><a href="#cb14-78" tabindex="-1"></a>      <span class="fu">controlbarMenu</span>(</span>
+<span id="cb14-79"><a href="#cb14-79" tabindex="-1"></a>        <span class="at">id =</span> <span class="st">&quot;controlbarmenu&quot;</span>,</span>
+<span id="cb14-80"><a href="#cb14-80" tabindex="-1"></a>        <span class="fu">controlbarItem</span>(</span>
+<span id="cb14-81"><a href="#cb14-81" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Item 1&quot;</span>,</span>
+<span id="cb14-82"><a href="#cb14-82" tabindex="-1"></a>          <span class="fu">sliderInput</span>(</span>
+<span id="cb14-83"><a href="#cb14-83" tabindex="-1"></a>            <span class="at">inputId =</span> <span class="st">&quot;obs&quot;</span>,</span>
+<span id="cb14-84"><a href="#cb14-84" tabindex="-1"></a>            <span class="at">label =</span> <span class="st">&quot;Number of observations:&quot;</span>,</span>
+<span id="cb14-85"><a href="#cb14-85" tabindex="-1"></a>            <span class="at">min =</span> <span class="dv">0</span>,</span>
+<span id="cb14-86"><a href="#cb14-86" tabindex="-1"></a>            <span class="at">max =</span> <span class="dv">1000</span>,</span>
+<span id="cb14-87"><a href="#cb14-87" tabindex="-1"></a>            <span class="at">value =</span> <span class="dv">500</span></span>
+<span id="cb14-88"><a href="#cb14-88" tabindex="-1"></a>          ),</span>
+<span id="cb14-89"><a href="#cb14-89" tabindex="-1"></a>          <span class="fu">column</span>(</span>
+<span id="cb14-90"><a href="#cb14-90" tabindex="-1"></a>            <span class="at">width =</span> <span class="dv">12</span>,</span>
+<span id="cb14-91"><a href="#cb14-91" tabindex="-1"></a>            <span class="at">align =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb14-92"><a href="#cb14-92" tabindex="-1"></a>            <span class="fu">radioButtons</span>(</span>
+<span id="cb14-93"><a href="#cb14-93" tabindex="-1"></a>              <span class="at">inputId =</span> <span class="st">&quot;dist&quot;</span>,</span>
+<span id="cb14-94"><a href="#cb14-94" tabindex="-1"></a>              <span class="at">label =</span> <span class="st">&quot;Distribution type:&quot;</span>,</span>
+<span id="cb14-95"><a href="#cb14-95" tabindex="-1"></a>              <span class="fu">c</span>(</span>
+<span id="cb14-96"><a href="#cb14-96" tabindex="-1"></a>                <span class="st">&quot;Normal&quot;</span> <span class="ot">=</span> <span class="st">&quot;norm&quot;</span>,</span>
+<span id="cb14-97"><a href="#cb14-97" tabindex="-1"></a>                <span class="st">&quot;Uniform&quot;</span> <span class="ot">=</span> <span class="st">&quot;unif&quot;</span>,</span>
+<span id="cb14-98"><a href="#cb14-98" tabindex="-1"></a>                <span class="st">&quot;Log-normal&quot;</span> <span class="ot">=</span> <span class="st">&quot;lnorm&quot;</span>,</span>
+<span id="cb14-99"><a href="#cb14-99" tabindex="-1"></a>                <span class="st">&quot;Exponential&quot;</span> <span class="ot">=</span> <span class="st">&quot;exp&quot;</span></span>
+<span id="cb14-100"><a href="#cb14-100" tabindex="-1"></a>              )</span>
+<span id="cb14-101"><a href="#cb14-101" tabindex="-1"></a>            )</span>
+<span id="cb14-102"><a href="#cb14-102" tabindex="-1"></a>          )</span>
+<span id="cb14-103"><a href="#cb14-103" tabindex="-1"></a>        ),</span>
+<span id="cb14-104"><a href="#cb14-104" tabindex="-1"></a>        <span class="fu">controlbarItem</span>(</span>
+<span id="cb14-105"><a href="#cb14-105" tabindex="-1"></a>          <span class="st">&quot;Item 2&quot;</span>,</span>
+<span id="cb14-106"><a href="#cb14-106" tabindex="-1"></a>          <span class="st">&quot;Simple text&quot;</span></span>
+<span id="cb14-107"><a href="#cb14-107" tabindex="-1"></a>        )</span>
+<span id="cb14-108"><a href="#cb14-108" tabindex="-1"></a>      )</span>
+<span id="cb14-109"><a href="#cb14-109" tabindex="-1"></a>    ),</span>
+<span id="cb14-110"><a href="#cb14-110" tabindex="-1"></a>    <span class="at">footer =</span> <span class="fu">dashboardFooter</span>(</span>
+<span id="cb14-111"><a href="#cb14-111" tabindex="-1"></a>      <span class="at">left =</span> <span class="fu">a</span>(</span>
+<span id="cb14-112"><a href="#cb14-112" tabindex="-1"></a>        <span class="at">href =</span> <span class="st">&quot;https://twitter.com/divadnojnarg&quot;</span>,</span>
+<span id="cb14-113"><a href="#cb14-113" tabindex="-1"></a>        <span class="at">target =</span> <span class="st">&quot;_blank&quot;</span>, <span class="st">&quot;@DivadNojnarg&quot;</span></span>
+<span id="cb14-114"><a href="#cb14-114" tabindex="-1"></a>      ),</span>
+<span id="cb14-115"><a href="#cb14-115" tabindex="-1"></a>      <span class="at">right =</span> <span class="st">&quot;2018&quot;</span></span>
+<span id="cb14-116"><a href="#cb14-116" tabindex="-1"></a>    ),</span>
+<span id="cb14-117"><a href="#cb14-117" tabindex="-1"></a>    <span class="at">body =</span> <span class="fu">dashboardBody</span>(</span>
+<span id="cb14-118"><a href="#cb14-118" tabindex="-1"></a>      <span class="fu">tabItems</span>(</span>
+<span id="cb14-119"><a href="#cb14-119" tabindex="-1"></a>        <span class="fu">tabItem</span>(</span>
+<span id="cb14-120"><a href="#cb14-120" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item1&quot;</span>,</span>
+<span id="cb14-121"><a href="#cb14-121" tabindex="-1"></a>          <span class="fu">fluidRow</span>(</span>
+<span id="cb14-122"><a href="#cb14-122" tabindex="-1"></a>            <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">FUN =</span> <span class="cf">function</span>(i) {</span>
+<span id="cb14-123"><a href="#cb14-123" tabindex="-1"></a>              <span class="fu">sortable</span>(</span>
+<span id="cb14-124"><a href="#cb14-124" tabindex="-1"></a>                <span class="at">width =</span> <span class="dv">4</span>,</span>
+<span id="cb14-125"><a href="#cb14-125" tabindex="-1"></a>                <span class="fu">p</span>(<span class="at">class =</span> <span class="st">&quot;text-center&quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;Column&quot;</span>, i)),</span>
+<span id="cb14-126"><a href="#cb14-126" tabindex="-1"></a>                <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">FUN =</span> <span class="cf">function</span>(j) {</span>
+<span id="cb14-127"><a href="#cb14-127" tabindex="-1"></a>                  <span class="fu">box</span>(</span>
+<span id="cb14-128"><a href="#cb14-128" tabindex="-1"></a>                    <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&quot;I am the &quot;</span>, j, <span class="st">&quot;-th card of the &quot;</span>, i, <span class="st">&quot;-th column&quot;</span>),</span>
+<span id="cb14-129"><a href="#cb14-129" tabindex="-1"></a>                    <span class="at">width =</span> <span class="dv">12</span>,</span>
+<span id="cb14-130"><a href="#cb14-130" tabindex="-1"></a>                    <span class="st">&quot;Click on my header&quot;</span></span>
+<span id="cb14-131"><a href="#cb14-131" tabindex="-1"></a>                  )</span>
+<span id="cb14-132"><a href="#cb14-132" tabindex="-1"></a>                })</span>
+<span id="cb14-133"><a href="#cb14-133" tabindex="-1"></a>              )</span>
+<span id="cb14-134"><a href="#cb14-134" tabindex="-1"></a>            })</span>
+<span id="cb14-135"><a href="#cb14-135" tabindex="-1"></a>          )</span>
+<span id="cb14-136"><a href="#cb14-136" tabindex="-1"></a>        ),</span>
+<span id="cb14-137"><a href="#cb14-137" tabindex="-1"></a>        <span class="fu">tabItem</span>(</span>
+<span id="cb14-138"><a href="#cb14-138" tabindex="-1"></a>          <span class="at">tabName =</span> <span class="st">&quot;item2&quot;</span>,</span>
+<span id="cb14-139"><a href="#cb14-139" tabindex="-1"></a>          <span class="fu">box</span>(</span>
+<span id="cb14-140"><a href="#cb14-140" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">&quot;Card with messages&quot;</span>,</span>
+<span id="cb14-141"><a href="#cb14-141" tabindex="-1"></a>            <span class="at">width =</span> <span class="dv">9</span>,</span>
+<span id="cb14-142"><a href="#cb14-142" tabindex="-1"></a>            <span class="fu">userMessages</span>(</span>
+<span id="cb14-143"><a href="#cb14-143" tabindex="-1"></a>              <span class="at">width =</span> <span class="dv">12</span>,</span>
+<span id="cb14-144"><a href="#cb14-144" tabindex="-1"></a>              <span class="at">status =</span> <span class="st">&quot;success&quot;</span>,</span>
+<span id="cb14-145"><a href="#cb14-145" tabindex="-1"></a>              <span class="fu">userMessage</span>(</span>
+<span id="cb14-146"><a href="#cb14-146" tabindex="-1"></a>                <span class="at">author =</span> <span class="st">&quot;Alexander Pierce&quot;</span>,</span>
+<span id="cb14-147"><a href="#cb14-147" tabindex="-1"></a>                <span class="at">date =</span> <span class="st">&quot;20 Jan 2:00 pm&quot;</span>,</span>
+<span id="cb14-148"><a href="#cb14-148" tabindex="-1"></a>                <span class="at">image =</span> <span class="st">&quot;https://adminlte.io/themes/AdminLTE/dist/img/user1-128x128.jpg&quot;</span>,</span>
+<span id="cb14-149"><a href="#cb14-149" tabindex="-1"></a>                <span class="at">type =</span> <span class="st">&quot;received&quot;</span>,</span>
+<span id="cb14-150"><a href="#cb14-150" tabindex="-1"></a>                <span class="st">&quot;Is this template really for free? That&#39;s unbelievable!&quot;</span></span>
+<span id="cb14-151"><a href="#cb14-151" tabindex="-1"></a>              ),</span>
+<span id="cb14-152"><a href="#cb14-152" tabindex="-1"></a>              <span class="fu">userMessage</span>(</span>
+<span id="cb14-153"><a href="#cb14-153" tabindex="-1"></a>                <span class="at">author =</span> <span class="st">&quot;Dana Pierce&quot;</span>,</span>
+<span id="cb14-154"><a href="#cb14-154" tabindex="-1"></a>                <span class="at">date =</span> <span class="st">&quot;21 Jan 4:00 pm&quot;</span>,</span>
+<span id="cb14-155"><a href="#cb14-155" tabindex="-1"></a>                <span class="at">image =</span> <span class="st">&quot;https://adminlte.io/themes/AdminLTE/dist/img/user5-128x128.jpg&quot;</span>,</span>
+<span id="cb14-156"><a href="#cb14-156" tabindex="-1"></a>                <span class="at">type =</span> <span class="st">&quot;sent&quot;</span>,</span>
+<span id="cb14-157"><a href="#cb14-157" tabindex="-1"></a>                <span class="st">&quot;Indeed, that&#39;s unbelievable!&quot;</span></span>
+<span id="cb14-158"><a href="#cb14-158" tabindex="-1"></a>              )</span>
+<span id="cb14-159"><a href="#cb14-159" tabindex="-1"></a>            )</span>
+<span id="cb14-160"><a href="#cb14-160" tabindex="-1"></a>          )</span>
+<span id="cb14-161"><a href="#cb14-161" tabindex="-1"></a>        )</span>
+<span id="cb14-162"><a href="#cb14-162" tabindex="-1"></a>      )</span>
+<span id="cb14-163"><a href="#cb14-163" tabindex="-1"></a>    )</span>
+<span id="cb14-164"><a href="#cb14-164" tabindex="-1"></a>  ),</span>
+<span id="cb14-165"><a href="#cb14-165" tabindex="-1"></a>  <span class="at">server =</span> <span class="cf">function</span>(input, output) {}</span>
+<span id="cb14-166"><a href="#cb14-166" tabindex="-1"></a>)</span></code></pre></div>
 </details>
 <p><br></p>
 <figure class="cd-image-container">

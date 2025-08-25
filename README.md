@@ -3,7 +3,7 @@
 [![R build status](https://github.com/RinteRface/bs4Dash/workflows/R-CMD-check/badge.svg)](https://github.com/RinteRface/bs4Dash/actions)
 [![version](https://www.r-pkg.org/badges/version/bs4Dash)](https://CRAN.R-project.org/package=bs4Dash)
 [![cranlogs](https://cranlogs.r-pkg.org/badges/bs4Dash)](https://CRAN.R-project.org/package=bs4Dash)
-[![total](https://cranlogs.r-pkg.org/badges/grand-total/bs4Dash)](https://www.rpackages.io/package/bs4Dash)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/bs4Dash)](https://CRAN.R-project.org/package=bs4Dash)
 [![Codecov test coverage](https://codecov.io/gh/RinteRface/bs4Dash/branch/master/graph/badge.svg)](https://codecov.io/gh/RinteRface/bs4Dash?branch=master)
 
 > Bootstrap 4 shinydashboard using [AdminLTE3](https://github.com/ColorlibHQ/AdminLTE)
@@ -96,12 +96,15 @@ shinyApp(ui, server)
 
 ```r
 # latest devel version
-devtools::install_github("RinteRface/bs4Dash")
+pak::pak("RinteRface/bs4Dash")
+# latest devel version from r-universe
+install.packages("bs4Dash", repos = c("cynkra.r-universe.dev", "cloud.r-project.org"))
 # from CRAN
 install.packages("bs4Dash")
 ```
 
 ## Demo
+
 You may also run:
 
 ```r
@@ -111,12 +114,11 @@ bs4DashGallery()
 
 ## Issues
 
-Issues are listed [here](https://github.com/RinteRface/bs4Dash/issues). 
-
+Issues are listed [here](https://github.com/RinteRface/bs4Dash/issues).
 
 ## Acknowledgement
 
-I warmly thank [Glyphicons](https://www.glyphicons.com) creator for providing them for free with Bootstrap. 
+I warmly thank [Glyphicons](https://www.glyphicons.com) creator for providing them for free with Bootstrap.
 
 ## Code of Conduct
   

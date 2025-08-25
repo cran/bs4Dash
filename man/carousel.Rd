@@ -40,7 +40,7 @@ put these item here instead of passing them in ...}
 if(interactive()){
  library(shiny)
  library(bs4Dash)
- 
+
  shinyApp(
    ui = dashboardPage(
      header = dashboardHeader(),
@@ -50,11 +50,11 @@ if(interactive()){
        id = "mycarousel",
        carouselItem(
         caption = "Item 1",
-        tags$img(src = "https://via.placeholder.com/500")
+        tags$img(src = "placeholders/500x500.png")
        ),
        carouselItem(
         caption = "Item 2",
-        tags$img(src = "https://via.placeholder.com/500")
+        tags$img(src = "placeholders/500x500.png")
        )
       )
      ),

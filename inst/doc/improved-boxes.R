@@ -26,12 +26,12 @@ card(
 )
 
 ## ----user-description, eval=FALSE---------------------------------------------
-#  userDescription(
-#    title = "Nadia Carmichael",
-#    subtitle = "lead Developer",
-#    type = 2,
-#    image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
-#  )
+# userDescription(
+#   title = "Nadia Carmichael",
+#   subtitle = "lead Developer",
+#   type = 2,
+#   image = "https://adminlte.io/themes/AdminLTE/dist/img/user7-128x128.jpg",
+# )
 
 ## ----userBox-code, eval=TRUE, echo=FALSE--------------------------------------
 card(
@@ -41,11 +41,11 @@ card(
 )
 
 ## ----user-block, eval=FALSE---------------------------------------------------
-#  userBlock(
-#    image = "https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg",
-#    title = "Social Box",
-#    subtitle = "example-01.05.2018"
-#  )
+# userBlock(
+#   image = "https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg",
+#   title = "Social Box",
+#   subtitle = "example-01.05.2018"
+# )
 
 ## ----socialBox-code, eval=TRUE, echo=FALSE------------------------------------
 card(
